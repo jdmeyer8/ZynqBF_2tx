@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info Type="StartUp" Visible="0" Icon="" File="ZynqBF_2tx_fpga.slx" Name="ZynqBF_2tx_fpga">
+    <Extension Value="4255d069-1872-4ee2-a955-25c4e62712a3" Name="StartUpPrev" />
+</Info>
