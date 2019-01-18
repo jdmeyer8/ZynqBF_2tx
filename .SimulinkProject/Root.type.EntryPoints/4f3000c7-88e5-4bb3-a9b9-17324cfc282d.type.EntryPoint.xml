@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info Type="StartUp" Visible="0" Icon="" File="ZynqBF_2tx_startup.m" Name="ZynqBF_2tx_startup">
+    <Extension Value="64a2df89-9966-4ddf-83dd-a5ae4a6cb468" Name="StartUpPrev" />
+</Info>
