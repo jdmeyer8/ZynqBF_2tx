@@ -57,35 +57,42 @@ port(
     ch1_q:          out std_logic_vector(15 downto 0);
     ch2_i:          out std_logic_vector(15 downto 0);
     ch2_q:          out std_logic_vector(15 downto 0);
-    probe:          out std_logic_vector(15 downto 0)
+    probe:          out std_logic_vector(15 downto 0);
+    probe_xcorr1:   out std_logic_vector(31 downto 0);        -- correlator for ch1
+    probe_xcorr2:   out std_logic_vector(31 downto 0);        -- correlator for ch2
+    probe_state:    out std_logic_vector( 7 downto 0);        -- peak detect/channel estimate state
+    probe_ch1i:     out std_logic_vector(31 downto 0);        -- ch1_i numerator
+    probe_ch1q:     out std_logic_vector(31 downto 0);        -- ch1_q numerator
+    probe_ch1r:     out std_logic_vector(31 downto 0)         -- ch1 denom. reciprocal
 );
 end component;
 
-signal clk:         std_logic := '1';   -- 420kHz*128 clock
-signal clk420:      std_logic := '1';          -- 420kHz clock
-signal clk420_cnt:  std_logic_vector(7 downto 0) := x"00";
-signal reset:       std_logic := '1';
+signal clk:             std_logic := '1';   -- 420kHz*128 clock
+signal reset:           std_logic := '1';
 
-signal rx_i_in:     std_logic_vector(15 downto 0);
-signal rx_q_in:     std_logic_vector(15 downto 0);
-signal rx_v_in:     std_logic;
+signal rx_i_in:         std_logic_vector(15 downto 0);
+signal rx_q_in:         std_logic_vector(15 downto 0);
+signal rx_v_in:         std_logic;
 
-signal ce_out_0:    std_logic;
-signal ce_out_1:    std_logic;
+signal ce_out_0:        std_logic;
+signal ce_out_1:        std_logic;
 
-signal rx_i_out:    std_logic_vector(15 downto 0);
-signal rx_q_out:    std_logic_vector(15 downto 0);
-signal rx_v_out:    std_logic;
+signal rx_i_out:        std_logic_vector(15 downto 0);
+signal rx_q_out:        std_logic_vector(15 downto 0);
+signal rx_v_out:        std_logic;
 
-signal ch1_i:       std_logic_vector(15 downto 0);
-signal ch1_q:       std_logic_vector(15 downto 0);
-signal ch2_i:       std_logic_vector(15 downto 0);
-signal ch2_q:       std_logic_vector(15 downto 0);
-signal probe:       std_logic_vector(15 downto 0);
+signal ch1_i:           std_logic_vector(15 downto 0);
+signal ch1_q:           std_logic_vector(15 downto 0);
+signal ch2_i:           std_logic_vector(15 downto 0);
+signal ch2_q:           std_logic_vector(15 downto 0);
+signal probe:           std_logic_vector(15 downto 0);
 
--- File i/o signals
-signal iline:       line;
-signal 
+signal probe_xcorr1:    std_logic_vector(31 downto 0);
+signal probe_xcorr2:    std_logic_vector(31 downto 0);
+signal probe_state:     std_logic_vector( 7 downto 0);
+signal probe_ch1i:      std_logic_vector(31 downto 0);
+signal probe_ch1q:      std_logic_vector(31 downto 0);
+signal probe_ch1r:      std_logic_vector(31 downto 0);
 
 
 begin
@@ -97,22 +104,61 @@ clk <= not clk after 9.3006 ns;
 -- reset for 200 ns
 reset <= '1', '0' after 200 ns;
 
-clk420_gen: process(clk) is
+rx_in_proc: process(reset, ce_out_0)
+    file file_rxi:      text;
+    file file_rxq:      text;
+    variable line_rxi:  line;
+    variable line_rxq:  line;
+    variable rxi:       std_logic_vector(15 downto 0);
+    variable rxq:       std_logic_vector(15 downto 0);
 begin
-    if rising_edge(clk) then
-        if clk420_cnt >= x"7F" then
-            clk420_cnt <= x"00";
-            clk420 <= not clk420;
+    if reset = '1' then
+        file_open(file_rxi, "rx_test_i.txt", read_mode);
+        file_open(file_rxq, "rx_test_q.txt", read_mode);
+        rx_i_in <= x"0000";
+        rx_q_in <= x"0000";
+    elsif ce_out_0 = '1' then
+        if (not endfile(file_rxi) and not endfile(file_rxq)) then
+            readline(file_rxi, line_rxi);
+            readline(file_rxq, line_rxq);
+            read(line_rxi, rxi);
+            read(line_rxq, rxq);
+            rx_i_in <= rxi;
+            rx_q_in <= rxq;
         else
-            clk420_cnt <= clk420_cnt + x"01";
-            clk420 <= clk420;
+            rx_i_in <= rx_i_in;
+            rx_q_in <= rx_q_in;
         end if;
+    else
+        rx_i_in <= rx_i_in;
+        rx_q_in <= rx_q_in;
     end if;
 end process;
 
-rx_i_in <= x"0000";
-rx_q_in <= x"0000";
 rx_v_in <= '1';
+
+results_file_proc: process(reset,clk)
+    file rfile:         text;
+    variable rline:     line;
+begin
+    if reset = '1' then
+        file_open(rfile, "sim_results.txt", write_mode);
+    elsif rising_edge(clk) then
+        write(rline,conv_integer(probe_xcorr1),right,10);
+        write(rline,string'(", "));
+        write(rline,conv_integer(probe_xcorr2),right,10);
+        write(rline,string'(", "));
+        write(rline,conv_integer(probe_state),right,10);
+        write(rline,string'(", "));
+        write(rline,conv_integer(probe_ch1i),right,10);
+        write(rline,string'(", "));
+        write(rline,conv_integer(probe_ch1q),right,10);
+        write(rline,string'(", "));
+        write(rline,conv_integer(probe_ch1r),right,10);
+        writeline(rfile, rline);
+    end if;
+end process;
+    
 
 
 dut: ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
@@ -132,7 +178,13 @@ port map(
     ch1_q => ch1_q,
     ch2_i => ch2_i,
     ch2_q => ch2_q,
-    probe => probe
+    probe => probe,
+    probe_xcorr1 => probe_xcorr1,
+    probe_xcorr2 => probe_xcorr2,
+    probe_state => probe_state,
+    probe_ch1i => probe_ch1i,
+    probe_ch1q => probe_ch1q,
+    probe_ch1r => probe_ch1r
 );
 
 end Behavioral;

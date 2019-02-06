@@ -1,4 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Info Type="StartUp" Visible="0" Icon="" File="RxInTest_20k.mat" Name="RxInTest_20k">
+<Info Type="StartUp" Visible="0" Icon="" File="data/RxInTest_20k.mat" Name="RxInTest_20k">
     <Extension Value="HEAD" Name="StartUpPrev" />
 </Info>

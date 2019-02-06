@@ -1,4 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Info Type="StartUp" Visible="0" Icon="" File="GoldSequences.mat" Name="GoldSequences">
+<Info Type="StartUp" Visible="0" Icon="" File="data/GoldSequences.mat" Name="GoldSequences">
     <Extension Value="a12ae308-42d6-42ed-8082-ee5c1e1c4e5d" Name="StartUpPrev" />
 </Info>
