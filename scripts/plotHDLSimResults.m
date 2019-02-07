@@ -1,5 +1,9 @@
 %% Extract data from sim_results.txt
-fname = '.\simulation\ZynqBF_2tx_sim.sim\sim_1\behav\xsim\sim_results.txt';
+if strcmp(computer, 'PCWIN64')
+    fname = '.\simulation\ZynqBF_2tx_sim.sim\sim_1\behav\xsim\sim_results.txt';
+else
+    fname = './simulation/ZynqBF_2tx_sim.sim/sim_1/behav/xsim/sim_results.txt';
+end
 % data_in = readResults(fname);
 data_in = csvread(fname);
 
