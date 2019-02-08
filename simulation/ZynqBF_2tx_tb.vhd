@@ -57,7 +57,7 @@ port(
     ch1_q:          out std_logic_vector(15 downto 0);
     ch2_i:          out std_logic_vector(15 downto 0);
     ch2_q:          out std_logic_vector(15 downto 0);
-    probe:          out std_logic_vector(15 downto 0);
+    probe:          out std_logic_vector(14 downto 0);
     probe_xcorr1:   out std_logic_vector(31 downto 0);        -- correlator for ch1
     probe_xcorr2:   out std_logic_vector(31 downto 0);        -- correlator for ch2
     probe_state:    out std_logic_vector( 7 downto 0);        -- peak detect/channel estimate state
@@ -85,7 +85,7 @@ signal ch1_i:           std_logic_vector(15 downto 0);
 signal ch1_q:           std_logic_vector(15 downto 0);
 signal ch2_i:           std_logic_vector(15 downto 0);
 signal ch2_q:           std_logic_vector(15 downto 0);
-signal probe:           std_logic_vector(15 downto 0);
+signal probe:           std_logic_vector(14 downto 0);
 
 signal probe_xcorr1:    std_logic_vector(31 downto 0);
 signal probe_xcorr2:    std_logic_vector(31 downto 0);
