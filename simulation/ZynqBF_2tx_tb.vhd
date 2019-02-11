@@ -40,7 +40,7 @@ end ZynqBF_2tx_tb;
 
 architecture Behavioral of ZynqBF_2tx_tb is
 
-component ZynqBF_2tx_fpga
+component ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
 port(
     clk:            in std_logic;
     reset:          in std_logic;
@@ -161,7 +161,7 @@ end process;
     
 
 
-dut: ZynqBF_2tx_fpga
+dut: ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
 port map(
     clk => clk,
     reset => reset,
