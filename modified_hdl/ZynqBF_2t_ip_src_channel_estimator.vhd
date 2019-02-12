@@ -275,6 +275,9 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   SIGNAL ch_est_out7                      : std_logic_vector(31 DOWNTO 0);  -- ufix32
   SIGNAL ch_est_out8                      : std_logic_vector(31 DOWNTO 0);  -- ufix32
   SIGNAL ch_est_out9                      : std_logic_vector(31 DOWNTO 0);  -- ufix32
+  signal peak_found_d1:                     std_logic;
+  signal peak_found_d2:                     std_logic;
+  signal peak_found_d3:                     std_logic;
 
 BEGIN
   u_goldSequences : ZynqBF_2t_ip_src_goldSequences
@@ -319,7 +322,7 @@ BEGIN
               addr2 => peakdetect_ch2_out1,  -- ufix15
               gs_sel => gs_sel,  -- boolean [2]
               rst => est_done,
-              load => Logical_Operator6_out1,
+              load => peak_found_d3,
               pd_init => pd_init,
               pd_step => pd_step_2,
               est_step => est_step,
@@ -359,7 +362,7 @@ BEGIN
     PORT MAP( clk => clk,
               reset => reset,
               enb => enb,
-              peak_found => Logical_Operator6_out1,
+              peak_found => peak_found_d2,
               est_done => est_done,
               cf_done => in_fifo_out4,
               pd_en => pd_en,
@@ -421,6 +424,21 @@ BEGIN
               probe_ch1q => ch_est_out8,  -- sfix32_En16
               probe_ch1r => ch_est_out9  -- sfix32_En14
               );
+              
+  peak_found_delay_proc: process(clk,reset)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        peak_found_d1 <= '0';
+        peak_found_d2 <= '0';
+        peak_found_d3 <= '0';
+      else
+        peak_found_d1 <= Logical_Operator6_out1;
+        peak_found_d2 <= peak_found_d1;
+        peak_found_d3 <= peak_found_d2;
+      end if;
+    end if;
+  end process;
 
   clear_fifo <= state_machine_out3 OR est_en;
 

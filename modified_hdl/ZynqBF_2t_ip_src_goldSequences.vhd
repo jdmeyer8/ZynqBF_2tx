@@ -4163,16 +4163,16 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_goldSequences IS
 BEGIN
   gs_addr_unsigned <= unsigned(gs_addr);
 
-  Delay4_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay4_out1 <= to_unsigned(16#000#, 12);
-      ELSIF enb = '1' THEN
-        Delay4_out1 <= gs_addr_unsigned;
-      END IF;
-    END IF;
-  END PROCESS Delay4_process;
+  -- Delay4_process : PROCESS (clk)
+  -- BEGIN
+    -- IF clk'EVENT AND clk = '1' THEN
+      -- IF reset = '1' THEN
+        -- Delay4_out1 <= to_unsigned(16#000#, 12);
+      -- ELSIF enb = '1' THEN
+        -- Delay4_out1 <= gs_addr_unsigned;
+      -- END IF;
+    -- END IF;
+  -- END PROCESS Delay4_process;
 
 
   reduced_process : PROCESS (clk)
@@ -4181,7 +4181,8 @@ BEGIN
       IF reset = '1' THEN
         Delay4_out1_1 <= to_unsigned(16#000#, 12);
       ELSIF enb = '1' THEN
-        Delay4_out1_1 <= Delay4_out1;
+        -- Delay4_out1_1 <= Delay4_out1;
+        Delay4_out1_1 <= gs_addr_unsigned;
       END IF;
     END IF;
   END PROCESS reduced_process;
@@ -4205,7 +4206,7 @@ BEGIN
     END IF;
   END PROCESS Delay5_process;
 
-  Delay5_out1 <= Delay5_reg(1);
+  Delay5_out1 <= Delay5_reg(0);
 
   
   gs1_q_k <= to_unsigned(16#000#, 12) WHEN Delay4_out1_1 = to_unsigned(16#000#, 12) ELSE
@@ -4225,7 +4226,7 @@ BEGIN
     END IF;
   END PROCESS Delay8_process;
 
-  Delay8_out1 <= Delay8_reg(1);
+  Delay8_out1 <= Delay8_reg(0);
 
   Vector_Concatenate2_out1(0) <= Delay5_out1;
   Vector_Concatenate2_out1(1) <= Delay8_out1;
@@ -4243,7 +4244,7 @@ BEGIN
 
 
   outputgen1: FOR k IN 0 TO 1 GENERATE
-    gs1(k) <= std_logic_vector(Delay6_out1(k));
+    gs1(k) <= std_logic_vector(Vector_Concatenate2_out1(k));
   END GENERATE;
 
   
@@ -4264,7 +4265,7 @@ BEGIN
     END IF;
   END PROCESS Delay2_process;
 
-  Delay2_out1 <= Delay2_reg(1);
+  Delay2_out1 <= Delay2_reg(0);
 
   
   gs2_q_k <= to_unsigned(16#000#, 12) WHEN Delay4_out1_1 = to_unsigned(16#000#, 12) ELSE
@@ -4284,7 +4285,7 @@ BEGIN
     END IF;
   END PROCESS Delay3_process;
 
-  Delay3_out1 <= Delay3_reg(1);
+  Delay3_out1 <= Delay3_reg(0);
 
   Vector_Concatenate1_out1(0) <= Delay2_out1;
   Vector_Concatenate1_out1(1) <= Delay3_out1;
@@ -4302,7 +4303,7 @@ BEGIN
 
 
   outputgen: FOR k IN 0 TO 1 GENERATE
-    gs2(k) <= std_logic_vector(Delay11_out1(k));
+    gs2(k) <= std_logic_vector(Vector_Concatenate1_out1(k));
   END GENERATE;
 
 END rtl;

@@ -886,7 +886,8 @@ BEGIN
       IF reset = '1' THEN
         Delay20_out1 <= '0';
       ELSIF enb = '1' THEN
-        Delay20_out1 <= Logical_Operator4_out1;
+        -- Delay20_out1 <= Logical_Operator4_out1;
+        Delay20_out1 <= vin;
       END IF;
     END IF;
   END PROCESS Delay20_process;

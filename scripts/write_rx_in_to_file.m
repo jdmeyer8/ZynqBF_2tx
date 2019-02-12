@@ -1,4 +1,4 @@
-load('RxInTest_20k_true.mat')
+load('RxInTest_20k_shifted.mat')
 
 %% File name
 file_i = '.\simulation\rx_test_i.txt';

@@ -74,6 +74,8 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ram_rd_counter IS
   SIGNAL Delay7_out1                      : std_logic;
   SIGNAL HDL_Counter1_out1                : unsigned(11 DOWNTO 0);  -- ufix12
   SIGNAL Delay8_out1                      : unsigned(11 DOWNTO 0);  -- ufix12
+  signal Delay13:                           std_logic;
+  signal Delay14:                           std_logic;
 
 BEGIN
   u_select_inputs : ZynqBF_2t_ip_src_select_inputs
@@ -101,8 +103,12 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay1_out1 <= '0';
+        Delay13 <= '0';
+        Delay14 <= '0';
       ELSIF enb = '1' THEN
         Delay1_out1 <= load;
+        Delay13 <= Delay1_out1;
+        Delay14 <= Delay13;
       END IF;
     END IF;
   END PROCESS Delay1_process;
@@ -213,7 +219,8 @@ BEGIN
         IF Delay2_out1 = '1' THEN 
           HDL_Counter2_out1 <= to_unsigned(16#0000#, 15);
         ELSIF Delay1_out1 = '1' THEN 
-          HDL_Counter2_out1 <= Delay3_out1;
+          -- HDL_Counter2_out1 <= Delay3_out1;
+          HDL_Counter2_out1 <= y_unsigned;
         ELSIF Logical_Operator_out1 = '1' THEN 
           HDL_Counter2_out1 <= HDL_Counter2_out1 + to_unsigned(16#0001#, 15);
         END IF;
@@ -242,7 +249,8 @@ BEGIN
       IF reset = '1' THEN
         Delay7_out1 <= '0';
       ELSIF enb = '1' THEN
-        Delay7_out1 <= Logical_Operator_out1;
+        -- Delay7_out1 <= Logical_Operator_out1;
+        Delay7_out1 <= Delay14 or Delay4_out1 or Delay9_out1 or Delay12_out1;
       END IF;
     END IF;
   END PROCESS Delay7_process;
@@ -261,7 +269,7 @@ BEGIN
         IF Delay2_out1 = '1' THEN 
           HDL_Counter1_out1 <= to_unsigned(16#000#, 12);
         ELSIF Delay1_out1 = '1' THEN 
-          HDL_Counter1_out1 <= to_unsigned(16#FFF#, 12);
+          HDL_Counter1_out1 <= to_unsigned(16#000#, 12);
         ELSIF Delay9_out1 = '1' THEN 
           HDL_Counter1_out1 <= HDL_Counter1_out1 + to_unsigned(16#001#, 12);
         END IF;
@@ -282,7 +290,8 @@ BEGIN
   END PROCESS Delay8_process;
 
 
-  gs_addr_out <= std_logic_vector(Delay8_out1);
+  -- gs_addr_out <= std_logic_vector(Delay8_out1);
+  gs_addr_out <= std_logic_vector(HDL_Counter1_out1);
 
   re <= Delay7_out1;
 
