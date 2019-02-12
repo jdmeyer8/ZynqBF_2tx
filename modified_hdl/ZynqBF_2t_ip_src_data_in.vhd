@@ -53,6 +53,10 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_data_in IS
   SIGNAL Delay1_out                       : unsigned(63 DOWNTO 0);  -- ufix64
   SIGNAL Switch2_out1                     : unsigned(63 DOWNTO 0);  -- ufix64
   SIGNAL Delay2_out1                      : unsigned(63 DOWNTO 0);  -- ufix64
+  signal we_i:                              std_logic_vector(63 downto 0);
+  signal we_next:                           std_logic_vector(63 downto 0);
+  signal valid_d1:                          std_logic;
+  signal valid_d2:                          std_logic;
 
 BEGIN
   Delay4_process : PROCESS (clk)
@@ -72,8 +76,12 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay3_out1 <= '0';
+        valid_d1 <= '0';
+        valid_d2 <= '0';
       ELSIF enb = '1' THEN
         Delay3_out1 <= valid;
+        valid_d1 <= valid;
+        valid_d2 <= valid_d1;
       END IF;
     END IF;
   END PROCESS Delay3_process;
@@ -219,8 +227,24 @@ BEGIN
     END IF;
   END PROCESS Delay2_process;
 
+  we_i_process: process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' or rst = '1' then
+        we_i <= x"0000000000000001";
+      elsif valid_d2 = '1' then
+        we_i <= we_next;
+      else
+        we_i <= we_i;
+      end if;
+    end if;
+  end process;
+  
+  we_next <= we_i(62 downto 0) & we_i(63);
 
-  we <= std_logic_vector(Delay2_out1);
+
+  --we <= std_logic_vector(Delay2_out1);
+  we <= we_i when valid_d1 = '1' else x"0000000000000000";
 
 END rtl;
 

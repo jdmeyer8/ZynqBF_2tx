@@ -26,7 +26,8 @@ ENTITY ZynqBF_2t_ip_src_SimpleDualPortRAM_generic IS
            DataWidth                      : integer := 1
            );
   PORT( clk                               :   IN    std_logic;
-        enb                               :   IN    std_logic;
+        ram_rst 		                  :   IN    std_logic;
+	    enb                               :   IN    std_logic;
         wr_din                            :   IN    std_logic_vector(DataWidth - 1 DOWNTO 0);  -- generic width
         wr_addr                           :   IN    std_logic_vector(AddrWidth - 1 DOWNTO 0);  -- generic width
         wr_en                             :   IN    std_logic;  -- ufix1
@@ -55,7 +56,9 @@ BEGIN
   SimpleDualPortRAM_generic_process: PROCESS (clk)
   BEGIN
     IF clk'event AND clk = '1' THEN
-      IF enb = '1' THEN
+      if ram_rst = '1' then
+        ram <= (others => (others => '0'));
+      ELSIF enb = '1' THEN
         IF wr_en = '1' THEN
           ram(to_integer(wr_addr_unsigned)) <= wr_din;
         END IF;

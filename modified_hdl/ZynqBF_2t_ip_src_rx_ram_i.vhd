@@ -21,7 +21,8 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY ZynqBF_2t_ip_src_rx_ram_i IS
   PORT( clk                               :   IN    std_logic;
-        enb                               :   IN    std_logic;
+        ram_rst                           :   IN    std_logic;
+	    enb                               :   IN    std_logic;
         i                                 :   IN    std_logic_vector(5 DOWNTO 0);  -- ufix6
         wdata                             :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
         waddr                             :   IN    std_logic_vector(8 DOWNTO 0);  -- ufix9
@@ -50,7 +51,8 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_rx_ram_i IS
              DataWidth                    : integer
              );
     PORT( clk                             :   IN    std_logic;
-          enb                             :   IN    std_logic;
+          ram_rst                         :   IN    std_logic;
+	      enb                             :   IN    std_logic;
           wr_din                          :   IN    std_logic_vector(DataWidth - 1 DOWNTO 0);  -- generic width
           wr_addr                         :   IN    std_logic_vector(AddrWidth - 1 DOWNTO 0);  -- generic width
           wr_en                           :   IN    std_logic;
@@ -90,6 +92,7 @@ BEGIN
                  DataWidth => 16
                  )
     PORT MAP( clk => clk,
+	          ram_rst => ram_rst,
               enb => enb,
               wr_din => wdata,
               wr_addr => waddr,

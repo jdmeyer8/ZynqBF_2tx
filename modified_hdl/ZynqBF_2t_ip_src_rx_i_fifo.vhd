@@ -43,6 +43,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_rx_i_fifo IS
              DataWidth                    : integer
              );
     PORT( clk                             :   IN    std_logic;
+          ram_rst                         :   IN    std_logic;
           enb                             :   IN    std_logic;
           wr_din                          :   IN    std_logic_vector(DataWidth - 1 DOWNTO 0);  -- generic width
           wr_addr                         :   IN    std_logic_vector(AddrWidth - 1 DOWNTO 0);  -- generic width
@@ -101,6 +102,7 @@ BEGIN
                  DataWidth => 16
                  )
     PORT MAP( clk => clk,
+              ram_rst => '0',
               enb => enb,
               wr_din => std_logic_vector(us1_bypassout),
               wr_addr => std_logic_vector(w_waddr),

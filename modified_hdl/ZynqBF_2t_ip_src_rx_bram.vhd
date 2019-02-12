@@ -45,6 +45,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_rx_bram IS
              DataWidth                    : integer
              );
     PORT( clk                             :   IN    std_logic;
+          ram_rst                         :   IN    std_logic;
           enb                             :   IN    std_logic;
           wr_din                          :   IN    std_logic_vector(DataWidth - 1 DOWNTO 0);  -- generic width
           wr_addr                         :   IN    std_logic_vector(AddrWidth - 1 DOWNTO 0);  -- generic width
@@ -85,6 +86,7 @@ BEGIN
                  DataWidth => 16
                  )
     PORT MAP( clk => clk,
+              ram_rst => rst,
               enb => enb,
               wr_din => std_logic_vector(Delay3_out1),
               wr_addr => std_logic_vector(HDL_Counter_out1),
@@ -98,6 +100,7 @@ BEGIN
                  DataWidth => 16
                  )
     PORT MAP( clk => clk,
+              ram_rst => rst,
               enb => enb,
               wr_din => std_logic_vector(Delay4_out1),
               wr_addr => std_logic_vector(HDL_Counter_out1),
