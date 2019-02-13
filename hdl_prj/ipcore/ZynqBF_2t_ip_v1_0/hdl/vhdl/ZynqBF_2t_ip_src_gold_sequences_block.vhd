@@ -34,7 +34,7 @@ END ZynqBF_2t_ip_src_gold_sequences_block;
 ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
 
   -- Constants
-  CONSTANT lut_gs1i_64_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_64_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1D97#, 16), to_signed(16#2436#, 16), to_signed(-16#2339#, 16), to_signed(16#1B45#, 16),
      to_signed(-16#2413#, 16), to_signed(-16#1AFD#, 16), to_signed(-16#2339#, 16), to_signed(-16#2382#, 16),
      to_signed(-16#213C#, 16), to_signed(-16#1D97#, 16), to_signed(-16#248D#, 16), to_signed(16#23A7#, 16),
@@ -51,7 +51,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1EEB#, 16), to_signed(-16#2930#, 16), to_signed(16#2498#, 16), to_signed(16#25EC#, 16),
      to_signed(-16#1D06#, 16), to_signed(-16#2155#, 16), to_signed(16#21C1#, 16), to_signed(16#1E64#, 16),
      to_signed(16#204A#, 16), to_signed(16#1AE4#, 16), to_signed(16#2309#, 16), to_signed(-16#008B#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_63_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_63_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1330#, 16), to_signed(16#21D6#, 16), to_signed(-16#22AE#, 16), to_signed(16#23AE#, 16),
      to_signed(-16#1963#, 16), to_signed(-16#1C56#, 16), to_signed(-16#22AE#, 16), to_signed(-16#25E0#, 16),
      to_signed(-16#27A0#, 16), to_signed(-16#1242#, 16), to_signed(-16#227D#, 16), to_signed(16#2C0B#, 16),
@@ -68,7 +68,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#27D8#, 16), to_signed(-16#23ED#, 16), to_signed(16#1FB0#, 16), to_signed(16#1A73#, 16),
      to_signed(-16#1387#, 16), to_signed(-16#1670#, 16), to_signed(16#22E9#, 16), to_signed(16#1A67#, 16),
      to_signed(16#1EE0#, 16), to_signed(16#1FA4#, 16), to_signed(16#23CC#, 16), to_signed(-16#0077#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_62_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_62_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#07F6#, 16), to_signed(16#1F4E#, 16), to_signed(-16#1F01#, 16), to_signed(16#2AE7#, 16),
      to_signed(-16#0D41#, 16), to_signed(-16#1E91#, 16), to_signed(-16#1F01#, 16), to_signed(-16#2574#, 16),
      to_signed(-16#2B0B#, 16), to_signed(-16#0770#, 16), to_signed(-16#1D1E#, 16), to_signed(16#30AB#, 16),
@@ -85,7 +85,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2E4B#, 16), to_signed(-16#1A0F#, 16), to_signed(16#18DB#, 16), to_signed(16#0C3A#, 16),
      to_signed(-16#0AB1#, 16), to_signed(-16#09CD#, 16), to_signed(16#2307#, 16), to_signed(16#1820#, 16),
      to_signed(16#1CE1#, 16), to_signed(16#24C1#, 16), to_signed(16#2075#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_61_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_61_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#02DA#, 16), to_signed(16#1C7A#, 16), to_signed(-16#17FD#, 16), to_signed(16#30D5#, 16),
      to_signed(-16#002C#, 16), to_signed(-16#21BD#, 16), to_signed(-16#17FD#, 16), to_signed(-16#2355#, 16),
      to_signed(-16#2C1C#, 16), to_signed(16#02C6#, 16), to_signed(-16#1483#, 16), to_signed(16#321E#, 16),
@@ -102,7 +102,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#326B#, 16), to_signed(-16#0C60#, 16), to_signed(16#0FE7#, 16), to_signed(-16#02DE#, 16),
      to_signed(-16#024E#, 16), to_signed(16#02FE#, 16), to_signed(16#21F9#, 16), to_signed(16#1736#, 16),
      to_signed(16#1B1F#, 16), to_signed(16#29FB#, 16), to_signed(16#195C#, 16), to_signed(16#000A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_60_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_60_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0C9B#, 16), to_signed(16#19E4#, 16), to_signed(-16#0E41#, 16), to_signed(16#34C0#, 16),
      to_signed(16#0C9B#, 16), to_signed(-16#2523#, 16), to_signed(-16#0E41#, 16), to_signed(-16#2048#, 16),
      to_signed(-16#2B26#, 16), to_signed(16#0BD3#, 16), to_signed(-16#099A#, 16), to_signed(16#30C9#, 16),
@@ -119,7 +119,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33F8#, 16), to_signed(16#0336#, 16), to_signed(16#056F#, 16), to_signed(-16#1142#, 16),
      to_signed(16#056F#, 16), to_signed(16#0ED5#, 16), to_signed(16#2048#, 16), to_signed(16#17AA#, 16),
      to_signed(16#19E4#, 16), to_signed(16#2E5C#, 16), to_signed(16#0F39#, 16), to_signed(16#0064#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_59_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_59_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#14BB#, 16), to_signed(16#1818#, 16), to_signed(-16#02A5#, 16), to_signed(16#35F6#, 16),
      to_signed(16#17C2#, 16), to_signed(-16#27E7#, 16), to_signed(-16#02A5#, 16), to_signed(-16#1D2C#, 16),
      to_signed(-16#28AA#, 16), to_signed(16#134B#, 16), to_signed(16#027F#, 16), to_signed(16#2D51#, 16),
@@ -136,7 +136,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#32DB#, 16), to_signed(16#1276#, 16), to_signed(-16#05C4#, 16), to_signed(-16#1D56#, 16),
      to_signed(16#0C71#, 16), to_signed(16#18A4#, 16), to_signed(16#1E88#, 16), to_signed(16#1950#, 16),
      to_signed(16#1974#, 16), to_signed(16#30E2#, 16), to_signed(16#0308#, 16), to_signed(16#00B8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_58_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_58_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1AC1#, 16), to_signed(16#1796#, 16), to_signed(16#09DD#, 16), to_signed(16#33EC#, 16),
      to_signed(16#200C#, 16), to_signed(-16#292E#, 16), to_signed(16#09DD#, 16), to_signed(-16#1AD7#, 16),
      to_signed(-16#2547#, 16), to_signed(16#18DA#, 16), to_signed(16#0E9E#, 16), to_signed(16#287B#, 16),
@@ -153,7 +153,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2F27#, 16), to_signed(16#1F29#, 16), to_signed(-16#10D7#, 16), to_signed(-16#25A9#, 16),
      to_signed(16#12B4#, 16), to_signed(16#1F82#, 16), to_signed(16#1D43#, 16), to_signed(16#1BDA#, 16),
      to_signed(16#1A03#, 16), to_signed(16#30AB#, 16), to_signed(-16#0A11#, 16), to_signed(16#00F3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_57_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_57_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E4F#, 16), to_signed(16#18AD#, 16), to_signed(16#1645#, 16), to_signed(16#2E5D#, 16),
      to_signed(16#2481#, 16), to_signed(-16#2844#, 16), to_signed(16#1645#, 16), to_signed(-16#19F2#, 16),
      to_signed(-16#219F#, 16), to_signed(16#1C47#, 16), to_signed(16#19B1#, 16), to_signed(16#2314#, 16),
@@ -170,7 +170,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2919#, 16), to_signed(16#276A#, 16), to_signed(-16#1AFA#, 16), to_signed(-16#292E#, 16),
      to_signed(16#183D#, 16), to_signed(16#22C7#, 16), to_signed(16#1CE9#, 16), to_signed(16#1EE4#, 16),
      to_signed(16#1BA4#, 16), to_signed(16#2D18#, 16), to_signed(-16#16E7#, 16), to_signed(16#0104#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_56_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_56_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1EA3#, 16), to_signed(16#1AE4#, 16), to_signed(16#2117#, 16), to_signed(16#24D6#, 16),
      to_signed(16#251E#, 16), to_signed(-16#242C#, 16), to_signed(16#2117#, 16), to_signed(-16#1B69#, 16),
      to_signed(-16#1ED0#, 16), to_signed(16#1DF8#, 16), to_signed(16#2252#, 16), to_signed(16#1D4E#, 16),
@@ -187,7 +187,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#219C#, 16), to_signed(16#296E#, 16), to_signed(-16#22F1#, 16), to_signed(-16#27F5#, 16),
      to_signed(16#1D97#, 16), to_signed(16#219E#, 16), to_signed(16#1D29#, 16), to_signed(16#228F#, 16),
      to_signed(16#1ED0#, 16), to_signed(16#2567#, 16), to_signed(-16#22F6#, 16), to_signed(16#0055#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_55_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_55_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D53#, 16), to_signed(16#1FA4#, 16), to_signed(16#2A2F#, 16), to_signed(16#1985#, 16),
      to_signed(16#212B#, 16), to_signed(-16#1D78#, 16), to_signed(16#2A2F#, 16), to_signed(-16#1E8F#, 16),
      to_signed(-16#1BA4#, 16), to_signed(16#1D35#, 16), to_signed(16#289B#, 16), to_signed(16#196B#, 16),
@@ -204,7 +204,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#178A#, 16), to_signed(16#266E#, 16), to_signed(-16#28E9#, 16), to_signed(-16#2081#, 16),
      to_signed(16#220D#, 16), to_signed(16#1DC8#, 16), to_signed(16#1EAD#, 16), to_signed(16#25CD#, 16),
      to_signed(16#219F#, 16), to_signed(16#1B89#, 16), to_signed(-16#2C37#, 16), to_signed(16#000F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_54_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_54_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#18DA#, 16), to_signed(16#24C1#, 16), to_signed(16#318E#, 16), to_signed(16#0BB4#, 16),
      to_signed(16#187E#, 16), to_signed(-16#1512#, 16), to_signed(16#318E#, 16), to_signed(-16#225A#, 16),
      to_signed(-16#1A03#, 16), to_signed(16#1961#, 16), to_signed(16#2CF1#, 16), to_signed(16#1639#, 16),
@@ -221,7 +221,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0D1D#, 16), to_signed(16#1D42#, 16), to_signed(-16#2D44#, 16), to_signed(-16#154E#, 16),
      to_signed(16#24EA#, 16), to_signed(16#1624#, 16), to_signed(16#21D3#, 16), to_signed(16#27A5#, 16),
      to_signed(16#2547#, 16), to_signed(16#0EA1#, 16), to_signed(-16#328C#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_53_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_53_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#120F#, 16), to_signed(16#29FB#, 16), to_signed(16#362E#, 16), to_signed(-16#02C9#, 16),
      to_signed(16#0CAF#, 16), to_signed(-16#0AFD#, 16), to_signed(16#362E#, 16), to_signed(-16#26A8#, 16),
      to_signed(-16#1974#, 16), to_signed(16#1337#, 16), to_signed(16#2EC8#, 16), to_signed(16#148A#, 16),
@@ -238,7 +238,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#026E#, 16), to_signed(16#0FCA#, 16), to_signed(-16#2F61#, 16), to_signed(-16#073B#, 16),
      to_signed(16#26AF#, 16), to_signed(16#0C1A#, 16), to_signed(16#2580#, 16), to_signed(16#2872#, 16),
      to_signed(16#28AA#, 16), to_signed(16#0075#, 16), to_signed(-16#35AD#, 16), to_signed(-16#0094#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_52_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_52_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0966#, 16), to_signed(16#2E5C#, 16), to_signed(16#37C1#, 16), to_signed(-16#107A#, 16),
      to_signed(-16#00C8#, 16), to_signed(16#0000#, 16), to_signed(16#37C1#, 16), to_signed(-16#2A92#, 16),
      to_signed(-16#19E4#, 16), to_signed(16#0B0B#, 16), to_signed(16#2E5C#, 16), to_signed(16#1475#, 16),
@@ -255,7 +255,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#07DD#, 16), to_signed(16#0000#, 16), to_signed(-16#2F51#, 16), to_signed(16#07DD#, 16),
      to_signed(16#275D#, 16), to_signed(16#00C8#, 16), to_signed(16#28ED#, 16), to_signed(16#2825#, 16),
      to_signed(16#2B26#, 16), to_signed(-16#0D79#, 16), to_signed(-16#359D#, 16), to_signed(-16#00D3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_51_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_51_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0090#, 16), to_signed(16#30E2#, 16), to_signed(16#362E#, 16), to_signed(-16#1BE6#, 16),
      to_signed(-16#0E34#, 16), to_signed(16#0AFD#, 16), to_signed(16#362E#, 16), to_signed(-16#2D1F#, 16),
      to_signed(-16#1B1F#, 16), to_signed(16#0155#, 16), to_signed(16#2C15#, 16), to_signed(16#15E6#, 16),
@@ -272,7 +272,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1123#, 16), to_signed(-16#0FCA#, 16), to_signed(-16#2D47#, 16), to_signed(16#15F0#, 16),
      to_signed(16#2702#, 16), to_signed(-16#0A95#, 16), to_signed(16#2B3A#, 16), to_signed(16#26C3#, 16),
      to_signed(16#2C1C#, 16), to_signed(-16#1993#, 16), to_signed(-16#32A6#, 16), to_signed(-16#00F3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_50_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_50_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0B2A#, 16), to_signed(16#30AB#, 16), to_signed(16#318E#, 16), to_signed(-16#23C2#, 16),
      to_signed(-16#19DE#, 16), to_signed(16#1512#, 16), to_signed(16#318E#, 16), to_signed(-16#2D68#, 16),
      to_signed(-16#1CE1#, 16), to_signed(-16#0956#, 16), to_signed(16#287B#, 16), to_signed(16#18A6#, 16),
@@ -289,7 +289,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#18DB#, 16), to_signed(-16#1D42#, 16), to_signed(-16#298A#, 16), to_signed(16#210B#, 16),
      to_signed(16#25BE#, 16), to_signed(-16#14C4#, 16), to_signed(16#2B95#, 16), to_signed(16#2463#, 16),
      to_signed(16#2B0B#, 16), to_signed(-16#2266#, 16), to_signed(-16#2D41#, 16), to_signed(-16#00EA#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_49_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_49_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#15B2#, 16), to_signed(16#2D18#, 16), to_signed(16#2A2F#, 16), to_signed(-16#2726#, 16),
      to_signed(-16#2245#, 16), to_signed(16#1D78#, 16), to_signed(16#2A2F#, 16), to_signed(-16#2AC1#, 16),
      to_signed(-16#1EE0#, 16), to_signed(-16#144A#, 16), to_signed(16#2421#, 16), to_signed(16#1C62#, 16),
@@ -306,7 +306,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1EA4#, 16), to_signed(-16#266E#, 16), to_signed(-16#246C#, 16), to_signed(16#279B#, 16),
      to_signed(16#23C5#, 16), to_signed(-16#1CAE#, 16), to_signed(16#2959#, 16), to_signed(16#211F#, 16),
      to_signed(16#27A0#, 16), to_signed(-16#26D8#, 16), to_signed(-16#2604#, 16), to_signed(-16#00B4#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_48_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_48_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2001#, 16), to_signed(16#267D#, 16), to_signed(16#2001#, 16), to_signed(-16#2635#, 16),
      to_signed(-16#25C9#, 16), to_signed(16#242C#, 16), to_signed(16#2117#, 16), to_signed(-16#2567#, 16),
      to_signed(-16#2160#, 16), to_signed(-16#1F57#, 16), to_signed(16#2025#, 16), to_signed(16#2025#, 16),
@@ -323,7 +323,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#22D8#, 16), to_signed(-16#296E#, 16), to_signed(-16#1EC6#, 16), to_signed(16#281A#, 16),
      to_signed(16#20CF#, 16), to_signed(-16#20F4#, 16), to_signed(16#24BD#, 16), to_signed(16#1D97#, 16),
      to_signed(16#213C#, 16), to_signed(-16#26DF#, 16), to_signed(-16#1E1C#, 16), to_signed(16#0036#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_47_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_47_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#28C7#, 16), to_signed(16#1C77#, 16), to_signed(16#1557#, 16), to_signed(-16#1F75#, 16),
      to_signed(-16#258E#, 16), to_signed(16#2844#, 16), to_signed(16#1645#, 16), to_signed(-16#1CD3#, 16),
      to_signed(-16#237C#, 16), to_signed(-16#2915#, 16), to_signed(16#1C62#, 16), to_signed(16#2421#, 16),
@@ -340,7 +340,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#23D8#, 16), to_signed(-16#276A#, 16), to_signed(-16#1834#, 16), to_signed(16#22FE#, 16),
      to_signed(16#1DD7#, 16), to_signed(-16#21BB#, 16), to_signed(16#1D21#, 16), to_signed(16#192C#, 16),
      to_signed(16#19BE#, 16), to_signed(-16#20DC#, 16), to_signed(-16#1475#, 16), to_signed(16#009E#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_46_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_46_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2ED2#, 16), to_signed(16#0F28#, 16), to_signed(16#0956#, 16), to_signed(-16#154E#, 16),
      to_signed(-16#200C#, 16), to_signed(16#292E#, 16), to_signed(16#09DD#, 16), to_signed(-16#10FB#, 16),
      to_signed(-16#2464#, 16), to_signed(-16#302E#, 16), to_signed(16#18A6#, 16), to_signed(16#287B#, 16),
@@ -357,7 +357,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#238D#, 16), to_signed(-16#1F29#, 16), to_signed(-16#104D#, 16), to_signed(16#1988#, 16),
      to_signed(16#1BDA#, 16), to_signed(-16#1F82#, 16), to_signed(16#1258#, 16), to_signed(16#133B#, 16),
      to_signed(16#0FFD#, 16), to_signed(-16#1721#, 16), to_signed(-16#0B37#, 16), to_signed(16#00F1#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_45_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_45_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#3257#, 16), to_signed(16#0061#, 16), to_signed(-16#0291#, 16), to_signed(-16#0877#, 16),
      to_signed(-16#1686#, 16), to_signed(16#27E7#, 16), to_signed(-16#02A5#, 16), to_signed(-16#0382#, 16),
      to_signed(-16#249B#, 16), to_signed(-16#34A9#, 16), to_signed(16#15E6#, 16), to_signed(16#2C15#, 16),
@@ -374,7 +374,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#21E5#, 16), to_signed(-16#1276#, 16), to_signed(-16#07E2#, 16), to_signed(16#0C74#, 16),
      to_signed(16#1A8C#, 16), to_signed(-16#19E0#, 16), to_signed(16#05D5#, 16), to_signed(16#0C5C#, 16),
      to_signed(16#053F#, 16), to_signed(-16#0A5D#, 16), to_signed(-16#0239#, 16), to_signed(16#011F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_44_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_44_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#3330#, 16), to_signed(-16#0E41#, 16), to_signed(-16#0D79#, 16), to_signed(16#056F#, 16),
      to_signed(-16#0A2E#, 16), to_signed(16#2523#, 16), to_signed(-16#0E41#, 16), to_signed(16#0A2E#, 16),
      to_signed(-16#242E#, 16), to_signed(-16#3631#, 16), to_signed(16#1475#, 16), to_signed(16#2E5C#, 16),
@@ -391,7 +391,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1F80#, 16), to_signed(-16#0336#, 16), to_signed(16#00C8#, 16), to_signed(-16#026E#, 16),
      to_signed(16#1A18#, 16), to_signed(-16#1142#, 16), to_signed(-16#072C#, 16), to_signed(16#04A7#, 16),
      to_signed(-16#059C#, 16), to_signed(16#03C9#, 16), to_signed(16#0637#, 16), to_signed(16#011D#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_43_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_43_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#316B#, 16), to_signed(-16#1B03#, 16), to_signed(-16#168D#, 16), to_signed(16#129A#, 16),
      to_signed(16#0382#, 16), to_signed(16#21BD#, 16), to_signed(-16#17FD#, 16), to_signed(16#1686#, 16),
      to_signed(-16#233F#, 16), to_signed(-16#34A9#, 16), to_signed(16#148A#, 16), to_signed(16#2EC8#, 16),
@@ -408,7 +408,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1D17#, 16), to_signed(16#0C60#, 16), to_signed(16#0967#, 16), to_signed(-16#1106#, 16),
      to_signed(16#1A8C#, 16), to_signed(-16#0654#, 16), to_signed(-16#1347#, 16), to_signed(-16#03BE#, 16),
      to_signed(-16#0FA8#, 16), to_signed(16#1173#, 16), to_signed(16#0DE1#, 16), to_signed(16#00E7#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_42_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_42_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2D41#, 16), to_signed(-16#244C#, 16), to_signed(-16#1D1B#, 16), to_signed(16#1D51#, 16),
      to_signed(16#10FB#, 16), to_signed(16#1E91#, 16), to_signed(-16#1F01#, 16), to_signed(16#200C#, 16),
      to_signed(-16#21F7#, 16), to_signed(-16#302E#, 16), to_signed(16#1639#, 16), to_signed(16#2CF1#, 16),
@@ -425,7 +425,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1B5D#, 16), to_signed(16#1A0F#, 16), to_signed(16#11AD#, 16), to_signed(-16#1D42#, 16),
      to_signed(16#1BDA#, 16), to_signed(16#0613#, 16), to_signed(-16#1D1E#, 16), to_signed(-16#0C97#, 16),
      to_signed(-16#1804#, 16), to_signed(16#1CCB#, 16), to_signed(16#149B#, 16), to_signed(16#0083#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_41_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_41_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2711#, 16), to_signed(-16#28E0#, 16), to_signed(-16#20A5#, 16), to_signed(16#242B#, 16),
      to_signed(16#1CD3#, 16), to_signed(16#1C56#, 16), to_signed(-16#22AE#, 16), to_signed(16#258E#, 16),
      to_signed(-16#2085#, 16), to_signed(-16#2915#, 16), to_signed(16#196B#, 16), to_signed(16#289B#, 16),
@@ -442,7 +442,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1AE1#, 16), to_signed(16#23ED#, 16), to_signed(16#194E#, 16), to_signed(-16#2562#, 16),
      to_signed(16#1DD7#, 16), to_signed(16#1300#, 16), to_signed(-16#238A#, 16), to_signed(-16#158F#, 16),
      to_signed(-16#1DF3#, 16), to_signed(16#2449#, 16), to_signed(16#1A45#, 16), to_signed(-16#0002#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_40_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_40_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1FDC#, 16), to_signed(-16#2789#, 16), to_signed(-16#2179#, 16), to_signed(16#26C6#, 16),
      to_signed(16#2567#, 16), to_signed(16#1C13#, 16), to_signed(-16#2223#, 16), to_signed(16#26DF#, 16),
      to_signed(-16#1E89#, 16), to_signed(-16#1F57#, 16), to_signed(16#1E64#, 16), to_signed(16#2252#, 16),
@@ -459,7 +459,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1C7F#, 16), to_signed(16#281A#, 16), to_signed(16#2086#, 16), to_signed(-16#28C4#, 16),
      to_signed(16#1FB8#, 16), to_signed(16#2001#, 16), to_signed(-16#2537#, 16), to_signed(-16#1EC6#, 16),
      to_signed(-16#2179#, 16), to_signed(16#265A#, 16), to_signed(16#1E41#, 16), to_signed(-16#0123#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_39_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_39_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#167E#, 16), to_signed(-16#20FA#, 16), to_signed(-16#1DF3#, 16), to_signed(16#232F#, 16),
      to_signed(16#2AC1#, 16), to_signed(16#1D44#, 16), to_signed(-16#1E11#, 16), to_signed(16#2333#, 16),
      to_signed(-16#1DD3#, 16), to_signed(-16#144A#, 16), to_signed(16#2403#, 16), to_signed(16#19B1#, 16),
@@ -476,7 +476,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1E8F#, 16), to_signed(16#26AC#, 16), to_signed(16#2667#, 16), to_signed(-16#2651#, 16),
      to_signed(16#22D7#, 16), to_signed(16#2B79#, 16), to_signed(-16#238A#, 16), to_signed(-16#2711#, 16),
      to_signed(-16#20A5#, 16), to_signed(16#2449#, 16), to_signed(16#222B#, 16), to_signed(-16#01A0#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_38_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_38_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0D1D#, 16), to_signed(-16#169B#, 16), to_signed(-16#1804#, 16), to_signed(16#1B6B#, 16),
      to_signed(16#2D68#, 16), to_signed(16#1F17#, 16), to_signed(-16#177E#, 16), to_signed(16#1A64#, 16),
      to_signed(-16#1CE1#, 16), to_signed(-16#0956#, 16), to_signed(16#2901#, 16), to_signed(16#0E9E#, 16),
@@ -493,7 +493,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#225A#, 16), to_signed(16#2085#, 16), to_signed(16#2A11#, 16), to_signed(-16#1DC9#, 16),
      to_signed(16#2538#, 16), to_signed(16#33E8#, 16), to_signed(-16#1D1E#, 16), to_signed(-16#2D41#, 16),
      to_signed(-16#1D1B#, 16), to_signed(16#1CCB#, 16), to_signed(16#2463#, 16), to_signed(-16#01E4#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_37_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_37_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#03AA#, 16), to_signed(-16#0936#, 16), to_signed(-16#0FA8#, 16), to_signed(16#0FEE#, 16),
      to_signed(16#2D1F#, 16), to_signed(16#21A9#, 16), to_signed(-16#0E81#, 16), to_signed(16#0E20#, 16),
      to_signed(-16#1C5A#, 16), to_signed(16#0155#, 16), to_signed(16#2D3C#, 16), to_signed(16#027F#, 16),
@@ -510,7 +510,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#26A8#, 16), to_signed(16#1604#, 16), to_signed(16#2BF7#, 16), to_signed(-16#10F1#, 16),
      to_signed(16#2716#, 16), to_signed(16#393B#, 16), to_signed(-16#1347#, 16), to_signed(-16#316B#, 16),
      to_signed(-16#168D#, 16), to_signed(16#1173#, 16), to_signed(16#2587#, 16), to_signed(-16#01E2#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_36_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_36_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#056F#, 16), to_signed(16#056F#, 16), to_signed(-16#059C#, 16), to_signed(16#0239#, 16),
      to_signed(16#2A92#, 16), to_signed(16#245B#, 16), to_signed(-16#03F7#, 16), to_signed(16#0000#, 16),
      to_signed(-16#1C51#, 16), to_signed(16#0B0B#, 16), to_signed(16#3001#, 16), to_signed(-16#099A#, 16),
@@ -527,7 +527,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2A92#, 16), to_signed(16#08A5#, 16), to_signed(16#2C1B#, 16), to_signed(-16#01A6#, 16),
      to_signed(16#2825#, 16), to_signed(16#3B0C#, 16), to_signed(-16#072C#, 16), to_signed(-16#3330#, 16),
      to_signed(-16#0D79#, 16), to_signed(16#03C9#, 16), to_signed(16#25B7#, 16), to_signed(-16#0197#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_35_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_35_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0DCD#, 16), to_signed(16#1358#, 16), to_signed(16#053F#, 16), to_signed(-16#0BE1#, 16),
      to_signed(16#26A8#, 16), to_signed(16#2676#, 16), to_signed(16#0725#, 16), to_signed(-16#0E20#, 16),
      to_signed(-16#1CCA#, 16), to_signed(16#1337#, 16), to_signed(16#30AE#, 16), to_signed(-16#1483#, 16),
@@ -544,7 +544,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2D1F#, 16), to_signed(-16#05CB#, 16), to_signed(16#2A9B#, 16), to_signed(16#0DE4#, 16),
      to_signed(16#281F#, 16), to_signed(16#393B#, 16), to_signed(16#05D5#, 16), to_signed(-16#3257#, 16),
      to_signed(-16#0291#, 16), to_signed(-16#0A5D#, 16), to_signed(16#251C#, 16), to_signed(-16#010A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_34_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_34_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1521#, 16), to_signed(16#1E9F#, 16), to_signed(16#0FFD#, 16), to_signed(-16#1881#, 16),
      to_signed(16#225A#, 16), to_signed(16#2747#, 16), to_signed(16#11D1#, 16), to_signed(-16#1A64#, 16),
      to_signed(-16#1DBD#, 16), to_signed(16#1961#, 16), to_signed(16#2EC5#, 16), to_signed(-16#1D1E#, 16),
@@ -561,7 +561,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2D68#, 16), to_signed(-16#1367#, 16), to_signed(16#27A4#, 16), to_signed(16#1B6F#, 16),
      to_signed(16#26D0#, 16), to_signed(16#33E8#, 16), to_signed(16#1258#, 16), to_signed(-16#2ED2#, 16),
      to_signed(16#0956#, 16), to_signed(-16#1721#, 16), to_signed(16#23EB#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_33_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_33_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B34#, 16), to_signed(16#25B0#, 16), to_signed(16#19BE#, 16), to_signed(-16#21F6#, 16),
      to_signed(16#1E8F#, 16), to_signed(16#263B#, 16), to_signed(16#1B26#, 16), to_signed(-16#2333#, 16),
      to_signed(-16#1F14#, 16), to_signed(16#1D35#, 16), to_signed(16#2A03#, 16), to_signed(-16#227D#, 16),
@@ -578,7 +578,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2AC1#, 16), to_signed(-16#1E79#, 16), to_signed(16#2370#, 16), to_signed(16#2507#, 16),
      to_signed(16#2416#, 16), to_signed(16#2B79#, 16), to_signed(16#1D21#, 16), to_signed(-16#28C7#, 16),
      to_signed(16#1557#, 16), to_signed(-16#20DC#, 16), to_signed(16#225D#, 16), to_signed(16#00B7#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_32_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_32_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#206D#, 16), to_signed(16#2704#, 16), to_signed(16#213C#, 16), to_signed(-16#2789#, 16),
      to_signed(16#1B69#, 16), to_signed(16#226B#, 16), to_signed(16#22FC#, 16), to_signed(-16#27F5#, 16),
      to_signed(-16#2025#, 16), to_signed(16#1F0F#, 16), to_signed(16#21E6#, 16), to_signed(-16#248D#, 16),
@@ -595,7 +595,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2451#, 16), to_signed(-16#2635#, 16), to_signed(16#1DB0#, 16), to_signed(16#29DA#, 16),
      to_signed(16#206D#, 16), to_signed(16#2001#, 16), to_signed(16#24BD#, 16), to_signed(-16#2117#, 16),
      to_signed(16#2001#, 16), to_signed(-16#26DF#, 16), to_signed(16#2025#, 16), to_signed(16#0270#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_31_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_31_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#231A#, 16), to_signed(16#23FA#, 16), to_signed(16#27A0#, 16), to_signed(-16#27E4#, 16),
      to_signed(16#19F2#, 16), to_signed(16#1C6B#, 16), to_signed(16#2840#, 16), to_signed(-16#267C#, 16),
      to_signed(-16#216F#, 16), to_signed(16#1D35#, 16), to_signed(16#1874#, 16), to_signed(-16#2270#, 16),
@@ -612,7 +612,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1BE4#, 16), to_signed(-16#2822#, 16), to_signed(16#1841#, 16), to_signed(16#28A7#, 16),
      to_signed(16#1A38#, 16), to_signed(16#1300#, 16), to_signed(16#2959#, 16), to_signed(-16#16A0#, 16),
      to_signed(16#2A2F#, 16), to_signed(-16#26D8#, 16), to_signed(16#1E26#, 16), to_signed(16#03C8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_30_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_30_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#24EA#, 16), to_signed(16#1B6F#, 16), to_signed(16#2B0B#, 16), to_signed(-16#2266#, 16),
      to_signed(16#1AD7#, 16), to_signed(16#1512#, 16), to_signed(16#2A35#, 16), to_signed(-16#2092#, 16),
      to_signed(-16#2364#, 16), to_signed(16#1961#, 16), to_signed(16#0CBB#, 16), to_signed(-16#1BBE#, 16),
@@ -629,7 +629,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1075#, 16), to_signed(-16#25A9#, 16), to_signed(16#11AD#, 16), to_signed(16#210B#, 16),
      to_signed(16#133B#, 16), to_signed(16#0613#, 16), to_signed(16#2B95#, 16), to_signed(-16#0BB0#, 16),
      to_signed(16#318E#, 16), to_signed(-16#2266#, 16), to_signed(16#1D36#, 16), to_signed(16#0559#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_29_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_29_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2573#, 16), to_signed(16#0F20#, 16), to_signed(16#2C1C#, 16), to_signed(-16#1857#, 16),
      to_signed(16#1D2C#, 16), to_signed(16#0C38#, 16), to_signed(16#29B5#, 16), to_signed(-16#1672#, 16),
      to_signed(-16#2531#, 16), to_signed(16#1337#, 16), to_signed(16#0041#, 16), to_signed(-16#11C3#, 16),
@@ -646,7 +646,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0397#, 16), to_signed(-16#1E92#, 16), to_signed(16#0AA2#, 16), to_signed(16#14B4#, 16),
      to_signed(16#0B21#, 16), to_signed(-16#0654#, 16), to_signed(16#2B3A#, 16), to_signed(-16#007C#, 16),
      to_signed(16#362E#, 16), to_signed(-16#1993#, 16), to_signed(16#1CDF#, 16), to_signed(16#074D#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_28_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_28_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#24EF#, 16), to_signed(16#00C8#, 16), to_signed(16#2B26#, 16), to_signed(-16#0B0B#, 16),
      to_signed(16#2048#, 16), to_signed(16#026E#, 16), to_signed(16#275D#, 16), to_signed(-16#0966#, 16),
      to_signed(-16#267F#, 16), to_signed(16#0B0B#, 16), to_signed(-16#0BD3#, 16), to_signed(-16#059C#, 16),
@@ -663,7 +663,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0966#, 16), to_signed(-16#13B0#, 16), to_signed(16#0336#, 16), to_signed(16#056F#, 16),
      to_signed(16#0239#, 16), to_signed(-16#1142#, 16), to_signed(16#28ED#, 16), to_signed(16#0A2E#, 16),
      to_signed(16#37C1#, 16), to_signed(-16#0D79#, 16), to_signed(16#1D19#, 16), to_signed(16#09D6#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_27_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_27_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#23AC#, 16), to_signed(-16#0D9B#, 16), to_signed(16#28AA#, 16), to_signed(16#03CB#, 16),
      to_signed(16#2355#, 16), to_signed(-16#07A7#, 16), to_signed(16#23FC#, 16), to_signed(16#04F3#, 16),
      to_signed(-16#26F8#, 16), to_signed(16#0155#, 16), to_signed(-16#1651#, 16), to_signed(16#075A#, 16),
@@ -680,7 +680,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1516#, 16), to_signed(-16#0634#, 16), to_signed(-16#048C#, 16), to_signed(-16#0A91#, 16),
      to_signed(-16#0714#, 16), to_signed(-16#19E0#, 16), to_signed(16#2580#, 16), to_signed(16#1380#, 16),
      to_signed(16#362E#, 16), to_signed(16#0075#, 16), to_signed(16#1DCB#, 16), to_signed(16#0D29#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_26_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_26_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2204#, 16), to_signed(-16#1A0F#, 16), to_signed(16#2547#, 16), to_signed(16#125B#, 16),
      to_signed(16#2574#, 16), to_signed(-16#1158#, 16), to_signed(16#2074#, 16), to_signed(16#12E2#, 16),
      to_signed(-16#264A#, 16), to_signed(-16#0956#, 16), to_signed(-16#1E25#, 16), to_signed(16#13B8#, 16),
@@ -697,7 +697,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1E25#, 16), to_signed(16#0880#, 16), to_signed(-16#0C93#, 16), to_signed(-16#1908#, 16),
      to_signed(-16#1051#, 16), to_signed(-16#1F82#, 16), to_signed(16#21D3#, 16), to_signed(16#1AC1#, 16),
      to_signed(16#318E#, 16), to_signed(16#0EA1#, 16), to_signed(16#1EC7#, 16), to_signed(16#1166#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_25_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_25_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2055#, 16), to_signed(-16#22E1#, 16), to_signed(16#219F#, 16), to_signed(16#1EF9#, 16),
      to_signed(16#25E0#, 16), to_signed(-16#1A08#, 16), to_signed(16#1D93#, 16), to_signed(16#1EDB#, 16),
      to_signed(-16#2434#, 16), to_signed(-16#144A#, 16), to_signed(-16#2279#, 16), to_signed(16#1E3B#, 16),
@@ -714,7 +714,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2385#, 16), to_signed(16#1703#, 16), to_signed(-16#14C4#, 16), to_signed(-16#23F1#, 16),
      to_signed(-16#18FF#, 16), to_signed(-16#21BB#, 16), to_signed(16#1EAD#, 16), to_signed(16#1F5C#, 16),
      to_signed(16#2A2F#, 16), to_signed(16#1B89#, 16), to_signed(16#1FDB#, 16), to_signed(16#1691#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_24_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_24_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E64#, 16), to_signed(-16#265A#, 16), to_signed(16#1DBA#, 16), to_signed(16#27D1#, 16),
      to_signed(16#2498#, 16), to_signed(-16#20AB#, 16), to_signed(16#1B69#, 16), to_signed(16#2727#, 16),
      to_signed(-16#2001#, 16), to_signed(-16#1E41#, 16), to_signed(-16#2248#, 16), to_signed(16#2567#, 16),
@@ -731,7 +731,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2408#, 16), to_signed(16#2498#, 16), to_signed(-16#1C5C#, 16), to_signed(-16#2949#, 16),
      to_signed(-16#2130#, 16), to_signed(-16#20F4#, 16), to_signed(16#1D29#, 16), to_signed(16#2063#, 16),
      to_signed(16#2001#, 16), to_signed(16#2567#, 16), to_signed(16#2160#, 16), to_signed(16#1D0B#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_23_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_23_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D19#, 16), to_signed(-16#24A4#, 16), to_signed(16#1AB6#, 16), to_signed(16#2DD6#, 16),
      to_signed(16#1FB0#, 16), to_signed(-16#2697#, 16), to_signed(16#1AEE#, 16), to_signed(16#2BCD#, 16),
      to_signed(-16#1B52#, 16), to_signed(-16#2827#, 16), to_signed(-16#1F30#, 16), to_signed(16#2A66#, 16),
@@ -748,7 +748,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2138#, 16), to_signed(16#2E8D#, 16), to_signed(-16#23AE#, 16), to_signed(-16#28FE#, 16),
      to_signed(-16#27CF#, 16), to_signed(-16#1CAE#, 16), to_signed(16#1CE9#, 16), to_signed(16#1F5C#, 16),
      to_signed(16#1557#, 16), to_signed(16#2D18#, 16), to_signed(16#2280#, 16), to_signed(16#234C#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_22_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_22_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D36#, 16), to_signed(-16#1E9F#, 16), to_signed(16#197C#, 16), to_signed(16#2F4F#, 16),
      to_signed(16#18DB#, 16), to_signed(-16#2A04#, 16), to_signed(16#1CBD#, 16), to_signed(16#2D68#, 16),
      to_signed(-16#149B#, 16), to_signed(-16#2FA8#, 16), to_signed(-16#17F7#, 16), to_signed(16#2B95#, 16),
@@ -765,7 +765,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#19DE#, 16), to_signed(16#35CF#, 16), to_signed(-16#2AE7#, 16), to_signed(-16#23C6#, 16),
      to_signed(-16#2BE5#, 16), to_signed(-16#14C4#, 16), to_signed(16#1D43#, 16), to_signed(16#1AC1#, 16),
      to_signed(16#0956#, 16), to_signed(16#30AB#, 16), to_signed(16#227E#, 16), to_signed(16#2944#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_21_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_21_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E1A#, 16), to_signed(-16#1494#, 16), to_signed(16#1989#, 16), to_signed(16#2D54#, 16),
      to_signed(16#0FE7#, 16), to_signed(-16#2B89#, 16), to_signed(16#1FD8#, 16), to_signed(16#2BE4#, 16),
      to_signed(-16#0CA5#, 16), to_signed(-16#34BE#, 16), to_signed(-16#0E00#, 16), to_signed(16#29FE#, 16),
@@ -782,7 +782,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0F70#, 16), to_signed(16#3970#, 16), to_signed(-16#30D5#, 16), to_signed(-16#19DC#, 16),
      to_signed(-16#2DDC#, 16), to_signed(-16#0A95#, 16), to_signed(16#1E88#, 16), to_signed(16#1380#, 16),
      to_signed(-16#0291#, 16), to_signed(16#30E2#, 16), to_signed(16#21EF#, 16), to_signed(16#2E46#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_20_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_20_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1F87#, 16), to_signed(-16#07DD#, 16), to_signed(16#1AAC#, 16), to_signed(16#28ED#, 16),
      to_signed(16#056F#, 16), to_signed(-16#2B5A#, 16), to_signed(16#237E#, 16), to_signed(16#2825#, 16),
      to_signed(-16#03C9#, 16), to_signed(-16#36F9#, 16), to_signed(-16#026E#, 16), to_signed(16#267F#, 16),
@@ -799,7 +799,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0336#, 16), to_signed(16#3967#, 16), to_signed(-16#34C0#, 16), to_signed(-16#0C9B#, 16),
      to_signed(-16#2DC1#, 16), to_signed(16#00C8#, 16), to_signed(16#2048#, 16), to_signed(16#0A2E#, 16),
      to_signed(-16#0D79#, 16), to_signed(16#2E5C#, 16), to_signed(16#20F8#, 16), to_signed(16#3199#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_19_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_19_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2121#, 16), to_signed(16#05E0#, 16), to_signed(16#1C8F#, 16), to_signed(16#2366#, 16),
      to_signed(-16#05C4#, 16), to_signed(-16#29C2#, 16), to_signed(16#26BF#, 16), to_signed(16#2352#, 16),
      to_signed(16#058F#, 16), to_signed(-16#3619#, 16), to_signed(16#096E#, 16), to_signed(16#222A#, 16),
@@ -816,7 +816,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0959#, 16), to_signed(16#35F9#, 16), to_signed(-16#35F6#, 16), to_signed(16#0247#, 16),
      to_signed(-16#2BC2#, 16), to_signed(16#0C1A#, 16), to_signed(16#21F9#, 16), to_signed(-16#007C#, 16),
      to_signed(-16#168D#, 16), to_signed(16#29FB#, 16), to_signed(16#1FD4#, 16), to_signed(16#328F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_18_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_18_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2281#, 16), to_signed(16#12E1#, 16), to_signed(16#1EC7#, 16), to_signed(16#1E19#, 16),
      to_signed(-16#10D7#, 16), to_signed(-16#271E#, 16), to_signed(16#28A7#, 16), to_signed(16#1EA0#, 16),
      to_signed(16#0EF1#, 16), to_signed(-16#3215#, 16), to_signed(16#143D#, 16), to_signed(16#1E19#, 16),
@@ -833,7 +833,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#14C4#, 16), to_signed(16#2FA8#, 16), to_signed(-16#33EC#, 16), to_signed(16#10FB#, 16),
      to_signed(-16#282B#, 16), to_signed(16#1624#, 16), to_signed(16#2307#, 16), to_signed(-16#0BB0#, 16),
      to_signed(-16#1D1B#, 16), to_signed(16#24C1#, 16), to_signed(16#1EC4#, 16), to_signed(16#30A8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_17_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_17_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#234B#, 16), to_signed(16#1D8A#, 16), to_signed(16#20E8#, 16), to_signed(16#1A30#, 16),
      to_signed(-16#1AFA#, 16), to_signed(-16#23D2#, 16), to_signed(16#2862#, 16), to_signed(16#1B1F#, 16),
      to_signed(16#17E5#, 16), to_signed(-16#2B1D#, 16), to_signed(16#1CCC#, 16), to_signed(16#1B3D#, 16),
@@ -850,7 +850,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1DBB#, 16), to_signed(16#271A#, 16), to_signed(-16#2E5D#, 16), to_signed(16#1DDF#, 16),
      to_signed(-16#2352#, 16), to_signed(16#1DC8#, 16), to_signed(16#22E9#, 16), to_signed(-16#16A0#, 16),
      to_signed(-16#20A5#, 16), to_signed(16#1FA4#, 16), to_signed(16#1E04#, 16), to_signed(16#2BA3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_16_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_16_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#23CA#, 16), to_signed(16#251E#, 16), to_signed(16#2320#, 16), to_signed(16#18FF#, 16),
      to_signed(-16#2407#, 16), to_signed(-16#20CF#, 16), to_signed(16#24D6#, 16), to_signed(16#1A15#, 16),
      to_signed(16#1F70#, 16), to_signed(-16#2117#, 16), to_signed(16#22B4#, 16), to_signed(16#19A9#, 16),
@@ -867,7 +867,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#22B4#, 16), to_signed(16#1D97#, 16), to_signed(-16#25EC#, 16), to_signed(16#2727#, 16),
      to_signed(-16#1D06#, 16), to_signed(16#219E#, 16), to_signed(16#20AB#, 16), to_signed(-16#2001#, 16),
      to_signed(-16#2063#, 16), to_signed(16#1BFA#, 16), to_signed(16#1D35#, 16), to_signed(16#2309#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_15_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_15_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#233E#, 16), to_signed(16#2822#, 16), to_signed(16#2488#, 16), to_signed(16#1A23#, 16),
      to_signed(-16#29D7#, 16), to_signed(-16#1DCA#, 16), to_signed(16#1F80#, 16), to_signed(16#1A23#, 16),
      to_signed(16#25D4#, 16), to_signed(-16#1557#, 16), to_signed(16#24B2#, 16), to_signed(16#1B3D#, 16),
@@ -884,7 +884,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#23C3#, 16), to_signed(16#1330#, 16), to_signed(-16#1A73#, 16), to_signed(16#2CC9#, 16),
      to_signed(-16#1639#, 16), to_signed(16#22C7#, 16), to_signed(16#1DB5#, 16), to_signed(-16#27D8#, 16),
      to_signed(-16#1D05#, 16), to_signed(16#199C#, 16), to_signed(16#1D15#, 16), to_signed(16#1876#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_14_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_14_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2121#, 16), to_signed(16#25A9#, 16), to_signed(16#2464#, 16), to_signed(16#1CBA#, 16),
      to_signed(-16#2DCB#, 16), to_signed(-16#1A7A#, 16), to_signed(16#16F8#, 16), to_signed(16#1CBA#, 16),
      to_signed(16#2B5E#, 16), to_signed(-16#0956#, 16), to_signed(16#21EF#, 16), to_signed(16#1E19#, 16),
@@ -901,7 +901,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2168#, 16), to_signed(16#07F6#, 16), to_signed(-16#0C3A#, 16), to_signed(16#2F4F#, 16),
      to_signed(-16#0FC7#, 16), to_signed(16#1F82#, 16), to_signed(16#1855#, 16), to_signed(-16#2E4B#, 16),
      to_signed(-16#177E#, 16), to_signed(16#181C#, 16), to_signed(16#1E3D#, 16), to_signed(16#0C37#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_13_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_13_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E60#, 16), to_signed(16#1E92#, 16), to_signed(16#235F#, 16), to_signed(16#20A6#, 16),
      to_signed(-16#2F4D#, 16), to_signed(-16#17CC#, 16), to_signed(16#0C6D#, 16), to_signed(16#20A6#, 16),
      to_signed(16#2F2C#, 16), to_signed(16#0291#, 16), to_signed(16#1B3C#, 16), to_signed(16#222A#, 16),
@@ -918,7 +918,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1B50#, 16), to_signed(-16#02DA#, 16), to_signed(16#02DE#, 16), to_signed(16#2E90#, 16),
      to_signed(-16#0932#, 16), to_signed(16#18A4#, 16), to_signed(16#1137#, 16), to_signed(-16#326B#, 16),
      to_signed(-16#0FBD#, 16), to_signed(16#1804#, 16), to_signed(16#1FE9#, 16), to_signed(-16#00A6#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_12_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_12_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B89#, 16), to_signed(16#13B0#, 16), to_signed(16#21C0#, 16), to_signed(16#24EF#, 16),
      to_signed(-16#2E89#, 16), to_signed(-16#161A#, 16), to_signed(16#00C8#, 16), to_signed(16#24EF#, 16),
      to_signed(16#30F6#, 16), to_signed(16#0D79#, 16), to_signed(16#1142#, 16), to_signed(16#267F#, 16),
@@ -935,7 +935,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#120A#, 16), to_signed(-16#0C9B#, 16), to_signed(16#1142#, 16), to_signed(16#2B5A#, 16),
      to_signed(-16#026E#, 16), to_signed(16#0ED5#, 16), to_signed(16#08A5#, 16), to_signed(-16#33F8#, 16),
      to_signed(-16#0664#, 16), to_signed(16#191C#, 16), to_signed(16#21C0#, 16), to_signed(-16#0CF0#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_11_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_11_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1940#, 16), to_signed(16#0634#, 16), to_signed(16#1FE9#, 16), to_signed(16#2879#, 16),
      to_signed(-16#2BD6#, 16), to_signed(-16#15B1#, 16), to_signed(-16#0AE8#, 16), to_signed(16#2879#, 16),
      to_signed(16#3088#, 16), to_signed(16#168D#, 16), to_signed(16#04F8#, 16), to_signed(16#29FE#, 16),
@@ -952,7 +952,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0668#, 16), to_signed(-16#14BB#, 16), to_signed(16#1D56#, 16), to_signed(16#26BC#, 16),
      to_signed(16#04A0#, 16), to_signed(16#02FE#, 16), to_signed(-16#00FE#, 16), to_signed(-16#32DB#, 16),
      to_signed(16#03CF#, 16), to_signed(16#1B0A#, 16), to_signed(16#235F#, 16), to_signed(-16#1771#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_10_table_data         : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_10_table_data         : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#181C#, 16), to_signed(-16#0880#, 16), to_signed(16#1E3D#, 16), to_signed(16#2A35#, 16),
      to_signed(-16#27A4#, 16), to_signed(-16#16C0#, 16), to_signed(-16#1598#, 16), to_signed(16#2A35#, 16),
      to_signed(16#2DCB#, 16), to_signed(16#1D1B#, 16), to_signed(-16#0880#, 16), to_signed(16#2B95#, 16),
@@ -969,7 +969,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#069A#, 16), to_signed(-16#1AC1#, 16), to_signed(16#25A9#, 16), to_signed(16#21D3#, 16),
      to_signed(16#0C0D#, 16), to_signed(-16#09CD#, 16), to_signed(-16#0B37#, 16), to_signed(-16#2F27#, 16),
      to_signed(16#0E17#, 16), to_signed(16#1D67#, 16), to_signed(16#2464#, 16), to_signed(-16#1F17#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_9_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_9_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#188F#, 16), to_signed(-16#1703#, 16), to_signed(16#1D15#, 16), to_signed(16#294C#, 16),
      to_signed(-16#2264#, 16), to_signed(-16#194D#, 16), to_signed(-16#1E66#, 16), to_signed(16#294C#, 16),
      to_signed(16#28CB#, 16), to_signed(16#20A5#, 16), to_signed(-16#15F7#, 16), to_signed(16#2A66#, 16),
@@ -986,7 +986,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#13EE#, 16), to_signed(-16#1E4F#, 16), to_signed(16#292E#, 16), to_signed(16#1DA0#, 16),
      to_signed(16#13D5#, 16), to_signed(-16#1670#, 16), to_signed(-16#1582#, 16), to_signed(-16#2919#, 16),
      to_signed(16#17B6#, 16), to_signed(16#1FCE#, 16), to_signed(16#2488#, 16), to_signed(-16#2318#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_8_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_8_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B50#, 16), to_signed(-16#2498#, 16), to_signed(16#1C1F#, 16), to_signed(16#24BD#, 16),
      to_signed(-16#1BEF#, 16), to_signed(-16#1DBA#, 16), to_signed(-16#2542#, 16), to_signed(16#24BD#, 16),
      to_signed(16#2246#, 16), to_signed(16#2179#, 16), to_signed(-16#22D8#, 16), to_signed(16#2567#, 16),
@@ -1003,7 +1003,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2117#, 16), to_signed(-16#1EA3#, 16), to_signed(16#27F5#, 16), to_signed(16#1A53#, 16),
      to_signed(16#1B45#, 16), to_signed(-16#226B#, 16), to_signed(-16#1FDC#, 16), to_signed(-16#219C#, 16),
      to_signed(16#2092#, 16), to_signed(16#2160#, 16), to_signed(16#2436#, 16), to_signed(-16#2394#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_7_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_7_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E8B#, 16), to_signed(-16#2E8D#, 16), to_signed(16#1D15#, 16), to_signed(16#1D2E#, 16),
      to_signed(-16#1639#, 16), to_signed(-16#21FB#, 16), to_signed(-16#2844#, 16), to_signed(16#1D2E#, 16),
      to_signed(16#18F2#, 16), to_signed(16#1DF3#, 16), to_signed(-16#2C85#, 16), to_signed(16#1E3B#, 16),
@@ -1020,7 +1020,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2B79#, 16), to_signed(-16#1D53#, 16), to_signed(16#2081#, 16), to_signed(16#19F2#, 16),
      to_signed(16#23AE#, 16), to_signed(-16#2C37#, 16), to_signed(-16#280D#, 16), to_signed(-16#178A#, 16),
      to_signed(16#2782#, 16), to_signed(16#228D#, 16), to_signed(16#21D6#, 16), to_signed(-16#1F6A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_6_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_6_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2361#, 16), to_signed(-16#35CF#, 16), to_signed(16#1E3D#, 16), to_signed(16#13B8#, 16),
      to_signed(-16#0FC7#, 16), to_signed(-16#271B#, 16), to_signed(-16#292E#, 16), to_signed(16#13B8#, 16),
      to_signed(16#0EF1#, 16), to_signed(16#1804#, 16), to_signed(-16#33E8#, 16), to_signed(16#13B8#, 16),
@@ -1037,7 +1037,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33E8#, 16), to_signed(-16#18DA#, 16), to_signed(16#154E#, 16), to_signed(16#1AD7#, 16),
      to_signed(16#2AE7#, 16), to_signed(-16#328C#, 16), to_signed(-16#2F27#, 16), to_signed(-16#0D1D#, 16),
      to_signed(16#2B91#, 16), to_signed(16#23DE#, 16), to_signed(16#1F4E#, 16), to_signed(-16#1794#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_5_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_5_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2876#, 16), to_signed(-16#3970#, 16), to_signed(16#1FE9#, 16), to_signed(16#0895#, 16),
      to_signed(-16#0932#, 16), to_signed(-16#2BCC#, 16), to_signed(-16#27E7#, 16), to_signed(16#0895#, 16),
      to_signed(16#0454#, 16), to_signed(16#0FA8#, 16), to_signed(-16#37FF#, 16), to_signed(16#075A#, 16),
@@ -1054,7 +1054,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#393B#, 16), to_signed(-16#120F#, 16), to_signed(16#073B#, 16), to_signed(16#1D2C#, 16),
      to_signed(16#30D5#, 16), to_signed(-16#35AD#, 16), to_signed(-16#3417#, 16), to_signed(-16#026E#, 16),
      to_signed(16#2D43#, 16), to_signed(16#24AF#, 16), to_signed(16#1C7A#, 16), to_signed(-16#0CF8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_4_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_4_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2CCC#, 16), to_signed(-16#3967#, 16), to_signed(16#21C0#, 16), to_signed(-16#032F#, 16),
      to_signed(-16#026E#, 16), to_signed(-16#2F39#, 16), to_signed(-16#2523#, 16), to_signed(-16#032F#, 16),
      to_signed(-16#0637#, 16), to_signed(16#059C#, 16), to_signed(-16#389F#, 16), to_signed(-16#059C#, 16),
@@ -1071,7 +1071,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#3B0C#, 16), to_signed(-16#0966#, 16), to_signed(-16#07DD#, 16), to_signed(16#2048#, 16),
      to_signed(16#34C0#, 16), to_signed(-16#359D#, 16), to_signed(-16#3665#, 16), to_signed(16#07DD#, 16),
      to_signed(16#2CCC#, 16), to_signed(16#24F6#, 16), to_signed(16#19E4#, 16), to_signed(-16#00D3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_3_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_3_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2F5E#, 16), to_signed(-16#35F9#, 16), to_signed(16#235F#, 16), to_signed(-16#0E6D#, 16),
      to_signed(16#04A0#, 16), to_signed(-16#3099#, 16), to_signed(-16#21BD#, 16), to_signed(-16#0E6D#, 16),
      to_signed(-16#0FFB#, 16), to_signed(-16#053F#, 16), to_signed(-16#35E5#, 16), to_signed(-16#11C3#, 16),
@@ -1088,7 +1088,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#393B#, 16), to_signed(16#0090#, 16), to_signed(-16#15F0#, 16), to_signed(16#2355#, 16),
      to_signed(16#35F6#, 16), to_signed(-16#32A6#, 16), to_signed(-16#35C1#, 16), to_signed(16#1123#, 16),
      to_signed(16#2A90#, 16), to_signed(16#24AF#, 16), to_signed(16#1818#, 16), to_signed(16#0B72#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_2_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_2_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2F4B#, 16), to_signed(-16#2FA8#, 16), to_signed(16#2464#, 16), to_signed(-16#1804#, 16),
      to_signed(16#0C0D#, 16), to_signed(-16#2F4B#, 16), to_signed(-16#1E91#, 16), to_signed(-16#1804#, 16),
      to_signed(-16#1855#, 16), to_signed(-16#0FFD#, 16), to_signed(-16#302E#, 16), to_signed(-16#1BBE#, 16),
@@ -1105,7 +1105,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33E8#, 16), to_signed(16#0B2A#, 16), to_signed(-16#210B#, 16), to_signed(16#2574#, 16),
      to_signed(16#33EC#, 16), to_signed(-16#2D41#, 16), to_signed(-16#3205#, 16), to_signed(16#18DB#, 16),
      to_signed(16#271B#, 16), to_signed(16#23DE#, 16), to_signed(16#1796#, 16), to_signed(16#1667#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_1_table_data          : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_1_table_data          : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2BFE#, 16), to_signed(-16#271A#, 16), to_signed(16#2488#, 16), to_signed(-16#1F00#, 16),
      to_signed(16#13D5#, 16), to_signed(-16#2AF2#, 16), to_signed(-16#1C56#, 16), to_signed(-16#1F00#, 16),
      to_signed(-16#1EC2#, 16), to_signed(-16#19BE#, 16), to_signed(-16#2809#, 16), to_signed(-16#2270#, 16),
@@ -1122,7 +1122,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2B79#, 16), to_signed(16#15B2#, 16), to_signed(-16#279B#, 16), to_signed(16#25E0#, 16),
      to_signed(16#2E5D#, 16), to_signed(-16#2604#, 16), to_signed(-16#2B48#, 16), to_signed(16#1EA4#, 16),
      to_signed(16#2307#, 16), to_signed(16#228D#, 16), to_signed(16#18AD#, 16), to_signed(16#1EC6#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_64_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_64_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1D97#, 16), to_signed(16#2436#, 16), to_signed(-16#2339#, 16), to_signed(16#1B45#, 16),
      to_signed(-16#2413#, 16), to_signed(-16#1AFD#, 16), to_signed(-16#2339#, 16), to_signed(-16#2382#, 16),
      to_signed(-16#213C#, 16), to_signed(-16#1D97#, 16), to_signed(-16#248D#, 16), to_signed(16#23A7#, 16),
@@ -1139,7 +1139,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1EEB#, 16), to_signed(-16#2930#, 16), to_signed(16#2498#, 16), to_signed(16#25EC#, 16),
      to_signed(-16#1D06#, 16), to_signed(-16#2155#, 16), to_signed(16#21C1#, 16), to_signed(16#1E64#, 16),
      to_signed(16#204A#, 16), to_signed(16#1AE4#, 16), to_signed(16#2309#, 16), to_signed(-16#008B#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_63_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_63_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1330#, 16), to_signed(16#21D6#, 16), to_signed(-16#22AE#, 16), to_signed(16#23AE#, 16),
      to_signed(-16#1963#, 16), to_signed(-16#1C56#, 16), to_signed(-16#22AE#, 16), to_signed(-16#25E0#, 16),
      to_signed(-16#27A0#, 16), to_signed(-16#1242#, 16), to_signed(-16#227D#, 16), to_signed(16#2C0B#, 16),
@@ -1156,7 +1156,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#27D8#, 16), to_signed(-16#23ED#, 16), to_signed(16#1FB0#, 16), to_signed(16#1A73#, 16),
      to_signed(-16#1387#, 16), to_signed(-16#1670#, 16), to_signed(16#22E9#, 16), to_signed(16#1A67#, 16),
      to_signed(16#1EE0#, 16), to_signed(16#1FA4#, 16), to_signed(16#23CC#, 16), to_signed(-16#0077#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_62_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_62_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#07F6#, 16), to_signed(16#1F4E#, 16), to_signed(-16#1F01#, 16), to_signed(16#2AE7#, 16),
      to_signed(-16#0D41#, 16), to_signed(-16#1E91#, 16), to_signed(-16#1F01#, 16), to_signed(-16#2574#, 16),
      to_signed(-16#2B0B#, 16), to_signed(-16#0770#, 16), to_signed(-16#1D1E#, 16), to_signed(16#30AB#, 16),
@@ -1173,7 +1173,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2E4B#, 16), to_signed(-16#1A0F#, 16), to_signed(16#18DB#, 16), to_signed(16#0C3A#, 16),
      to_signed(-16#0AB1#, 16), to_signed(-16#09CD#, 16), to_signed(16#2307#, 16), to_signed(16#1820#, 16),
      to_signed(16#1CE1#, 16), to_signed(16#24C1#, 16), to_signed(16#2075#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_61_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_61_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#02DA#, 16), to_signed(16#1C7A#, 16), to_signed(-16#17FD#, 16), to_signed(16#30D5#, 16),
      to_signed(-16#002C#, 16), to_signed(-16#21BD#, 16), to_signed(-16#17FD#, 16), to_signed(-16#2355#, 16),
      to_signed(-16#2C1C#, 16), to_signed(16#02C6#, 16), to_signed(-16#1483#, 16), to_signed(16#321E#, 16),
@@ -1190,7 +1190,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#326B#, 16), to_signed(-16#0C60#, 16), to_signed(16#0FE7#, 16), to_signed(-16#02DE#, 16),
      to_signed(-16#024E#, 16), to_signed(16#02FE#, 16), to_signed(16#21F9#, 16), to_signed(16#1736#, 16),
      to_signed(16#1B1F#, 16), to_signed(16#29FB#, 16), to_signed(16#195C#, 16), to_signed(16#000A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_60_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_60_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0C9B#, 16), to_signed(16#19E4#, 16), to_signed(-16#0E41#, 16), to_signed(16#34C0#, 16),
      to_signed(16#0C9B#, 16), to_signed(-16#2523#, 16), to_signed(-16#0E41#, 16), to_signed(-16#2048#, 16),
      to_signed(-16#2B26#, 16), to_signed(16#0BD3#, 16), to_signed(-16#099A#, 16), to_signed(16#30C9#, 16),
@@ -1207,7 +1207,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33F8#, 16), to_signed(16#0336#, 16), to_signed(16#056F#, 16), to_signed(-16#1142#, 16),
      to_signed(16#056F#, 16), to_signed(16#0ED5#, 16), to_signed(16#2048#, 16), to_signed(16#17AA#, 16),
      to_signed(16#19E4#, 16), to_signed(16#2E5C#, 16), to_signed(16#0F39#, 16), to_signed(16#0064#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_59_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_59_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#14BB#, 16), to_signed(16#1818#, 16), to_signed(-16#02A5#, 16), to_signed(16#35F6#, 16),
      to_signed(16#17C2#, 16), to_signed(-16#27E7#, 16), to_signed(-16#02A5#, 16), to_signed(-16#1D2C#, 16),
      to_signed(-16#28AA#, 16), to_signed(16#134B#, 16), to_signed(16#027F#, 16), to_signed(16#2D51#, 16),
@@ -1224,7 +1224,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#32DB#, 16), to_signed(16#1276#, 16), to_signed(-16#05C4#, 16), to_signed(-16#1D56#, 16),
      to_signed(16#0C71#, 16), to_signed(16#18A4#, 16), to_signed(16#1E88#, 16), to_signed(16#1950#, 16),
      to_signed(16#1974#, 16), to_signed(16#30E2#, 16), to_signed(16#0308#, 16), to_signed(16#00B8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_58_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_58_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1AC1#, 16), to_signed(16#1796#, 16), to_signed(16#09DD#, 16), to_signed(16#33EC#, 16),
      to_signed(16#200C#, 16), to_signed(-16#292E#, 16), to_signed(16#09DD#, 16), to_signed(-16#1AD7#, 16),
      to_signed(-16#2547#, 16), to_signed(16#18DA#, 16), to_signed(16#0E9E#, 16), to_signed(16#287B#, 16),
@@ -1241,7 +1241,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2F27#, 16), to_signed(16#1F29#, 16), to_signed(-16#10D7#, 16), to_signed(-16#25A9#, 16),
      to_signed(16#12B4#, 16), to_signed(16#1F82#, 16), to_signed(16#1D43#, 16), to_signed(16#1BDA#, 16),
      to_signed(16#1A03#, 16), to_signed(16#30AB#, 16), to_signed(-16#0A11#, 16), to_signed(16#00F3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_57_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_57_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E4F#, 16), to_signed(16#18AD#, 16), to_signed(16#1645#, 16), to_signed(16#2E5D#, 16),
      to_signed(16#2481#, 16), to_signed(-16#2844#, 16), to_signed(16#1645#, 16), to_signed(-16#19F2#, 16),
      to_signed(-16#219F#, 16), to_signed(16#1C47#, 16), to_signed(16#19B1#, 16), to_signed(16#2314#, 16),
@@ -1258,7 +1258,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2919#, 16), to_signed(16#276A#, 16), to_signed(-16#1AFA#, 16), to_signed(-16#292E#, 16),
      to_signed(16#183D#, 16), to_signed(16#22C7#, 16), to_signed(16#1CE9#, 16), to_signed(16#1EE4#, 16),
      to_signed(16#1BA4#, 16), to_signed(16#2D18#, 16), to_signed(-16#16E7#, 16), to_signed(16#0104#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_56_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_56_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1EA3#, 16), to_signed(16#1AE4#, 16), to_signed(16#2117#, 16), to_signed(16#24D6#, 16),
      to_signed(16#251E#, 16), to_signed(-16#242C#, 16), to_signed(16#2117#, 16), to_signed(-16#1B69#, 16),
      to_signed(-16#1ED0#, 16), to_signed(16#1DF8#, 16), to_signed(16#2252#, 16), to_signed(16#1D4E#, 16),
@@ -1275,7 +1275,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#219C#, 16), to_signed(16#296E#, 16), to_signed(-16#22F1#, 16), to_signed(-16#27F5#, 16),
      to_signed(16#1D97#, 16), to_signed(16#219E#, 16), to_signed(16#1D29#, 16), to_signed(16#228F#, 16),
      to_signed(16#1ED0#, 16), to_signed(16#2567#, 16), to_signed(-16#22F6#, 16), to_signed(16#0055#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_55_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_55_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D53#, 16), to_signed(16#1FA4#, 16), to_signed(16#2A2F#, 16), to_signed(16#1985#, 16),
      to_signed(16#212B#, 16), to_signed(-16#1D78#, 16), to_signed(16#2A2F#, 16), to_signed(-16#1E8F#, 16),
      to_signed(-16#1BA4#, 16), to_signed(16#1D35#, 16), to_signed(16#289B#, 16), to_signed(16#196B#, 16),
@@ -1292,7 +1292,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#178A#, 16), to_signed(16#266E#, 16), to_signed(-16#28E9#, 16), to_signed(-16#2081#, 16),
      to_signed(16#220D#, 16), to_signed(16#1DC8#, 16), to_signed(16#1EAD#, 16), to_signed(16#25CD#, 16),
      to_signed(16#219F#, 16), to_signed(16#1B89#, 16), to_signed(-16#2C37#, 16), to_signed(16#000F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_54_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_54_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#18DA#, 16), to_signed(16#24C1#, 16), to_signed(16#318E#, 16), to_signed(16#0BB4#, 16),
      to_signed(16#187E#, 16), to_signed(-16#1512#, 16), to_signed(16#318E#, 16), to_signed(-16#225A#, 16),
      to_signed(-16#1A03#, 16), to_signed(16#1961#, 16), to_signed(16#2CF1#, 16), to_signed(16#1639#, 16),
@@ -1309,7 +1309,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0D1D#, 16), to_signed(16#1D42#, 16), to_signed(-16#2D44#, 16), to_signed(-16#154E#, 16),
      to_signed(16#24EA#, 16), to_signed(16#1624#, 16), to_signed(16#21D3#, 16), to_signed(16#27A5#, 16),
      to_signed(16#2547#, 16), to_signed(16#0EA1#, 16), to_signed(-16#328C#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_53_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_53_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#120F#, 16), to_signed(16#29FB#, 16), to_signed(16#362E#, 16), to_signed(-16#02C9#, 16),
      to_signed(16#0CAF#, 16), to_signed(-16#0AFD#, 16), to_signed(16#362E#, 16), to_signed(-16#26A8#, 16),
      to_signed(-16#1974#, 16), to_signed(16#1337#, 16), to_signed(16#2EC8#, 16), to_signed(16#148A#, 16),
@@ -1326,7 +1326,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#026E#, 16), to_signed(16#0FCA#, 16), to_signed(-16#2F61#, 16), to_signed(-16#073B#, 16),
      to_signed(16#26AF#, 16), to_signed(16#0C1A#, 16), to_signed(16#2580#, 16), to_signed(16#2872#, 16),
      to_signed(16#28AA#, 16), to_signed(16#0075#, 16), to_signed(-16#35AD#, 16), to_signed(-16#0094#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_52_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_52_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0966#, 16), to_signed(16#2E5C#, 16), to_signed(16#37C1#, 16), to_signed(-16#107A#, 16),
      to_signed(-16#00C8#, 16), to_signed(16#0000#, 16), to_signed(16#37C1#, 16), to_signed(-16#2A92#, 16),
      to_signed(-16#19E4#, 16), to_signed(16#0B0B#, 16), to_signed(16#2E5C#, 16), to_signed(16#1475#, 16),
@@ -1343,7 +1343,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#07DD#, 16), to_signed(16#0000#, 16), to_signed(-16#2F51#, 16), to_signed(16#07DD#, 16),
      to_signed(16#275D#, 16), to_signed(16#00C8#, 16), to_signed(16#28ED#, 16), to_signed(16#2825#, 16),
      to_signed(16#2B26#, 16), to_signed(-16#0D79#, 16), to_signed(-16#359D#, 16), to_signed(-16#00D3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_51_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_51_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0090#, 16), to_signed(16#30E2#, 16), to_signed(16#362E#, 16), to_signed(-16#1BE6#, 16),
      to_signed(-16#0E34#, 16), to_signed(16#0AFD#, 16), to_signed(16#362E#, 16), to_signed(-16#2D1F#, 16),
      to_signed(-16#1B1F#, 16), to_signed(16#0155#, 16), to_signed(16#2C15#, 16), to_signed(16#15E6#, 16),
@@ -1360,7 +1360,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1123#, 16), to_signed(-16#0FCA#, 16), to_signed(-16#2D47#, 16), to_signed(16#15F0#, 16),
      to_signed(16#2702#, 16), to_signed(-16#0A95#, 16), to_signed(16#2B3A#, 16), to_signed(16#26C3#, 16),
      to_signed(16#2C1C#, 16), to_signed(-16#1993#, 16), to_signed(-16#32A6#, 16), to_signed(-16#00F3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_50_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_50_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0B2A#, 16), to_signed(16#30AB#, 16), to_signed(16#318E#, 16), to_signed(-16#23C2#, 16),
      to_signed(-16#19DE#, 16), to_signed(16#1512#, 16), to_signed(16#318E#, 16), to_signed(-16#2D68#, 16),
      to_signed(-16#1CE1#, 16), to_signed(-16#0956#, 16), to_signed(16#287B#, 16), to_signed(16#18A6#, 16),
@@ -1377,7 +1377,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#18DB#, 16), to_signed(-16#1D42#, 16), to_signed(-16#298A#, 16), to_signed(16#210B#, 16),
      to_signed(16#25BE#, 16), to_signed(-16#14C4#, 16), to_signed(16#2B95#, 16), to_signed(16#2463#, 16),
      to_signed(16#2B0B#, 16), to_signed(-16#2266#, 16), to_signed(-16#2D41#, 16), to_signed(-16#00EA#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_49_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_49_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#15B2#, 16), to_signed(16#2D18#, 16), to_signed(16#2A2F#, 16), to_signed(-16#2726#, 16),
      to_signed(-16#2245#, 16), to_signed(16#1D78#, 16), to_signed(16#2A2F#, 16), to_signed(-16#2AC1#, 16),
      to_signed(-16#1EE0#, 16), to_signed(-16#144A#, 16), to_signed(16#2421#, 16), to_signed(16#1C62#, 16),
@@ -1394,7 +1394,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1EA4#, 16), to_signed(-16#266E#, 16), to_signed(-16#246C#, 16), to_signed(16#279B#, 16),
      to_signed(16#23C5#, 16), to_signed(-16#1CAE#, 16), to_signed(16#2959#, 16), to_signed(16#211F#, 16),
      to_signed(16#27A0#, 16), to_signed(-16#26D8#, 16), to_signed(-16#2604#, 16), to_signed(-16#00B4#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_48_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_48_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2001#, 16), to_signed(16#267D#, 16), to_signed(16#2001#, 16), to_signed(-16#2635#, 16),
      to_signed(-16#25C9#, 16), to_signed(16#242C#, 16), to_signed(16#2117#, 16), to_signed(-16#2567#, 16),
      to_signed(-16#2160#, 16), to_signed(-16#1F57#, 16), to_signed(16#2025#, 16), to_signed(16#2025#, 16),
@@ -1411,7 +1411,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#22D8#, 16), to_signed(-16#296E#, 16), to_signed(-16#1EC6#, 16), to_signed(16#281A#, 16),
      to_signed(16#20CF#, 16), to_signed(-16#20F4#, 16), to_signed(16#24BD#, 16), to_signed(16#1D97#, 16),
      to_signed(16#213C#, 16), to_signed(-16#26DF#, 16), to_signed(-16#1E1C#, 16), to_signed(16#0036#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_47_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_47_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#28C7#, 16), to_signed(16#1C77#, 16), to_signed(16#1557#, 16), to_signed(-16#1F75#, 16),
      to_signed(-16#258E#, 16), to_signed(16#2844#, 16), to_signed(16#1645#, 16), to_signed(-16#1CD3#, 16),
      to_signed(-16#237C#, 16), to_signed(-16#2915#, 16), to_signed(16#1C62#, 16), to_signed(16#2421#, 16),
@@ -1428,7 +1428,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#23D8#, 16), to_signed(-16#276A#, 16), to_signed(-16#1834#, 16), to_signed(16#22FE#, 16),
      to_signed(16#1DD7#, 16), to_signed(-16#21BB#, 16), to_signed(16#1D21#, 16), to_signed(16#192C#, 16),
      to_signed(16#19BE#, 16), to_signed(-16#20DC#, 16), to_signed(-16#1475#, 16), to_signed(16#009E#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_46_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_46_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2ED2#, 16), to_signed(16#0F28#, 16), to_signed(16#0956#, 16), to_signed(-16#154E#, 16),
      to_signed(-16#200C#, 16), to_signed(16#292E#, 16), to_signed(16#09DD#, 16), to_signed(-16#10FB#, 16),
      to_signed(-16#2464#, 16), to_signed(-16#302E#, 16), to_signed(16#18A6#, 16), to_signed(16#287B#, 16),
@@ -1445,7 +1445,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#238D#, 16), to_signed(-16#1F29#, 16), to_signed(-16#104D#, 16), to_signed(16#1988#, 16),
      to_signed(16#1BDA#, 16), to_signed(-16#1F82#, 16), to_signed(16#1258#, 16), to_signed(16#133B#, 16),
      to_signed(16#0FFD#, 16), to_signed(-16#1721#, 16), to_signed(-16#0B37#, 16), to_signed(16#00F1#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_45_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_45_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#3257#, 16), to_signed(16#0061#, 16), to_signed(-16#0291#, 16), to_signed(-16#0877#, 16),
      to_signed(-16#1686#, 16), to_signed(16#27E7#, 16), to_signed(-16#02A5#, 16), to_signed(-16#0382#, 16),
      to_signed(-16#249B#, 16), to_signed(-16#34A9#, 16), to_signed(16#15E6#, 16), to_signed(16#2C15#, 16),
@@ -1462,7 +1462,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#21E5#, 16), to_signed(-16#1276#, 16), to_signed(-16#07E2#, 16), to_signed(16#0C74#, 16),
      to_signed(16#1A8C#, 16), to_signed(-16#19E0#, 16), to_signed(16#05D5#, 16), to_signed(16#0C5C#, 16),
      to_signed(16#053F#, 16), to_signed(-16#0A5D#, 16), to_signed(-16#0239#, 16), to_signed(16#011F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_44_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_44_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#3330#, 16), to_signed(-16#0E41#, 16), to_signed(-16#0D79#, 16), to_signed(16#056F#, 16),
      to_signed(-16#0A2E#, 16), to_signed(16#2523#, 16), to_signed(-16#0E41#, 16), to_signed(16#0A2E#, 16),
      to_signed(-16#242E#, 16), to_signed(-16#3631#, 16), to_signed(16#1475#, 16), to_signed(16#2E5C#, 16),
@@ -1479,7 +1479,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1F80#, 16), to_signed(-16#0336#, 16), to_signed(16#00C8#, 16), to_signed(-16#026E#, 16),
      to_signed(16#1A18#, 16), to_signed(-16#1142#, 16), to_signed(-16#072C#, 16), to_signed(16#04A7#, 16),
      to_signed(-16#059C#, 16), to_signed(16#03C9#, 16), to_signed(16#0637#, 16), to_signed(16#011D#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_43_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_43_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#316B#, 16), to_signed(-16#1B03#, 16), to_signed(-16#168D#, 16), to_signed(16#129A#, 16),
      to_signed(16#0382#, 16), to_signed(16#21BD#, 16), to_signed(-16#17FD#, 16), to_signed(16#1686#, 16),
      to_signed(-16#233F#, 16), to_signed(-16#34A9#, 16), to_signed(16#148A#, 16), to_signed(16#2EC8#, 16),
@@ -1496,7 +1496,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1D17#, 16), to_signed(16#0C60#, 16), to_signed(16#0967#, 16), to_signed(-16#1106#, 16),
      to_signed(16#1A8C#, 16), to_signed(-16#0654#, 16), to_signed(-16#1347#, 16), to_signed(-16#03BE#, 16),
      to_signed(-16#0FA8#, 16), to_signed(16#1173#, 16), to_signed(16#0DE1#, 16), to_signed(16#00E7#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_42_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_42_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2D41#, 16), to_signed(-16#244C#, 16), to_signed(-16#1D1B#, 16), to_signed(16#1D51#, 16),
      to_signed(16#10FB#, 16), to_signed(16#1E91#, 16), to_signed(-16#1F01#, 16), to_signed(16#200C#, 16),
      to_signed(-16#21F7#, 16), to_signed(-16#302E#, 16), to_signed(16#1639#, 16), to_signed(16#2CF1#, 16),
@@ -1513,7 +1513,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1B5D#, 16), to_signed(16#1A0F#, 16), to_signed(16#11AD#, 16), to_signed(-16#1D42#, 16),
      to_signed(16#1BDA#, 16), to_signed(16#0613#, 16), to_signed(-16#1D1E#, 16), to_signed(-16#0C97#, 16),
      to_signed(-16#1804#, 16), to_signed(16#1CCB#, 16), to_signed(16#149B#, 16), to_signed(16#0083#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_41_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_41_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#2711#, 16), to_signed(-16#28E0#, 16), to_signed(-16#20A5#, 16), to_signed(16#242B#, 16),
      to_signed(16#1CD3#, 16), to_signed(16#1C56#, 16), to_signed(-16#22AE#, 16), to_signed(16#258E#, 16),
      to_signed(-16#2085#, 16), to_signed(-16#2915#, 16), to_signed(16#196B#, 16), to_signed(16#289B#, 16),
@@ -1530,7 +1530,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1AE1#, 16), to_signed(16#23ED#, 16), to_signed(16#194E#, 16), to_signed(-16#2562#, 16),
      to_signed(16#1DD7#, 16), to_signed(16#1300#, 16), to_signed(-16#238A#, 16), to_signed(-16#158F#, 16),
      to_signed(-16#1DF3#, 16), to_signed(16#2449#, 16), to_signed(16#1A45#, 16), to_signed(-16#0002#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_40_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_40_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#1FDC#, 16), to_signed(-16#2789#, 16), to_signed(-16#2179#, 16), to_signed(16#26C6#, 16),
      to_signed(16#2567#, 16), to_signed(16#1C13#, 16), to_signed(-16#2223#, 16), to_signed(16#26DF#, 16),
      to_signed(-16#1E89#, 16), to_signed(-16#1F57#, 16), to_signed(16#1E64#, 16), to_signed(16#2252#, 16),
@@ -1547,7 +1547,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1C7F#, 16), to_signed(16#281A#, 16), to_signed(16#2086#, 16), to_signed(-16#28C4#, 16),
      to_signed(16#1FB8#, 16), to_signed(16#2001#, 16), to_signed(-16#2537#, 16), to_signed(-16#1EC6#, 16),
      to_signed(-16#2179#, 16), to_signed(16#265A#, 16), to_signed(16#1E41#, 16), to_signed(-16#0123#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_39_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_39_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#167E#, 16), to_signed(-16#20FA#, 16), to_signed(-16#1DF3#, 16), to_signed(16#232F#, 16),
      to_signed(16#2AC1#, 16), to_signed(16#1D44#, 16), to_signed(-16#1E11#, 16), to_signed(16#2333#, 16),
      to_signed(-16#1DD3#, 16), to_signed(-16#144A#, 16), to_signed(16#2403#, 16), to_signed(16#19B1#, 16),
@@ -1564,7 +1564,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1E8F#, 16), to_signed(16#26AC#, 16), to_signed(16#2667#, 16), to_signed(-16#2651#, 16),
      to_signed(16#22D7#, 16), to_signed(16#2B79#, 16), to_signed(-16#238A#, 16), to_signed(-16#2711#, 16),
      to_signed(-16#20A5#, 16), to_signed(16#2449#, 16), to_signed(16#222B#, 16), to_signed(-16#01A0#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_38_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_38_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#0D1D#, 16), to_signed(-16#169B#, 16), to_signed(-16#1804#, 16), to_signed(16#1B6B#, 16),
      to_signed(16#2D68#, 16), to_signed(16#1F17#, 16), to_signed(-16#177E#, 16), to_signed(16#1A64#, 16),
      to_signed(-16#1CE1#, 16), to_signed(-16#0956#, 16), to_signed(16#2901#, 16), to_signed(16#0E9E#, 16),
@@ -1581,7 +1581,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#225A#, 16), to_signed(16#2085#, 16), to_signed(16#2A11#, 16), to_signed(-16#1DC9#, 16),
      to_signed(16#2538#, 16), to_signed(16#33E8#, 16), to_signed(-16#1D1E#, 16), to_signed(-16#2D41#, 16),
      to_signed(-16#1D1B#, 16), to_signed(16#1CCB#, 16), to_signed(16#2463#, 16), to_signed(-16#01E4#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_37_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_37_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(-16#03AA#, 16), to_signed(-16#0936#, 16), to_signed(-16#0FA8#, 16), to_signed(16#0FEE#, 16),
      to_signed(16#2D1F#, 16), to_signed(16#21A9#, 16), to_signed(-16#0E81#, 16), to_signed(16#0E20#, 16),
      to_signed(-16#1C5A#, 16), to_signed(16#0155#, 16), to_signed(16#2D3C#, 16), to_signed(16#027F#, 16),
@@ -1598,7 +1598,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#26A8#, 16), to_signed(16#1604#, 16), to_signed(16#2BF7#, 16), to_signed(-16#10F1#, 16),
      to_signed(16#2716#, 16), to_signed(16#393B#, 16), to_signed(-16#1347#, 16), to_signed(-16#316B#, 16),
      to_signed(-16#168D#, 16), to_signed(16#1173#, 16), to_signed(16#2587#, 16), to_signed(-16#01E2#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_36_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_36_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#056F#, 16), to_signed(16#056F#, 16), to_signed(-16#059C#, 16), to_signed(16#0239#, 16),
      to_signed(16#2A92#, 16), to_signed(16#245B#, 16), to_signed(-16#03F7#, 16), to_signed(16#0000#, 16),
      to_signed(-16#1C51#, 16), to_signed(16#0B0B#, 16), to_signed(16#3001#, 16), to_signed(-16#099A#, 16),
@@ -1615,7 +1615,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2A92#, 16), to_signed(16#08A5#, 16), to_signed(16#2C1B#, 16), to_signed(-16#01A6#, 16),
      to_signed(16#2825#, 16), to_signed(16#3B0C#, 16), to_signed(-16#072C#, 16), to_signed(-16#3330#, 16),
      to_signed(-16#0D79#, 16), to_signed(16#03C9#, 16), to_signed(16#25B7#, 16), to_signed(-16#0197#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_35_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_35_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#0DCD#, 16), to_signed(16#1358#, 16), to_signed(16#053F#, 16), to_signed(-16#0BE1#, 16),
      to_signed(16#26A8#, 16), to_signed(16#2676#, 16), to_signed(16#0725#, 16), to_signed(-16#0E20#, 16),
      to_signed(-16#1CCA#, 16), to_signed(16#1337#, 16), to_signed(16#30AE#, 16), to_signed(-16#1483#, 16),
@@ -1632,7 +1632,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2D1F#, 16), to_signed(-16#05CB#, 16), to_signed(16#2A9B#, 16), to_signed(16#0DE4#, 16),
      to_signed(16#281F#, 16), to_signed(16#393B#, 16), to_signed(16#05D5#, 16), to_signed(-16#3257#, 16),
      to_signed(-16#0291#, 16), to_signed(-16#0A5D#, 16), to_signed(16#251C#, 16), to_signed(-16#010A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_34_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_34_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1521#, 16), to_signed(16#1E9F#, 16), to_signed(16#0FFD#, 16), to_signed(-16#1881#, 16),
      to_signed(16#225A#, 16), to_signed(16#2747#, 16), to_signed(16#11D1#, 16), to_signed(-16#1A64#, 16),
      to_signed(-16#1DBD#, 16), to_signed(16#1961#, 16), to_signed(16#2EC5#, 16), to_signed(-16#1D1E#, 16),
@@ -1649,7 +1649,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2D68#, 16), to_signed(-16#1367#, 16), to_signed(16#27A4#, 16), to_signed(16#1B6F#, 16),
      to_signed(16#26D0#, 16), to_signed(16#33E8#, 16), to_signed(16#1258#, 16), to_signed(-16#2ED2#, 16),
      to_signed(16#0956#, 16), to_signed(-16#1721#, 16), to_signed(16#23EB#, 16), to_signed(-16#0043#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_33_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_33_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B34#, 16), to_signed(16#25B0#, 16), to_signed(16#19BE#, 16), to_signed(-16#21F6#, 16),
      to_signed(16#1E8F#, 16), to_signed(16#263B#, 16), to_signed(16#1B26#, 16), to_signed(-16#2333#, 16),
      to_signed(-16#1F14#, 16), to_signed(16#1D35#, 16), to_signed(16#2A03#, 16), to_signed(-16#227D#, 16),
@@ -1666,7 +1666,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2AC1#, 16), to_signed(-16#1E79#, 16), to_signed(16#2370#, 16), to_signed(16#2507#, 16),
      to_signed(16#2416#, 16), to_signed(16#2B79#, 16), to_signed(16#1D21#, 16), to_signed(-16#28C7#, 16),
      to_signed(16#1557#, 16), to_signed(-16#20DC#, 16), to_signed(16#225D#, 16), to_signed(16#00B7#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_32_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_32_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#206D#, 16), to_signed(16#2704#, 16), to_signed(16#213C#, 16), to_signed(-16#2789#, 16),
      to_signed(16#1B69#, 16), to_signed(16#226B#, 16), to_signed(16#22FC#, 16), to_signed(-16#27F5#, 16),
      to_signed(-16#2025#, 16), to_signed(16#1F0F#, 16), to_signed(16#21E6#, 16), to_signed(-16#248D#, 16),
@@ -1683,7 +1683,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2451#, 16), to_signed(-16#2635#, 16), to_signed(16#1DB0#, 16), to_signed(16#29DA#, 16),
      to_signed(16#206D#, 16), to_signed(16#2001#, 16), to_signed(16#24BD#, 16), to_signed(-16#2117#, 16),
      to_signed(16#2001#, 16), to_signed(-16#26DF#, 16), to_signed(16#2025#, 16), to_signed(16#0270#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_31_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_31_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#231A#, 16), to_signed(16#23FA#, 16), to_signed(16#27A0#, 16), to_signed(-16#27E4#, 16),
      to_signed(16#19F2#, 16), to_signed(16#1C6B#, 16), to_signed(16#2840#, 16), to_signed(-16#267C#, 16),
      to_signed(-16#216F#, 16), to_signed(16#1D35#, 16), to_signed(16#1874#, 16), to_signed(-16#2270#, 16),
@@ -1700,7 +1700,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1BE4#, 16), to_signed(-16#2822#, 16), to_signed(16#1841#, 16), to_signed(16#28A7#, 16),
      to_signed(16#1A38#, 16), to_signed(16#1300#, 16), to_signed(16#2959#, 16), to_signed(-16#16A0#, 16),
      to_signed(16#2A2F#, 16), to_signed(-16#26D8#, 16), to_signed(16#1E26#, 16), to_signed(16#03C8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_30_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_30_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#24EA#, 16), to_signed(16#1B6F#, 16), to_signed(16#2B0B#, 16), to_signed(-16#2266#, 16),
      to_signed(16#1AD7#, 16), to_signed(16#1512#, 16), to_signed(16#2A35#, 16), to_signed(-16#2092#, 16),
      to_signed(-16#2364#, 16), to_signed(16#1961#, 16), to_signed(16#0CBB#, 16), to_signed(-16#1BBE#, 16),
@@ -1717,7 +1717,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1075#, 16), to_signed(-16#25A9#, 16), to_signed(16#11AD#, 16), to_signed(16#210B#, 16),
      to_signed(16#133B#, 16), to_signed(16#0613#, 16), to_signed(16#2B95#, 16), to_signed(-16#0BB0#, 16),
      to_signed(16#318E#, 16), to_signed(-16#2266#, 16), to_signed(16#1D36#, 16), to_signed(16#0559#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_29_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_29_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2573#, 16), to_signed(16#0F20#, 16), to_signed(16#2C1C#, 16), to_signed(-16#1857#, 16),
      to_signed(16#1D2C#, 16), to_signed(16#0C38#, 16), to_signed(16#29B5#, 16), to_signed(-16#1672#, 16),
      to_signed(-16#2531#, 16), to_signed(16#1337#, 16), to_signed(16#0041#, 16), to_signed(-16#11C3#, 16),
@@ -1734,7 +1734,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0397#, 16), to_signed(-16#1E92#, 16), to_signed(16#0AA2#, 16), to_signed(16#14B4#, 16),
      to_signed(16#0B21#, 16), to_signed(-16#0654#, 16), to_signed(16#2B3A#, 16), to_signed(-16#007C#, 16),
      to_signed(16#362E#, 16), to_signed(-16#1993#, 16), to_signed(16#1CDF#, 16), to_signed(16#074D#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_28_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_28_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#24EF#, 16), to_signed(16#00C8#, 16), to_signed(16#2B26#, 16), to_signed(-16#0B0B#, 16),
      to_signed(16#2048#, 16), to_signed(16#026E#, 16), to_signed(16#275D#, 16), to_signed(-16#0966#, 16),
      to_signed(-16#267F#, 16), to_signed(16#0B0B#, 16), to_signed(-16#0BD3#, 16), to_signed(-16#059C#, 16),
@@ -1751,7 +1751,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0966#, 16), to_signed(-16#13B0#, 16), to_signed(16#0336#, 16), to_signed(16#056F#, 16),
      to_signed(16#0239#, 16), to_signed(-16#1142#, 16), to_signed(16#28ED#, 16), to_signed(16#0A2E#, 16),
      to_signed(16#37C1#, 16), to_signed(-16#0D79#, 16), to_signed(16#1D19#, 16), to_signed(16#09D6#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_27_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_27_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#23AC#, 16), to_signed(-16#0D9B#, 16), to_signed(16#28AA#, 16), to_signed(16#03CB#, 16),
      to_signed(16#2355#, 16), to_signed(-16#07A7#, 16), to_signed(16#23FC#, 16), to_signed(16#04F3#, 16),
      to_signed(-16#26F8#, 16), to_signed(16#0155#, 16), to_signed(-16#1651#, 16), to_signed(16#075A#, 16),
@@ -1768,7 +1768,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1516#, 16), to_signed(-16#0634#, 16), to_signed(-16#048C#, 16), to_signed(-16#0A91#, 16),
      to_signed(-16#0714#, 16), to_signed(-16#19E0#, 16), to_signed(16#2580#, 16), to_signed(16#1380#, 16),
      to_signed(16#362E#, 16), to_signed(16#0075#, 16), to_signed(16#1DCB#, 16), to_signed(16#0D29#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_26_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_26_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2204#, 16), to_signed(-16#1A0F#, 16), to_signed(16#2547#, 16), to_signed(16#125B#, 16),
      to_signed(16#2574#, 16), to_signed(-16#1158#, 16), to_signed(16#2074#, 16), to_signed(16#12E2#, 16),
      to_signed(-16#264A#, 16), to_signed(-16#0956#, 16), to_signed(-16#1E25#, 16), to_signed(16#13B8#, 16),
@@ -1785,7 +1785,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#1E25#, 16), to_signed(16#0880#, 16), to_signed(-16#0C93#, 16), to_signed(-16#1908#, 16),
      to_signed(-16#1051#, 16), to_signed(-16#1F82#, 16), to_signed(16#21D3#, 16), to_signed(16#1AC1#, 16),
      to_signed(16#318E#, 16), to_signed(16#0EA1#, 16), to_signed(16#1EC7#, 16), to_signed(16#1166#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_25_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_25_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2055#, 16), to_signed(-16#22E1#, 16), to_signed(16#219F#, 16), to_signed(16#1EF9#, 16),
      to_signed(16#25E0#, 16), to_signed(-16#1A08#, 16), to_signed(16#1D93#, 16), to_signed(16#1EDB#, 16),
      to_signed(-16#2434#, 16), to_signed(-16#144A#, 16), to_signed(-16#2279#, 16), to_signed(16#1E3B#, 16),
@@ -1802,7 +1802,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2385#, 16), to_signed(16#1703#, 16), to_signed(-16#14C4#, 16), to_signed(-16#23F1#, 16),
      to_signed(-16#18FF#, 16), to_signed(-16#21BB#, 16), to_signed(16#1EAD#, 16), to_signed(16#1F5C#, 16),
      to_signed(16#2A2F#, 16), to_signed(16#1B89#, 16), to_signed(16#1FDB#, 16), to_signed(16#1691#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_24_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_24_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E64#, 16), to_signed(-16#265A#, 16), to_signed(16#1DBA#, 16), to_signed(16#27D1#, 16),
      to_signed(16#2498#, 16), to_signed(-16#20AB#, 16), to_signed(16#1B69#, 16), to_signed(16#2727#, 16),
      to_signed(-16#2001#, 16), to_signed(-16#1E41#, 16), to_signed(-16#2248#, 16), to_signed(16#2567#, 16),
@@ -1819,7 +1819,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2408#, 16), to_signed(16#2498#, 16), to_signed(-16#1C5C#, 16), to_signed(-16#2949#, 16),
      to_signed(-16#2130#, 16), to_signed(-16#20F4#, 16), to_signed(16#1D29#, 16), to_signed(16#2063#, 16),
      to_signed(16#2001#, 16), to_signed(16#2567#, 16), to_signed(16#2160#, 16), to_signed(16#1D0B#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_23_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_23_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D19#, 16), to_signed(-16#24A4#, 16), to_signed(16#1AB6#, 16), to_signed(16#2DD6#, 16),
      to_signed(16#1FB0#, 16), to_signed(-16#2697#, 16), to_signed(16#1AEE#, 16), to_signed(16#2BCD#, 16),
      to_signed(-16#1B52#, 16), to_signed(-16#2827#, 16), to_signed(-16#1F30#, 16), to_signed(16#2A66#, 16),
@@ -1836,7 +1836,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2138#, 16), to_signed(16#2E8D#, 16), to_signed(-16#23AE#, 16), to_signed(-16#28FE#, 16),
      to_signed(-16#27CF#, 16), to_signed(-16#1CAE#, 16), to_signed(16#1CE9#, 16), to_signed(16#1F5C#, 16),
      to_signed(16#1557#, 16), to_signed(16#2D18#, 16), to_signed(16#2280#, 16), to_signed(16#234C#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_22_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_22_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1D36#, 16), to_signed(-16#1E9F#, 16), to_signed(16#197C#, 16), to_signed(16#2F4F#, 16),
      to_signed(16#18DB#, 16), to_signed(-16#2A04#, 16), to_signed(16#1CBD#, 16), to_signed(16#2D68#, 16),
      to_signed(-16#149B#, 16), to_signed(-16#2FA8#, 16), to_signed(-16#17F7#, 16), to_signed(16#2B95#, 16),
@@ -1853,7 +1853,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#19DE#, 16), to_signed(16#35CF#, 16), to_signed(-16#2AE7#, 16), to_signed(-16#23C6#, 16),
      to_signed(-16#2BE5#, 16), to_signed(-16#14C4#, 16), to_signed(16#1D43#, 16), to_signed(16#1AC1#, 16),
      to_signed(16#0956#, 16), to_signed(16#30AB#, 16), to_signed(16#227E#, 16), to_signed(16#2944#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_21_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_21_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E1A#, 16), to_signed(-16#1494#, 16), to_signed(16#1989#, 16), to_signed(16#2D54#, 16),
      to_signed(16#0FE7#, 16), to_signed(-16#2B89#, 16), to_signed(16#1FD8#, 16), to_signed(16#2BE4#, 16),
      to_signed(-16#0CA5#, 16), to_signed(-16#34BE#, 16), to_signed(-16#0E00#, 16), to_signed(16#29FE#, 16),
@@ -1870,7 +1870,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0F70#, 16), to_signed(16#3970#, 16), to_signed(-16#30D5#, 16), to_signed(-16#19DC#, 16),
      to_signed(-16#2DDC#, 16), to_signed(-16#0A95#, 16), to_signed(16#1E88#, 16), to_signed(16#1380#, 16),
      to_signed(-16#0291#, 16), to_signed(16#30E2#, 16), to_signed(16#21EF#, 16), to_signed(16#2E46#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_20_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_20_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1F87#, 16), to_signed(-16#07DD#, 16), to_signed(16#1AAC#, 16), to_signed(16#28ED#, 16),
      to_signed(16#056F#, 16), to_signed(-16#2B5A#, 16), to_signed(16#237E#, 16), to_signed(16#2825#, 16),
      to_signed(-16#03C9#, 16), to_signed(-16#36F9#, 16), to_signed(-16#026E#, 16), to_signed(16#267F#, 16),
@@ -1887,7 +1887,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#0336#, 16), to_signed(16#3967#, 16), to_signed(-16#34C0#, 16), to_signed(-16#0C9B#, 16),
      to_signed(-16#2DC1#, 16), to_signed(16#00C8#, 16), to_signed(16#2048#, 16), to_signed(16#0A2E#, 16),
      to_signed(-16#0D79#, 16), to_signed(16#2E5C#, 16), to_signed(16#20F8#, 16), to_signed(16#3199#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_19_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_19_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2121#, 16), to_signed(16#05E0#, 16), to_signed(16#1C8F#, 16), to_signed(16#2366#, 16),
      to_signed(-16#05C4#, 16), to_signed(-16#29C2#, 16), to_signed(16#26BF#, 16), to_signed(16#2352#, 16),
      to_signed(16#058F#, 16), to_signed(-16#3619#, 16), to_signed(16#096E#, 16), to_signed(16#222A#, 16),
@@ -1904,7 +1904,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0959#, 16), to_signed(16#35F9#, 16), to_signed(-16#35F6#, 16), to_signed(16#0247#, 16),
      to_signed(-16#2BC2#, 16), to_signed(16#0C1A#, 16), to_signed(16#21F9#, 16), to_signed(-16#007C#, 16),
      to_signed(-16#168D#, 16), to_signed(16#29FB#, 16), to_signed(16#1FD4#, 16), to_signed(16#328F#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_18_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_18_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2281#, 16), to_signed(16#12E1#, 16), to_signed(16#1EC7#, 16), to_signed(16#1E19#, 16),
      to_signed(-16#10D7#, 16), to_signed(-16#271E#, 16), to_signed(16#28A7#, 16), to_signed(16#1EA0#, 16),
      to_signed(16#0EF1#, 16), to_signed(-16#3215#, 16), to_signed(16#143D#, 16), to_signed(16#1E19#, 16),
@@ -1921,7 +1921,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#14C4#, 16), to_signed(16#2FA8#, 16), to_signed(-16#33EC#, 16), to_signed(16#10FB#, 16),
      to_signed(-16#282B#, 16), to_signed(16#1624#, 16), to_signed(16#2307#, 16), to_signed(-16#0BB0#, 16),
      to_signed(-16#1D1B#, 16), to_signed(16#24C1#, 16), to_signed(16#1EC4#, 16), to_signed(16#30A8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_17_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_17_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#234B#, 16), to_signed(16#1D8A#, 16), to_signed(16#20E8#, 16), to_signed(16#1A30#, 16),
      to_signed(-16#1AFA#, 16), to_signed(-16#23D2#, 16), to_signed(16#2862#, 16), to_signed(16#1B1F#, 16),
      to_signed(16#17E5#, 16), to_signed(-16#2B1D#, 16), to_signed(16#1CCC#, 16), to_signed(16#1B3D#, 16),
@@ -1938,7 +1938,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1DBB#, 16), to_signed(16#271A#, 16), to_signed(-16#2E5D#, 16), to_signed(16#1DDF#, 16),
      to_signed(-16#2352#, 16), to_signed(16#1DC8#, 16), to_signed(16#22E9#, 16), to_signed(-16#16A0#, 16),
      to_signed(-16#20A5#, 16), to_signed(16#1FA4#, 16), to_signed(16#1E04#, 16), to_signed(16#2BA3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_16_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_16_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#23CA#, 16), to_signed(16#251E#, 16), to_signed(16#2320#, 16), to_signed(16#18FF#, 16),
      to_signed(-16#2407#, 16), to_signed(-16#20CF#, 16), to_signed(16#24D6#, 16), to_signed(16#1A15#, 16),
      to_signed(16#1F70#, 16), to_signed(-16#2117#, 16), to_signed(16#22B4#, 16), to_signed(16#19A9#, 16),
@@ -1955,7 +1955,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#22B4#, 16), to_signed(16#1D97#, 16), to_signed(-16#25EC#, 16), to_signed(16#2727#, 16),
      to_signed(-16#1D06#, 16), to_signed(16#219E#, 16), to_signed(16#20AB#, 16), to_signed(-16#2001#, 16),
      to_signed(-16#2063#, 16), to_signed(16#1BFA#, 16), to_signed(16#1D35#, 16), to_signed(16#2309#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_15_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_15_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#233E#, 16), to_signed(16#2822#, 16), to_signed(16#2488#, 16), to_signed(16#1A23#, 16),
      to_signed(-16#29D7#, 16), to_signed(-16#1DCA#, 16), to_signed(16#1F80#, 16), to_signed(16#1A23#, 16),
      to_signed(16#25D4#, 16), to_signed(-16#1557#, 16), to_signed(16#24B2#, 16), to_signed(16#1B3D#, 16),
@@ -1972,7 +1972,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#23C3#, 16), to_signed(16#1330#, 16), to_signed(-16#1A73#, 16), to_signed(16#2CC9#, 16),
      to_signed(-16#1639#, 16), to_signed(16#22C7#, 16), to_signed(16#1DB5#, 16), to_signed(-16#27D8#, 16),
      to_signed(-16#1D05#, 16), to_signed(16#199C#, 16), to_signed(16#1D15#, 16), to_signed(16#1876#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_14_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_14_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2121#, 16), to_signed(16#25A9#, 16), to_signed(16#2464#, 16), to_signed(16#1CBA#, 16),
      to_signed(-16#2DCB#, 16), to_signed(-16#1A7A#, 16), to_signed(16#16F8#, 16), to_signed(16#1CBA#, 16),
      to_signed(16#2B5E#, 16), to_signed(-16#0956#, 16), to_signed(16#21EF#, 16), to_signed(16#1E19#, 16),
@@ -1989,7 +1989,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#2168#, 16), to_signed(16#07F6#, 16), to_signed(-16#0C3A#, 16), to_signed(16#2F4F#, 16),
      to_signed(-16#0FC7#, 16), to_signed(16#1F82#, 16), to_signed(16#1855#, 16), to_signed(-16#2E4B#, 16),
      to_signed(-16#177E#, 16), to_signed(16#181C#, 16), to_signed(16#1E3D#, 16), to_signed(16#0C37#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_13_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_13_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E60#, 16), to_signed(16#1E92#, 16), to_signed(16#235F#, 16), to_signed(16#20A6#, 16),
      to_signed(-16#2F4D#, 16), to_signed(-16#17CC#, 16), to_signed(16#0C6D#, 16), to_signed(16#20A6#, 16),
      to_signed(16#2F2C#, 16), to_signed(16#0291#, 16), to_signed(16#1B3C#, 16), to_signed(16#222A#, 16),
@@ -2006,7 +2006,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#1B50#, 16), to_signed(-16#02DA#, 16), to_signed(16#02DE#, 16), to_signed(16#2E90#, 16),
      to_signed(-16#0932#, 16), to_signed(16#18A4#, 16), to_signed(16#1137#, 16), to_signed(-16#326B#, 16),
      to_signed(-16#0FBD#, 16), to_signed(16#1804#, 16), to_signed(16#1FE9#, 16), to_signed(-16#00A6#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_12_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_12_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B89#, 16), to_signed(16#13B0#, 16), to_signed(16#21C0#, 16), to_signed(16#24EF#, 16),
      to_signed(-16#2E89#, 16), to_signed(-16#161A#, 16), to_signed(16#00C8#, 16), to_signed(16#24EF#, 16),
      to_signed(16#30F6#, 16), to_signed(16#0D79#, 16), to_signed(16#1142#, 16), to_signed(16#267F#, 16),
@@ -2023,7 +2023,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#120A#, 16), to_signed(-16#0C9B#, 16), to_signed(16#1142#, 16), to_signed(16#2B5A#, 16),
      to_signed(-16#026E#, 16), to_signed(16#0ED5#, 16), to_signed(16#08A5#, 16), to_signed(-16#33F8#, 16),
      to_signed(-16#0664#, 16), to_signed(16#191C#, 16), to_signed(16#21C0#, 16), to_signed(-16#0CF0#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_11_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_11_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1940#, 16), to_signed(16#0634#, 16), to_signed(16#1FE9#, 16), to_signed(16#2879#, 16),
      to_signed(-16#2BD6#, 16), to_signed(-16#15B1#, 16), to_signed(-16#0AE8#, 16), to_signed(16#2879#, 16),
      to_signed(16#3088#, 16), to_signed(16#168D#, 16), to_signed(16#04F8#, 16), to_signed(16#29FE#, 16),
@@ -2040,7 +2040,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(-16#0668#, 16), to_signed(-16#14BB#, 16), to_signed(16#1D56#, 16), to_signed(16#26BC#, 16),
      to_signed(16#04A0#, 16), to_signed(16#02FE#, 16), to_signed(-16#00FE#, 16), to_signed(-16#32DB#, 16),
      to_signed(16#03CF#, 16), to_signed(16#1B0A#, 16), to_signed(16#235F#, 16), to_signed(-16#1771#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_10_table_data_2       : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_10_table_data_2       : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#181C#, 16), to_signed(-16#0880#, 16), to_signed(16#1E3D#, 16), to_signed(16#2A35#, 16),
      to_signed(-16#27A4#, 16), to_signed(-16#16C0#, 16), to_signed(-16#1598#, 16), to_signed(16#2A35#, 16),
      to_signed(16#2DCB#, 16), to_signed(16#1D1B#, 16), to_signed(-16#0880#, 16), to_signed(16#2B95#, 16),
@@ -2057,7 +2057,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#069A#, 16), to_signed(-16#1AC1#, 16), to_signed(16#25A9#, 16), to_signed(16#21D3#, 16),
      to_signed(16#0C0D#, 16), to_signed(-16#09CD#, 16), to_signed(-16#0B37#, 16), to_signed(-16#2F27#, 16),
      to_signed(16#0E17#, 16), to_signed(16#1D67#, 16), to_signed(16#2464#, 16), to_signed(-16#1F17#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_9_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_9_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#188F#, 16), to_signed(-16#1703#, 16), to_signed(16#1D15#, 16), to_signed(16#294C#, 16),
      to_signed(-16#2264#, 16), to_signed(-16#194D#, 16), to_signed(-16#1E66#, 16), to_signed(16#294C#, 16),
      to_signed(16#28CB#, 16), to_signed(16#20A5#, 16), to_signed(-16#15F7#, 16), to_signed(16#2A66#, 16),
@@ -2074,7 +2074,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#13EE#, 16), to_signed(-16#1E4F#, 16), to_signed(16#292E#, 16), to_signed(16#1DA0#, 16),
      to_signed(16#13D5#, 16), to_signed(-16#1670#, 16), to_signed(-16#1582#, 16), to_signed(-16#2919#, 16),
      to_signed(16#17B6#, 16), to_signed(16#1FCE#, 16), to_signed(16#2488#, 16), to_signed(-16#2318#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_8_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_8_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1B50#, 16), to_signed(-16#2498#, 16), to_signed(16#1C1F#, 16), to_signed(16#24BD#, 16),
      to_signed(-16#1BEF#, 16), to_signed(-16#1DBA#, 16), to_signed(-16#2542#, 16), to_signed(16#24BD#, 16),
      to_signed(16#2246#, 16), to_signed(16#2179#, 16), to_signed(-16#22D8#, 16), to_signed(16#2567#, 16),
@@ -2091,7 +2091,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2117#, 16), to_signed(-16#1EA3#, 16), to_signed(16#27F5#, 16), to_signed(16#1A53#, 16),
      to_signed(16#1B45#, 16), to_signed(-16#226B#, 16), to_signed(-16#1FDC#, 16), to_signed(-16#219C#, 16),
      to_signed(16#2092#, 16), to_signed(16#2160#, 16), to_signed(16#2436#, 16), to_signed(-16#2394#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_7_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_7_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#1E8B#, 16), to_signed(-16#2E8D#, 16), to_signed(16#1D15#, 16), to_signed(16#1D2E#, 16),
      to_signed(-16#1639#, 16), to_signed(-16#21FB#, 16), to_signed(-16#2844#, 16), to_signed(16#1D2E#, 16),
      to_signed(16#18F2#, 16), to_signed(16#1DF3#, 16), to_signed(-16#2C85#, 16), to_signed(16#1E3B#, 16),
@@ -2108,7 +2108,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#2B79#, 16), to_signed(-16#1D53#, 16), to_signed(16#2081#, 16), to_signed(16#19F2#, 16),
      to_signed(16#23AE#, 16), to_signed(-16#2C37#, 16), to_signed(-16#280D#, 16), to_signed(-16#178A#, 16),
      to_signed(16#2782#, 16), to_signed(16#228D#, 16), to_signed(16#21D6#, 16), to_signed(-16#1F6A#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_6_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_6_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2361#, 16), to_signed(-16#35CF#, 16), to_signed(16#1E3D#, 16), to_signed(16#13B8#, 16),
      to_signed(-16#0FC7#, 16), to_signed(-16#271B#, 16), to_signed(-16#292E#, 16), to_signed(16#13B8#, 16),
      to_signed(16#0EF1#, 16), to_signed(16#1804#, 16), to_signed(-16#33E8#, 16), to_signed(16#13B8#, 16),
@@ -2125,7 +2125,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33E8#, 16), to_signed(-16#18DA#, 16), to_signed(16#154E#, 16), to_signed(16#1AD7#, 16),
      to_signed(16#2AE7#, 16), to_signed(-16#328C#, 16), to_signed(-16#2F27#, 16), to_signed(-16#0D1D#, 16),
      to_signed(16#2B91#, 16), to_signed(16#23DE#, 16), to_signed(16#1F4E#, 16), to_signed(-16#1794#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_5_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_5_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2876#, 16), to_signed(-16#3970#, 16), to_signed(16#1FE9#, 16), to_signed(16#0895#, 16),
      to_signed(-16#0932#, 16), to_signed(-16#2BCC#, 16), to_signed(-16#27E7#, 16), to_signed(16#0895#, 16),
      to_signed(16#0454#, 16), to_signed(16#0FA8#, 16), to_signed(-16#37FF#, 16), to_signed(16#075A#, 16),
@@ -2142,7 +2142,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#393B#, 16), to_signed(-16#120F#, 16), to_signed(16#073B#, 16), to_signed(16#1D2C#, 16),
      to_signed(16#30D5#, 16), to_signed(-16#35AD#, 16), to_signed(-16#3417#, 16), to_signed(-16#026E#, 16),
      to_signed(16#2D43#, 16), to_signed(16#24AF#, 16), to_signed(16#1C7A#, 16), to_signed(-16#0CF8#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_4_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_4_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2CCC#, 16), to_signed(-16#3967#, 16), to_signed(16#21C0#, 16), to_signed(-16#032F#, 16),
      to_signed(-16#026E#, 16), to_signed(-16#2F39#, 16), to_signed(-16#2523#, 16), to_signed(-16#032F#, 16),
      to_signed(-16#0637#, 16), to_signed(16#059C#, 16), to_signed(-16#389F#, 16), to_signed(-16#059C#, 16),
@@ -2159,7 +2159,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#3B0C#, 16), to_signed(-16#0966#, 16), to_signed(-16#07DD#, 16), to_signed(16#2048#, 16),
      to_signed(16#34C0#, 16), to_signed(-16#359D#, 16), to_signed(-16#3665#, 16), to_signed(16#07DD#, 16),
      to_signed(16#2CCC#, 16), to_signed(16#24F6#, 16), to_signed(16#19E4#, 16), to_signed(-16#00D3#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_3_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_3_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2F5E#, 16), to_signed(-16#35F9#, 16), to_signed(16#235F#, 16), to_signed(-16#0E6D#, 16),
      to_signed(16#04A0#, 16), to_signed(-16#3099#, 16), to_signed(-16#21BD#, 16), to_signed(-16#0E6D#, 16),
      to_signed(-16#0FFB#, 16), to_signed(-16#053F#, 16), to_signed(-16#35E5#, 16), to_signed(-16#11C3#, 16),
@@ -2176,7 +2176,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#393B#, 16), to_signed(16#0090#, 16), to_signed(-16#15F0#, 16), to_signed(16#2355#, 16),
      to_signed(16#35F6#, 16), to_signed(-16#32A6#, 16), to_signed(-16#35C1#, 16), to_signed(16#1123#, 16),
      to_signed(16#2A90#, 16), to_signed(16#24AF#, 16), to_signed(16#1818#, 16), to_signed(16#0B72#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_2_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_2_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2F4B#, 16), to_signed(-16#2FA8#, 16), to_signed(16#2464#, 16), to_signed(-16#1804#, 16),
      to_signed(16#0C0D#, 16), to_signed(-16#2F4B#, 16), to_signed(-16#1E91#, 16), to_signed(-16#1804#, 16),
      to_signed(-16#1855#, 16), to_signed(-16#0FFD#, 16), to_signed(-16#302E#, 16), to_signed(-16#1BBE#, 16),
@@ -2193,7 +2193,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_gold_sequences_block IS
      to_signed(16#33E8#, 16), to_signed(16#0B2A#, 16), to_signed(-16#210B#, 16), to_signed(16#2574#, 16),
      to_signed(16#33EC#, 16), to_signed(-16#2D41#, 16), to_signed(-16#3205#, 16), to_signed(16#18DB#, 16),
      to_signed(16#271B#, 16), to_signed(16#23DE#, 16), to_signed(16#1796#, 16), to_signed(16#1667#, 16));  -- sfix16 [64]
-  CONSTANT lut_gs1i_1_table_data_2        : vector_of_signed16(0 TO 63) := 
+  CONSTANT lut_gs1i_1_table_data_2        : vector_of_signed16(63 DOWNTO 0) := 
     (to_signed(16#2BFE#, 16), to_signed(-16#271A#, 16), to_signed(16#2488#, 16), to_signed(-16#1F00#, 16),
      to_signed(16#13D5#, 16), to_signed(-16#2AF2#, 16), to_signed(-16#1C56#, 16), to_signed(-16#1F00#, 16),
      to_signed(-16#1EC2#, 16), to_signed(-16#19BE#, 16), to_signed(-16#2809#, 16), to_signed(-16#2270#, 16),
