@@ -244,7 +244,7 @@ BEGIN
 
 
   --we <= std_logic_vector(Delay2_out1);
-  we <= we_i when valid_d1 = '1' else x"0000000000000000";
+  we <= we_i when (rst = '0') and (valid_d1 = '1') else x"0000000000000000";
 
 END rtl;
 

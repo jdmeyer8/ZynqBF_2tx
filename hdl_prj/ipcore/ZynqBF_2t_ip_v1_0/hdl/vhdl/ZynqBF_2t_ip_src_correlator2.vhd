@@ -38,7 +38,7 @@ END ZynqBF_2t_ip_src_correlator2;
 ARCHITECTURE rtl OF ZynqBF_2t_ip_src_correlator2 IS
 
   -- Component Declarations
-  COMPONENT ZynqBF_2t_ip_src_data_in_block
+  COMPONENT ZynqBF_2t_ip_src_data_in
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
@@ -142,8 +142,8 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_correlator2 IS
   END COMPONENT;
 
   -- Component Configuration Statements
-  FOR ALL : ZynqBF_2t_ip_src_data_in_block
-    USE ENTITY work.ZynqBF_2t_ip_src_data_in_block(rtl);
+  FOR ALL : ZynqBF_2t_ip_src_data_in
+    USE ENTITY work.ZynqBF_2t_ip_src_data_in(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_correlation_config_block
     USE ENTITY work.ZynqBF_2t_ip_src_correlation_config_block(rtl);
@@ -230,7 +230,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_correlator2 IS
   SIGNAL corr_ram_dout_3                  : vector_of_signed16(0 TO 63);  -- sfix16_En15 [64]
 
 BEGIN
-  u_data_in : ZynqBF_2t_ip_src_data_in_block
+  u_data_in : ZynqBF_2t_ip_src_data_in
     PORT MAP( clk => clk,
               reset => reset,
               enb => enb,

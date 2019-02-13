@@ -26,10 +26,11 @@ ENTITY ZynqBF_2t_ip_src_state_machine IS
         peak_found                        :   IN    std_logic;
         est_done                          :   IN    std_logic;
         cf_done                           :   IN    std_logic;
-        pd_en                             :   OUT   std_logic;
-        est_en                            :   OUT   std_logic;
-        cf_en                             :   OUT   std_logic;
-        probe_state                       :   OUT   std_logic_vector(7 DOWNTO 0)  -- uint8
+        --pd_en                             :   OUT   std_logic;
+        --est_en                            :   OUT   std_logic;
+        --cf_en                             :   OUT   std_logic;
+	      state_out			                    :   OUT   std_logic_vector(3 downto 0)
+        --probe_state                       :   OUT   std_logic_vector(7 DOWNTO 0)  -- uint8
         );
 END ZynqBF_2t_ip_src_state_machine;
 
@@ -47,6 +48,17 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_state_machine IS
   SIGNAL Logical_Operator3_out1           : std_logic;
   SIGNAL Compare_To_Constant_out1         : std_logic;
   SIGNAL Compare_To_Constant1_out1        : std_logic;
+  
+  constant s_pd                           : std_logic_vector(3 downto 0) := "0001";
+  constant s_est                          : std_logic_vector(3 downto 0) := "0010";
+  constant s_cf                           : std_logic_vector(3 downto 0) := "0100";
+  constant s_rst                          : std_logic_vector(3 downto 0) := "1000";
+  
+  signal rst_counter                      : unsigned(15 downto 0);
+  signal rst_cnt_done                     : std_logic;
+  
+  signal cs_fsm                           : std_logic_vector(3 downto 0);
+  signal ns_fsm                           : std_logic_vector(3 downto 0);
 
 BEGIN
   Delay_process : PROCESS (clk)
@@ -107,6 +119,70 @@ BEGIN
   END PROCESS HDL_Counter_process;
 
 
+--  current_state_process: process(clk)
+--  begin
+--    if clk'event and clk = '1' then
+--      if reset = '1' then
+--        cs_fsm <= s_pd;
+--      else
+--        cs_fsm <= ns_fsm;
+--      end if;
+--    end if;
+--  end process;
+  
+  current_state_process: process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cs_fsm <= s_pd;
+      else
+        case cs_fsm is
+          when s_pd =>
+            if peak_found = '1' then
+              cs_fsm <= s_est;
+            else
+              cs_fsm <= s_pd;
+            end if;
+          when s_est =>
+            if est_done = '1' then
+              cs_fsm <= s_cf;
+            else
+              cs_fsm <= s_est;
+            end if;
+          when s_cf =>
+            if cf_done = '1' then
+              cs_fsm <= s_rst;
+            else
+              cs_fsm <= s_cf;
+            end if;
+          when s_rst =>
+            if rst_cnt_done = '1' then
+              cs_fsm <= s_pd;
+            else
+              cs_fsm <= s_rst;
+            end if;
+          when others =>
+            cs_fsm <= s_pd;
+        end case;
+      end if;
+    end if;
+  end process;
+  
+  
+  rst_counter_process: process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' or cs_fsm /= s_rst then
+        rst_counter <= to_unsigned(16#0000#, 16);
+      else
+        rst_counter <= rst_counter + to_unsigned(16#0001#, 16);
+      end if;
+    end if;
+  end process;
+  
+  rst_cnt_done <= '1' when (rst_counter >= to_unsigned(16#000F#, 16)) else '0'; 
+          
+
   
   Compare_To_Constant_out1 <= '1' WHEN HDL_Counter_out1 = to_unsigned(16#00#, 8) ELSE
       '0';
@@ -115,13 +191,15 @@ BEGIN
   Compare_To_Constant1_out1 <= '1' WHEN HDL_Counter_out1 = to_unsigned(16#01#, 8) ELSE
       '0';
 
-  probe_state <= std_logic_vector(HDL_Counter_out1);
+  --probe_state <= std_logic_vector(HDL_Counter_out1);
 
-  pd_en <= Compare_To_Constant_out1;
+  --pd_en <= Compare_To_Constant_out1;
 
-  est_en <= Compare_To_Constant1_out1;
+  --est_en <= Compare_To_Constant1_out1;
 
-  cf_en <= Compare_To_Constant2_out1;
+  --cf_en <= Compare_To_Constant2_out1;
+  
+  state_out <= cs_fsm;
 
 END rtl;
 

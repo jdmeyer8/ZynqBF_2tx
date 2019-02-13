@@ -139,10 +139,11 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
           peak_found                      :   IN    std_logic;
           est_done                        :   IN    std_logic;
           cf_done                         :   IN    std_logic;
-          pd_en                           :   OUT   std_logic;
-          est_en                          :   OUT   std_logic;
-          cf_en                           :   OUT   std_logic;
-          probe_state                     :   OUT   std_logic_vector(7 DOWNTO 0)  -- uint8
+          --pd_en                           :   OUT   std_logic;
+          --est_en                          :   OUT   std_logic;
+          --cf_en                           :   OUT   std_logic;
+          state_out                       :   OUT   std_logic_vector(3 downto 0)
+          --probe_state                     :   OUT   std_logic_vector(7 DOWNTO 0)  -- uint8
           );
   END COMPONENT;
 
@@ -238,7 +239,15 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   SIGNAL gs_addr                          : std_logic_vector(11 DOWNTO 0);  -- ufix12
   SIGNAL goldSequences_out1               : vector_of_std_logic_vector16(0 TO 1);  -- ufix16 [2]
   SIGNAL goldSequences_out2               : vector_of_std_logic_vector16(0 TO 1);  -- ufix16 [2]
-  SIGNAL state_machine_out3               : std_logic;
+  
+  SIGNAL current_state                    : std_logic_vector(3 downto 0);  -- current state of fsm
+                                                                           -- 0001 = detect peak
+                                                                           -- 0010 = estimate channel
+                                                                           -- 0100 = clear fifo
+                                                                           -- 1000 = restart fsm
+                                                                           
+  SIGNAL rst_en                           : std_logic;  -- state machine restart state
+  SIGNAL cf_en                            : std_logic;
   SIGNAL est_en                           : std_logic;
   SIGNAL clear_fifo                       : std_logic;
   SIGNAL pd_step                          : std_logic;
@@ -365,11 +374,19 @@ BEGIN
               peak_found => peak_found_d2,
               est_done => est_done,
               cf_done => in_fifo_out4,
-              pd_en => pd_en,
-              est_en => est_en,
-              cf_en => state_machine_out3,
-              probe_state => state_machine_out4  -- uint8
+              --pd_en => pd_en,
+              --est_en => est_en,
+              --cf_en => cf_en,
+              state_out => current_state
+              --probe_state => state_machine_out4  -- uint8
               );
+              
+  pd_en <= current_state(0);
+  est_en <= current_state(1);
+  cf_en <= current_state(2);
+  rst_en <= current_state(3);
+              
+              
 
   u_in_fifo : ZynqBF_2t_ip_src_in_fifo
     PORT MAP( clk => clk,
@@ -440,7 +457,7 @@ BEGIN
     end if;
   end process;
 
-  clear_fifo <= state_machine_out3 OR est_en;
+  clear_fifo <= cf_en OR est_en;
 
   pd_step_2 <= pd_step_1 AND (pd_step AND pd_en);
 
@@ -460,7 +477,7 @@ BEGIN
 
   probe_xcorr2 <= xcorr;
 
-  probe_state <= state_machine_out4;
+  probe_state <= "0000" & current_state; --state_machine_out4;
 
   probe_ch1i <= ch_est_out7;
 
