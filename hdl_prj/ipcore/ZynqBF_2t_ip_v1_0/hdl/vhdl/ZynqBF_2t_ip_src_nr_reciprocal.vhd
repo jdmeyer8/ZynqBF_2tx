@@ -48,15 +48,17 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_nr_reciprocal IS
   signal dout_i                           : std_logic_vector(31 downto 0);
   signal a                                : signed(31 downto 0);
   signal x                                : signed(31 downto 0);
-  signal xn                               : signed(63 downto 0);
   
   signal step                             : std_logic;
   signal step_cnt                         : unsigned(3 downto 0);
   signal n_steps                          : unsigned(3 downto 0) := to_unsigned(4,4);
   
-  signal s1                               : signed(63 downto 0);
-  signal s2                               : signed(63 downto 0);
-  constant const2                         : signed(63 downto 0) := x"0000000200000000";
+  constant const2                         : signed(63 downto 0) := x"0000000200000000";  -- constant 2 for nr equation xn = x*(2 - a*x)
+  
+  -- multiplier signals
+  signal min1                             : signed(31 downto 0);
+  signal min2                             : signed(31 downto 0);
+  signal mout                             : signed(63 downto 0);
 
 BEGIN
 
@@ -128,7 +130,7 @@ begin
             x(k) <= '1';
             a <= signed(din_i);
         elsif cs_nr = s_calc and step = '1' then
-            x <= xn(47 downto 16);
+            x <= mout(47 downto 16);
         else
             x <= x;
         end if;
@@ -154,38 +156,41 @@ end process;
 
 step <= '1' when step_cnt = n_steps else '0';
 
-newton_raphson_process: process(clk)
+
+nr_multiplier_in_process: process(clk)
 begin
-    if clk'event and clk = '1' then
-        if reset = '1' then
-            xn <= to_signed(0, 64);
-            s1 <= to_signed(0, 64);
-            s2 <= to_signed(0, 64);
-        elsif cs_nr = s_calc then
-            case step_cnt is
-                when to_unsigned(1,4) =>
-                    xn <= xn;
-                    s1 <= a*x;
-                    s2 <= s2;
-                when to_unsigned(2,4) =>
-                    xn <= xn;
-                    s1 <= s1;
-                    s2 <= const2 - s1;
-                when to_unsigned(3,4) =>
-                    xn <= s2(47 downto 16)*x;
-                    s1 <= s1;
-                    s2 <= s2;
-                when others =>
-                    xn <= xn;
-                    s1 <= s1;
-                    s2 <= s2;
-            end case;
-        else
-            xn <= to_signed(0, 64);
-            s1 <= to_signed(0, 64);
-            s2 <= to_signed(0, 64);
-        end if;
+  if clk'event and clk = '1' then
+    if reset = '1' then
+      min1 <= to_signed(0, 32);
+      min2 <= to_signed(0 ,32);
+    elsif cs_nr = s_calc then
+      min2 <= x;
+      case step_cnt is
+        when x"0" =>
+          min1 <= a;    -- step 1 is a*x
+        when x"2" =>
+          min1 <= const2(47 downto 16) - mout(47 downto 16);  -- step 2 is x*(2 - a*x)
+        when others =>
+          min1 <= min1;
+      end case;
+    else
+      min1 <= to_signed(0, 32);
+      min2 <= to_signed(0, 32);
     end if;
+  end if;
+end process;
+
+nr_multiplier_out_process: process(clk)
+begin
+  if clk'event and clk = '1' then
+    if reset = '1' then
+      mout <= to_signed(0, 64);
+    elsif cs_nr = s_calc then
+      mout <= min1*min2;
+    else
+      mout <= to_signed(0, 64);
+    end if;
+  end if;
 end process;
 
 dout_process: process(clk)

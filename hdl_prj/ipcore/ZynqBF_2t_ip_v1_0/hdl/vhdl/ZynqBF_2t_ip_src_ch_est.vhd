@@ -492,7 +492,7 @@ BEGIN
   mac_bb_delay_process : PROCESS (clk)
   BEGIN
     IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' and est_rst = '1' THEN
+      IF reset = '1' or est_rst = '1' THEN
         s_2 <= to_signed(0, 32);
       ELSIF enb = '1' THEN
         s_2 <= mac_bb_multiplyAdd_out;
@@ -776,7 +776,7 @@ BEGIN
   END PROCESS PipelineRegister1_process;
 
 
-  Product1_out1_2 <= Product1_out1_1(30 DOWNTO 15);
+  Product1_out1_2 <= Product1_out1_1(32 DOWNTO 17);
 
   PipelineRegister_process : PROCESS (clk)
   BEGIN
@@ -790,7 +790,7 @@ BEGIN
   END PROCESS PipelineRegister_process;
 
 
-  Product_out1_2 <= Product_out1_1(30 DOWNTO 15);
+  Product_out1_2 <= Product_out1_1(32 DOWNTO 17);
 
   Delay7_out1_0 <= Delay7_out1(0);
 
