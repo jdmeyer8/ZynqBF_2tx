@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="10402102153565fs"></ZoomStartTime>
-      <ZoomEndTime time="10402315294454fs"></ZoomEndTime>
-      <Cursor1Time time="12000000000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="30000000000001fs"></ZoomEndTime>
+      <Cursor1Time time="30000000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="167"></NameColumnWidth>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="47" />
+   <WVObjectSize size="44" />
    <wvobject type="logic" fp_name="/ZynqBF_2tx_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -205,30 +205,6 @@
       <obj_property name="Radix">REALRADIX</obj_property>
       <obj_property name="radix_realType">UNSIGNEDFIXEDPOINTRADIX</obj_property>
       <obj_property name="radix_fractionWidth">16</obj_property>
-      <obj_property name="radix_otherWidth">0</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/ZynqBF_2tx_tb/dut/u_channel_estimator/u_ch_est/u_nr_reciprocal/s1">
-      <obj_property name="ElementShortName">s1[63:0]</obj_property>
-      <obj_property name="ObjectShortName">s1[63:0]</obj_property>
-      <obj_property name="Radix">REALRADIX</obj_property>
-      <obj_property name="radix_realType">UNSIGNEDFIXEDPOINTRADIX</obj_property>
-      <obj_property name="radix_fractionWidth">32</obj_property>
-      <obj_property name="radix_otherWidth">0</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/ZynqBF_2tx_tb/dut/u_channel_estimator/u_ch_est/u_nr_reciprocal/s2">
-      <obj_property name="ElementShortName">s2[63:0]</obj_property>
-      <obj_property name="ObjectShortName">s2[63:0]</obj_property>
-      <obj_property name="Radix">REALRADIX</obj_property>
-      <obj_property name="radix_realType">UNSIGNEDFIXEDPOINTRADIX</obj_property>
-      <obj_property name="radix_fractionWidth">32</obj_property>
-      <obj_property name="radix_otherWidth">0</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/ZynqBF_2tx_tb/dut/u_channel_estimator/u_ch_est/u_nr_reciprocal/xn">
-      <obj_property name="ElementShortName">xn[63:0]</obj_property>
-      <obj_property name="ObjectShortName">xn[63:0]</obj_property>
-      <obj_property name="Radix">REALRADIX</obj_property>
-      <obj_property name="radix_realType">UNSIGNEDFIXEDPOINTRADIX</obj_property>
-      <obj_property name="radix_fractionWidth">32</obj_property>
       <obj_property name="radix_otherWidth">0</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/ZynqBF_2tx_tb/dut/u_channel_estimator/u_ch_est/u_nr_reciprocal/min1">

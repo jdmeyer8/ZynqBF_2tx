@@ -56,9 +56,10 @@ BEGIN
   SimpleDualPortRAM_generic_process: PROCESS (clk)
   BEGIN
     IF clk'event AND clk = '1' THEN
-      if ram_rst = '1' then
-        ram <= (others => (others => '0'));
-      ELSIF enb = '1' THEN
+      --if ram_rst = '1' then
+        --ram <= (others => (others => '0'));
+      --ELSIF enb = '1' THEN
+      IF enb = '1' then
         IF wr_en = '1' THEN
           ram(to_integer(wr_addr_unsigned)) <= wr_din;
         END IF;
