@@ -137,27 +137,29 @@ end process;
 
 rx_v_in <= '1';
 
---results_file_proc: process(reset,clk)
---    file rfile:         text;
---    variable rline:     line;
---begin
---    if reset = '1' then
---        file_open(rfile, "sim_results.txt", write_mode);
---    elsif rising_edge(clk) then
---        write(rline,conv_integer(probe_xcorr1),right,10);
---        write(rline,string'(", "));
---        write(rline,conv_integer(probe_xcorr2),right,10);
---        write(rline,string'(", "));
---        write(rline,conv_integer(probe_state),right,10);
---        write(rline,string'(", "));
---        write(rline,conv_integer(probe_ch1i),right,10);
---        write(rline,string'(", "));
---        write(rline,conv_integer(probe_ch1q),right,10);
---        write(rline,string'(", "));
---        write(rline,conv_integer(probe_ch1r),right,10);
---        writeline(rfile, rline);
---    end if;
---end process;
+results_file_proc: process(reset,clk)
+   file rfile:         text;
+   variable rline:     line;
+begin
+   if reset = '1' then
+       file_open(rfile, "sim_results.txt", write_mode);
+   elsif rising_edge(clk) then
+       write(rline,conv_integer(probe_xcorr1),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(probe_xcorr2),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(probe_state),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(ch1_i),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(ch1_q),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(ch2_i),right,10);
+       write(rline,string'(", "));
+       write(rline,conv_integer(ch2_q),right,10);
+       writeline(rfile, rline);
+   end if;
+end process;
     
 
 

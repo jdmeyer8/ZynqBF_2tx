@@ -186,6 +186,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
+          est_rst                         :   IN    std_logic;
           rx                              :   IN    vector_of_std_logic_vector16(0 TO 1);  -- sfix16_En15 [2]
           gs1                             :   IN    vector_of_std_logic_vector16(0 TO 1);  -- sfix16_En15 [2]
           gs2                             :   IN    vector_of_std_logic_vector16(0 TO 1);  -- sfix16_En15 [2]
@@ -287,6 +288,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   signal peak_found_d1:                     std_logic;
   signal peak_found_d2:                     std_logic;
   signal peak_found_d3:                     std_logic;
+  signal ch_est_rst:                        std_logic;
 
 BEGIN
   u_goldSequences : ZynqBF_2t_ip_src_goldSequences
@@ -425,6 +427,7 @@ BEGIN
     PORT MAP( clk => clk,
               reset => reset,
               enb => enb,
+              est_rst => ch_est_rst,
               rx => ram_dout,  -- sfix16_En15 [2]
               gs1 => goldSequences_out1,  -- sfix16_En15 [2]
               gs2 => goldSequences_out2,  -- sfix16_En15 [2]
@@ -441,6 +444,8 @@ BEGIN
               probe_ch1q => ch_est_out8,  -- sfix32_En16
               probe_ch1r => ch_est_out9  -- sfix32_En14
               );
+              
+   ch_est_rst <= not est_en;
               
   peak_found_delay_proc: process(clk,reset)
   begin

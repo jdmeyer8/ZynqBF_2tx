@@ -65,17 +65,28 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ch_est IS
   --         );
   -- END COMPONENT;
 
-  COMPONENT ZynqBF_2t_ip_src_calc_inverse
+  -- COMPONENT ZynqBF_2t_ip_src_calc_inverse
+    -- PORT( clk                             :   IN    std_logic;
+          -- reset                           :   IN    std_logic;
+          -- enb                             :   IN    std_logic;
+          -- din                             :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En16
+          -- en                              :   IN    std_logic;
+          -- dout                            :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En14
+          -- dval                            :   OUT   std_logic
+          -- );
+  -- END COMPONENT;
+
+  COMPONENT ZynqBF_2t_ip_src_nr_reciprocal
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
           din                             :   IN    std_logic_vector(31 DOWNTO 0);  -- sfix32_En16
-          en                              :   IN    std_logic;
+          start                           :   IN    std_logic;
           dout                            :   OUT   std_logic_vector(31 DOWNTO 0);  -- sfix32_En14
-          dval                            :   OUT   std_logic
+          valid                           :   OUT   std_logic
           );
   END COMPONENT;
-
+  
   COMPONENT ZynqBF_2t_ip_src_local_fsm
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
@@ -111,8 +122,10 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ch_est IS
   -- FOR ALL : ZynqBF_2t_ip_src_select_inputs_block
   --   USE ENTITY work.ZynqBF_2t_ip_src_select_inputs_block(rtl);
 
-  FOR ALL : ZynqBF_2t_ip_src_calc_inverse
-    USE ENTITY work.ZynqBF_2t_ip_src_calc_inverse(rtl);
+  -- FOR ALL : ZynqBF_2t_ip_src_calc_inverse
+    -- USE ENTITY work.ZynqBF_2t_ip_src_calc_inverse(rtl);
+  FOR ALL : ZynqBF_2t_ip_src_nr_reciprocal
+    USE ENTITY work.ZynqBF_2t_ip_src_nr_reciprocal(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_local_fsm
     USE ENTITY work.ZynqBF_2t_ip_src_local_fsm(rtl);
@@ -250,6 +263,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ch_est IS
   SIGNAL Delay20_out1                     : std_logic;
   SIGNAL ac_out                           : signed(31 DOWNTO 0);  -- sfix32_En16
   SIGNAL bd_out                           : signed(31 DOWNTO 0);  -- sfix32_En16
+  signal gs_sel_d1:                         std_logic_vector(1 downto 0);
 
   ATTRIBUTE use_dsp48 : string;
 
@@ -280,18 +294,28 @@ BEGIN
   --            );
   
   y <=
-    Delay8_out1_1 when Delay7_out1 = "01" else
-    Delay9_out1_1 when Delay7_out1 = "10" else
-    to_signed(16#0000#, 16);
+    Delay8_out1_1 when gs_sel_d1 = "01" else
+    Delay9_out1_1 when gs_sel_d1 = "10" else
+    (others => (others => '0'));
 
-  u_calc_inverse : ZynqBF_2t_ip_src_calc_inverse
+  -- u_calc_inverse : ZynqBF_2t_ip_src_calc_inverse
+    -- PORT MAP( clk => clk,
+              -- reset => reset,
+              -- enb => enb,
+              -- din => std_logic_vector(Sum_out1),  -- sfix32_En16
+              -- en => local_fsm_out2,
+              -- dout => calc_inverse_out1,  -- sfix32_En14
+              -- dval => nr_done
+              -- );
+              
+  u_nr_reciprocal : ZynqBF_2t_ip_src_nr_reciprocal
     PORT MAP( clk => clk,
               reset => reset,
               enb => enb,
-              din => std_logic_vector(Sum_out1),  -- sfix32_En16
-              en => local_fsm_out2,
-              dout => calc_inverse_out1,  -- sfix32_En14
-              dval => nr_done
+              din => std_logic_vector(Sum_out1),
+              start => dp_done,
+              dout => calc_inverse_out1,
+              valid => nr_done
               );
 
   u_local_fsm : ZynqBF_2t_ip_src_local_fsm
@@ -351,8 +375,10 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay7_out1 <= (OTHERS => '0');
+        gs_sel_d1 <= "00";
       ELSIF enb = '1' THEN
         Delay7_out1 <= gs_sel;
+        gs_sel_d1 <= gs_sel(1) & gs_sel(0);
       END IF;
     END IF;
   END PROCESS Delay7_process;
@@ -466,7 +492,7 @@ BEGIN
   mac_bb_delay_process : PROCESS (clk)
   BEGIN
     IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' est_rst = '1' THEN
+      IF reset = '1' and est_rst = '1' THEN
         s_2 <= to_signed(0, 32);
       ELSIF enb = '1' THEN
         s_2 <= mac_bb_multiplyAdd_out;
