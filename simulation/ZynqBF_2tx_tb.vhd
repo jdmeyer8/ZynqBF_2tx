@@ -107,8 +107,8 @@ clk <= not clk after 1250 ns;
 clk200 <= not clk200 after 2.5 ns;
 
 -- reset for 200 ns
-reset <= '1', '0' after 10 us;
-reset200 <= '1', '0' after 10 us;
+reset <= '1', '0' after 20 us;
+reset200 <= '1', '0' after 20 us;
 
 rx_in_proc: process(reset, clk)
     file file_rxi:      text;

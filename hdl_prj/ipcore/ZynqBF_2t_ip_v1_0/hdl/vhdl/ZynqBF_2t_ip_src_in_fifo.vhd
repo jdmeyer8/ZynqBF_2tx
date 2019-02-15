@@ -66,13 +66,11 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_in_fifo IS
   signal rden_dreg                        : std_logic_vector(1 downto 0); -- read enable delay register
   
 BEGIN
-
-  rst_fifo <= cf_en;
   
   u_rx_i_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
   port map(
-    rst => rst_fifo,
+    rst => reset200,
     wrclk => clk,
     wren => wren,
     di => rxi_in,
@@ -92,7 +90,7 @@ BEGIN
   u_rx_q_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
   port map(
-    rst => rst_fifo,
+    rst => reset200,
     wrclk => clk,
     wren => wren,
     di => rxi_in,
@@ -115,7 +113,7 @@ BEGIN
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pd_en_meta_reg <= "111";
+        pd_en_meta_reg <= "000";
       elsif enb = '1' then
         pd_en_meta_reg <= pd_en_meta_reg(1 downto 0) & pd_en;
       end if;
@@ -133,7 +131,7 @@ BEGIN
   
   empty <= empty_i;
   
-  rden <= pd_en and empty_n;
+  rden <= (pd_en or cf_en) and empty_n;
   --rden_process: process(clk200)
   --begin
   --  if clk200'event and clk200 = '1' then

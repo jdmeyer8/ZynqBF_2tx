@@ -450,14 +450,14 @@ BEGIN
               
    ch_est_rst <= not est_en;
               
-  peak_found_delay_proc: process(clk,reset)
+  peak_found_delay_proc: process(clk200)
   begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
+    if clk200'event and clk200 = '1' then
+      if reset200 = '1' then
         peak_found_d1 <= '0';
         peak_found_d2 <= '0';
         peak_found_d3 <= '0';
-      else
+      elsif enb200 = '1' then
         peak_found_d1 <= Logical_Operator6_out1;
         peak_found_d2 <= peak_found_d1;
         peak_found_d3 <= peak_found_d2;

@@ -134,7 +134,7 @@ BEGIN
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        cs_fsm <= s_pd;
+        cs_fsm <= s_rst;
       else
         case cs_fsm is
           when s_pd =>
@@ -162,7 +162,7 @@ BEGIN
               cs_fsm <= s_rst;
             end if;
           when others =>
-            cs_fsm <= s_pd;
+            cs_fsm <= s_rst;
         end case;
       end if;
     end if;
