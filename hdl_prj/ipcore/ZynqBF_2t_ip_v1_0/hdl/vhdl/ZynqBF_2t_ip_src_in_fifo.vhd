@@ -19,13 +19,16 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
+LIBRARY UNISIM;
+use UNISIM.vcomponents.all;
+
 ENTITY ZynqBF_2t_ip_src_in_fifo IS
   PORT( clk                               :   IN    std_logic;
+        clk200                            :   IN    std_logic;
         reset                             :   IN    std_logic;
-        enb_1_128_0                       :   IN    std_logic;
+        reset200                          :   IN    std_logic;
         enb                               :   IN    std_logic;
-        enb_1_128_1                       :   IN    std_logic;
-        enb_1_1_1                         :   IN    std_logic;
+        enb200                            :   IN    std_logic;
         rxi_in                            :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
         rxq_in                            :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
         rxv_in                            :   IN    std_logic;
@@ -42,177 +45,108 @@ END ZynqBF_2t_ip_src_in_fifo;
 ARCHITECTURE rtl OF ZynqBF_2t_ip_src_in_fifo IS
 
   -- Component Declarations
-  COMPONENT ZynqBF_2t_ip_src_rx_q_fifo
-    PORT( clk                             :   IN    std_logic;
-          reset                           :   IN    std_logic;
-          enb                             :   IN    std_logic;
-          enb_1_128_1                     :   IN    std_logic;
-          enb_1_1_1                       :   IN    std_logic;
-          In_rsvd                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
-          Push                            :   IN    std_logic;
-          Pop                             :   IN    std_logic;
-          Out_rsvd                        :   OUT   std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
-          Empty                           :   OUT   std_logic
-          );
-  END COMPONENT;
 
-  COMPONENT ZynqBF_2t_ip_src_rx_i_fifo
-    PORT( clk                             :   IN    std_logic;
-          reset                           :   IN    std_logic;
-          enb                             :   IN    std_logic;
-          enb_1_128_1                     :   IN    std_logic;
-          enb_1_1_1                       :   IN    std_logic;
-          In_rsvd                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
-          Push                            :   IN    std_logic;
-          Pop                             :   IN    std_logic;
-          Out_rsvd                        :   OUT   std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
-          Empty                           :   OUT   std_logic
-          );
-  END COMPONENT;
-
-  -- Component Configuration Statements
-  FOR ALL : ZynqBF_2t_ip_src_rx_q_fifo
-    USE ENTITY work.ZynqBF_2t_ip_src_rx_q_fifo(rtl);
-
-  FOR ALL : ZynqBF_2t_ip_src_rx_i_fifo
-    USE ENTITY work.ZynqBF_2t_ip_src_rx_i_fifo(rtl);
 
   -- Signals
-  SIGNAL rxi_in_signed                    : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL Delay_out1                       : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL Rate_Transition_bypass_reg       : std_logic;  -- ufix1
-  SIGNAL Rate_Transition_out1             : std_logic;
-  SIGNAL Logical_Operator1_out1           : std_logic;
-  SIGNAL rxq_in_signed                    : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL Delay1_out1                      : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL fifo_ready                       : std_logic;
-  SIGNAL Logical_Operator4_out1           : std_logic;
-  SIGNAL Logical_Operator5_out1           : std_logic;
-  SIGNAL rx_q_fifo_out1                   : std_logic_vector(15 DOWNTO 0);  -- ufix16
-  SIGNAL rx_q_fifo_out2                   : std_logic;
-  SIGNAL rx_i_fifo_out2                   : std_logic;
-  SIGNAL Logical_Operator2_out1           : std_logic;
-  SIGNAL rx_i_fifo_out1                   : std_logic_vector(15 DOWNTO 0);  -- ufix16
-  SIGNAL Delay4_reg                       : std_logic_vector(0 TO 1);  -- ufix1 [2]
-  SIGNAL Delay4_out1                      : std_logic;
-  SIGNAL Logical_Operator_out1            : std_logic;
-  SIGNAL Delay5_out1                      : std_logic;
+  
+  signal rst_fifo                         : std_logic;
+  
+  signal wren                             : std_logic;
+  signal rden                             : std_logic;
+  signal empty_rxi                        : std_logic;
+  signal empty_rxq                        : std_logic;
+  signal empty_i                          : std_logic;
+  signal empty_n                          : std_logic;
+  
+  signal pd_en_i                          : std_logic;  -- pd_en after clock-crossing
+  signal pd_en_meta_reg                   : std_logic(2 downto 0);
+  
+  signal rden_dreg                        : std_logic_vector(1 downto 0); -- read enable delay register
+  
+  
 
 BEGIN
-  u_rx_q_fifo : ZynqBF_2t_ip_src_rx_q_fifo
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
-              enb_1_128_1 => enb_1_128_1,
-              enb_1_1_1 => enb_1_1_1,
-              In_rsvd => std_logic_vector(Delay1_out1),  -- sfix16_En15
-              Push => Logical_Operator1_out1,
-              Pop => Logical_Operator5_out1,
-              Out_rsvd => rx_q_fifo_out1,  -- sfix16_En15
-              Empty => rx_q_fifo_out2
-              );
 
-  u_rx_i_fifo : ZynqBF_2t_ip_src_rx_i_fifo
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
-              enb_1_128_1 => enb_1_128_1,
-              enb_1_1_1 => enb_1_1_1,
-              In_rsvd => std_logic_vector(Delay_out1),  -- sfix16_En15
-              Push => Logical_Operator1_out1,
-              Pop => Logical_Operator5_out1,
-              Out_rsvd => rx_i_fifo_out1,  -- sfix16_En15
-              Empty => rx_i_fifo_out2
-              );
-
-  rxi_in_signed <= signed(rxi_in);
-
-  Delay_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
-        Delay_out1 <= rxi_in_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay_process;
-
-
-  Rate_Transition_bypass_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Rate_Transition_bypass_reg <= '0';
-      ELSIF enb_1_128_1 = '1' THEN
-        Rate_Transition_bypass_reg <= pd_en;
-      END IF;
-    END IF;
-  END PROCESS Rate_Transition_bypass_process;
-
+  rst_fifo <= reset200 or cf_en;
   
-  Rate_Transition_out1 <= pd_en WHEN enb_1_128_1 = '1' ELSE
-      Rate_Transition_bypass_reg;
-
-  Logical_Operator1_out1 <= rxv_in AND Rate_Transition_out1;
-
-  rxq_in_signed <= signed(rxq_in);
-
-  Delay1_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay1_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
-        Delay1_out1 <= rxq_in_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay1_process;
-
-
-  Logical_Operator4_out1 <= pd_en AND fifo_ready;
-
-  fifo_ready <=  NOT (rx_i_fifo_out2 OR rx_q_fifo_out2);
-
-  Logical_Operator2_out1 <= cf_en AND fifo_ready;
-
-  Logical_Operator5_out1 <= Logical_Operator2_out1 OR Logical_Operator4_out1;
-
-  Delay4_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay4_reg <= (OTHERS => '0');
-      ELSIF enb = '1' THEN
-        Delay4_reg(0) <= Logical_Operator4_out1;
-        Delay4_reg(1) <= Delay4_reg(0);
-      END IF;
-    END IF;
-  END PROCESS Delay4_process;
-
-  Delay4_out1 <= Delay4_reg(1);
-
-  Logical_Operator_out1 <= rx_i_fifo_out2 AND rx_q_fifo_out2;
-
-  Delay5_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay5_out1 <= '0';
-      ELSIF enb = '1' THEN
-        Delay5_out1 <= Logical_Operator_out1;
-      END IF;
-    END IF;
-  END PROCESS Delay5_process;
-
-
-  rxi_out <= rx_i_fifo_out1;
-
-  rxq_out <= rx_q_fifo_out1;
-
-  rxv_out <= Delay4_out1;
-
-  empty <= Delay5_out1;
+  u_rx_i_fifo : FIFO_DUALCLOCK_MACRO
+  generic map(data_width => 16)
+  port map(
+    rst => rst_fifo,
+    wrclk => clk,
+    wren => wren,
+    di => rxi_in,
+    full => open,
+    rdclk => clk200,
+    rden => rden,
+    do => rx_i_fifo_out,
+    empty => empty_rxi,
+    almost_empty => open,
+    almost_full => open,
+    wrerr => open,
+    rderr => open,
+    wrcount => open,
+    rdcount => open
+  );
+    
+  u_rx_q_fifo : FIFO_DUALCLOCK_MACRO
+  generic map(data_width => 16)
+  port map(
+    rst => reset200,
+    wrclk => clk,
+    wren => wren,
+    di => rxi_in,
+    full => open,
+    rdclk => clk200,
+    rden => rden,
+    do => rx_i_fifo_out,
+    empty => empty_rxi,
+    almost_empty => open,
+    almost_full => open,
+    wrerr => open,
+    rderr => open,
+    wrcount => open,
+    rdcount => open
+  );
+  
+  
+  -- Write side signals
+  pd_en_metastability_filter : process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        pd_en_meta_reg <= "000";
+      elsif enb = '1' then
+        pd_en_meta_reg <= pd_en_meta_reg(1 downto 0) & pd_en;
+      end if;
+    end if;
+  end process;
+  
+  pd_en_i <= pd_en_meta_reg(2);
+  
+  wren <= pd_en_i & rxv_in;
+  
+  
+  -- Read side signals
+  empty_i <= empty_rxi & empty_rxq;
+  empty_n <= not empty_i;
+  
+  rden <= pd_en and empty_n;
+  empty <= empty_i;
+  
+  rd_en_delay_process : process(clk200)
+  begin
+    if clk200'event and clk200 = '1' then
+      if reset200 = '1' then
+        rd_en_dreg <= "00";
+      elsif enb200 = '1' then
+        rd_en_dreg <= rd_en_dreg(0) & rd_en;
+      end if;
+    end if;
+  end process;
+  
+  rxv_out <= rd_en_dreg(1);
+  
 
 END rtl;
 

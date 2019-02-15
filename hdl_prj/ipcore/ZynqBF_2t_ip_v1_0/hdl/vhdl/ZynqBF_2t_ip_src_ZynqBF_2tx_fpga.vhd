@@ -54,7 +54,9 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
   PORT( clk                               :   IN    std_logic;
+        clk200                            :   IN    std_logic;  -- 200 MHz system clock for high-rate processing
         reset                             :   IN    std_logic;
+        reset200                          :   IN    std_logic;  -- 200 MHz system clock reset
         clk_enable                        :   IN    std_logic;
         rx_i_in                           :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
         rx_q_in                           :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -95,7 +97,9 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
 
   COMPONENT ZynqBF_2t_ip_src_channel_estimator
     PORT( clk                             :   IN    std_logic;
+          clk200                          :   IN    std_logic;
           reset                           :   IN    std_logic;
+          reset200                        :   IN    std_logic;
           enb_1_128_0                     :   IN    std_logic;
           enb                             :   IN    std_logic;
           enb_1_128_1                     :   IN    std_logic;
@@ -127,6 +131,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
   -- Signals
   SIGNAL enb_1_128_0                      : std_logic;
   SIGNAL enb                              : std_logic;
+  SIGNAL enb200                           : std_logic; -- enb for 200 MHz clock
   SIGNAL enb_1_128_1                      : std_logic;
   SIGNAL enb_1_1_1                        : std_logic;
   SIGNAL rx_i_in_signed                   : signed(15 DOWNTO 0);  -- sfix16_En15
@@ -156,23 +161,29 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
   SIGNAL Delay10_out1                     : signed(15 DOWNTO 0);  -- sfix16_En15
   SIGNAL channel_estimator_out4_signed    : signed(15 DOWNTO 0);  -- sfix16_En15
   SIGNAL Delay11_out1                     : signed(15 DOWNTO 0);  -- sfix16_En15
+  
+  -- Signals for enb clock-crossing meta filter
+  signal enb_meta_reg                     : std_logic_vector(2 downto 0);
 
 BEGIN
-  u_ZynqBF_2tx_fpga_tc : ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
-    PORT MAP( clk => clk,
-              reset => reset,
-              clk_enable => clk_enable,
-              enb => enb,
-              enb_1_1_1 => enb_1_1_1,
-              enb_1_128_0 => enb_1_128_0,
-              enb_1_128_1 => enb_1_128_1
-              );
+  --u_ZynqBF_2tx_fpga_tc : ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
+  --  PORT MAP( clk => clk,
+  --            reset => reset,
+  --            clk_enable => clk_enable,
+  --            enb => enb,
+  --            enb_1_1_1 => enb_1_1_1,
+  --            enb_1_128_0 => enb_1_128_0,
+  --            enb_1_128_1 => enb_1_128_1
+  --            );
 
   u_channel_estimator : ZynqBF_2t_ip_src_channel_estimator
     PORT MAP( clk => clk,
+              clk200 => clk200,
               reset => reset,
+              reset200 => reset200,
               enb_1_128_0 => enb_1_128_0,
               enb => enb,
+              enb200 => enb200,
               enb_1_128_1 => enb_1_128_1,
               enb_1_1_1 => enb_1_1_1,
               rx_i => std_logic_vector(rx_i),  -- sfix16_En15
@@ -190,6 +201,19 @@ BEGIN
               probe_ch1r => channel_estimator_out10,  -- sfix32_En14
               probe => channel_estimator_out11  -- ufix15
               );
+              
+  enb200_metastability_filter : process(clk200)
+  begin
+    if clk200'event and clk200 = '1' then
+      if reset200 = '1' then
+        enb_meta_reg <= "000";
+      else
+        enb_meta_reg <= enb_meta_reg(1 downto 0) & enb;
+      end if;
+    end if;
+  end process;
+  
+  enb200 <= enb_meta_reg(2);
 
   rx_i_in_signed <= signed(rx_i_in);
 
@@ -198,7 +222,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         rx_i <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         rx_i <= rx_i_in_signed;
       END IF;
     END IF;
@@ -210,7 +235,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         Delay_out1 <= rx_i;
       END IF;
     END IF;
@@ -226,7 +252,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         rx_q <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         rx_q <= rx_q_in_signed;
       END IF;
     END IF;
@@ -238,7 +265,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay1_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         Delay1_out1 <= rx_q;
       END IF;
     END IF;
@@ -252,7 +280,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay5_out1 <= '0';
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         Delay5_out1 <= rx_v_in;
       END IF;
     END IF;
@@ -264,7 +293,8 @@ BEGIN
     IF clk'EVENT AND clk = '1' THEN
       IF reset = '1' THEN
         Delay2_out1 <= '0';
-      ELSIF enb_1_128_0 = '1' THEN
+      --ELSIF enb_1_128_0 = '1' THEN
+      ELSIF enb = '1' then
         Delay2_out1 <= Delay5_out1;
       END IF;
     END IF;
@@ -275,10 +305,10 @@ BEGIN
 
   Delay8_process : PROCESS (clk)
   BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
+    IF clk200'EVENT AND clk200 = '1' THEN
+      IF reset200 = '1' THEN
         Delay8_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb = '1' THEN
+      ELSIF enb200 = '1' THEN
         Delay8_out1 <= channel_estimator_out1_signed;
       END IF;
     END IF;
@@ -291,10 +321,10 @@ BEGIN
 
   Delay9_process : PROCESS (clk)
   BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
+    IF clk200'EVENT AND clk200 = '1' THEN
+      IF reset200 = '1' THEN
         Delay9_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb = '1' THEN
+      ELSIF enb200 = '1' THEN
         Delay9_out1 <= channel_estimator_out2_signed;
       END IF;
     END IF;
@@ -307,10 +337,10 @@ BEGIN
 
   Delay10_process : PROCESS (clk)
   BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
+    IF clk200'EVENT AND clk200 = '1' THEN
+      IF reset200 = '1' THEN
         Delay10_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb = '1' THEN
+      ELSIF enb200 = '1' THEN
         Delay10_out1 <= channel_estimator_out3_signed;
       END IF;
     END IF;
@@ -323,10 +353,10 @@ BEGIN
 
   Delay11_process : PROCESS (clk)
   BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
+    IF clk200'EVENT AND clk200 = '1' THEN
+      IF reset200 = '1' THEN
         Delay11_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb = '1' THEN
+      ELSIF enb200 = '1' THEN
         Delay11_out1 <= channel_estimator_out4_signed;
       END IF;
     END IF;

@@ -21,7 +21,9 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY ZynqBF_2t_ip_dut IS
   PORT( clk                               :   IN    std_logic;
+        clk200                            :   IN    std_logic;
         reset                             :   IN    std_logic;
+        reset200                          :   IN    std_logic;
         dut_enable                        :   IN    std_logic;  -- ufix1
         rx_i_in                           :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
         rx_q_in                           :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -52,7 +54,9 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_dut IS
   COMPONENT ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
     PORT( clk                             :   IN    std_logic;
           clk_enable                      :   IN    std_logic;
+          clk200                          :   IN    std_logic;
           reset                           :   IN    std_logic;
+          reset200                        :   IN    std_logic;
           rx_i_in                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
           rx_q_in                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
           rx_v_in                         :   IN    std_logic;  -- ufix1
@@ -103,7 +107,9 @@ BEGIN
   u_ZynqBF_2t_ip_src_ZynqBF_2tx_fpga : ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
     PORT MAP( clk => clk,
               clk_enable => enb,
+              clk200 => clk200,
               reset => reset,
+              reset200 => reset200,
               rx_i_in => rx_i_in,  -- sfix16_En15
               rx_q_in => rx_q_in,  -- sfix16_En15
               rx_v_in => rx_v_in_sig,  -- ufix1

@@ -32,6 +32,8 @@ ENTITY ZynqBF_2t_ip IS
         baseband_rx0I_in                  :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
         baseband_rx0Q_in                  :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
         baseband_rx_valid_in              :   IN    std_logic;  -- ufix1
+        ipcore_clk200                     :   IN    std_logic;  -- 200 MHz FPGA clock for high-rate processing
+        ipcore_reset200n                  :   IN    std_logic;  -- 200 MHz FPGA clock reset
         AXI4_Lite_ACLK                    :   IN    std_logic;  -- ufix1
         AXI4_Lite_ARESETN                 :   IN    std_logic;  -- ufix1
         AXI4_Lite_AWADDR                  :   IN    std_logic_vector(15 DOWNTO 0);  -- ufix16
@@ -94,7 +96,9 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip IS
 
   COMPONENT ZynqBF_2t_ip_dut
     PORT( clk                             :   IN    std_logic;  -- ufix1
+          clk200                          :   IN    std_logic;  -- 200 MHz FPGA clock for high-rate processing
           reset                           :   IN    std_logic;
+          reset200                        :   IN    std_logic;  -- 200 MHz FPGA clock reset
           dut_enable                      :   IN    std_logic;  -- ufix1
           rx_i_in                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
           rx_q_in                         :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -127,6 +131,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip IS
 
   -- Signals
   SIGNAL reset                            : std_logic;
+  SIGNAL reset200                         : std_logic;  -- 200 MHz clock reset
   SIGNAL ip_timestamp                     : unsigned(31 DOWNTO 0);  -- ufix32
   SIGNAL reset_cm                         : std_logic;  -- ufix1
   SIGNAL baseband_rx0I_in_unsigned        : unsigned(15 DOWNTO 0);  -- ufix16
@@ -192,7 +197,9 @@ BEGIN
 
   u_ZynqBF_2t_ip_dut_inst : ZynqBF_2t_ip_dut
     PORT MAP( clk => IPCORE_CLK,  -- ufix1
+              clk200 => ipcore_clk200,
               reset => reset,
+              reset200 => reset200,
               dut_enable => write_axi_enable,  -- ufix1
               rx_i_in => std_logic_vector(rx_i_in_sig),  -- sfix16_En15
               rx_q_in => std_logic_vector(rx_q_in_sig),  -- sfix16_En15
@@ -228,6 +235,8 @@ BEGIN
   rx_q_in_sig <= signed(baseband_rx0Q_in_unsigned);
 
   reset <= reset_cm OR reset_internal;
+  
+  reset200 <= not ipcore_reset200n;
 
   rx_i_out_sig_signed <= signed(rx_i_out_sig);
 

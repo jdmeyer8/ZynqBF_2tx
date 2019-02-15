@@ -22,9 +22,12 @@ USE work.ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_pkg.ALL;
 
 ENTITY ZynqBF_2t_ip_src_channel_estimator IS
   PORT( clk                               :   IN    std_logic;
+        clk200                            :   IN    std_logic;
         reset                             :   IN    std_logic;
+        reset200                          :   IN    std_logic;
         enb_1_128_0                       :   IN    std_logic;
         enb                               :   IN    std_logic;
+        enb200                            :   IN    std_logic;
         enb_1_128_1                       :   IN    std_logic;
         enb_1_1_1                         :   IN    std_logic;
         rx_i                              :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -149,9 +152,12 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
 
   COMPONENT ZynqBF_2t_ip_src_in_fifo
     PORT( clk                             :   IN    std_logic;
+          clk200                          :   IN    std_logic;
           reset                           :   IN    std_logic;
+          reset200                        :   IN    std_logic;
           enb_1_128_0                     :   IN    std_logic;
           enb                             :   IN    std_logic;
+          enb200                          :   IN    std_logic;
           enb_1_128_1                     :   IN    std_logic;
           enb_1_1_1                       :   IN    std_logic;
           rxi_in                          :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -392,9 +398,12 @@ BEGIN
 
   u_in_fifo : ZynqBF_2t_ip_src_in_fifo
     PORT MAP( clk => clk,
+              clk200 => clk200,
               reset => reset,
+              reset200 => reset200,
               enb_1_128_0 => enb_1_128_0,
               enb => enb,
+              enb200 => enb200,
               enb_1_128_1 => enb_1_128_1,
               enb_1_1_1 => enb_1_1_1,
               rxi_in => rx_i,  -- sfix16_En15
