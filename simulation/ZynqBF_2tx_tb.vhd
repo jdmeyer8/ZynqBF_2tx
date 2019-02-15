@@ -43,7 +43,9 @@ architecture Behavioral of ZynqBF_2tx_tb is
 component ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
 port(
     clk:            in std_logic;
+    clk200:         in std_logic;
     reset:          in std_logic;
+    reset200:       in std_logic;
     clk_enable:     in std_logic;
     rx_i_in:        in std_logic_vector(15 downto 0);
     rx_q_in:        in std_logic_vector(15 downto 0);
@@ -67,8 +69,10 @@ port(
 );
 end component;
 
-signal clk:             std_logic := '1';   -- 420kHz*128 clock
+signal clk:             std_logic := '1';   -- 420 kHz clock
+signal clk200:          std_logic := '1';   -- 200 MHz clock
 signal reset:           std_logic := '1';
+signal reset200:        std_logic := '1';
 
 signal rx_i_in:         std_logic_vector(15 downto 0);
 signal rx_q_in:         std_logic_vector(15 downto 0);
@@ -97,14 +101,16 @@ signal probe_ch1r:      std_logic_vector(31 downto 0);
 
 begin
 
--- clock for 420kHz radio sample rate
--- 420kHz * 128 = 53.76 MHz
-clk <= not clk after 9.3006 ns;
+-- clocks for 400 kHz radio sample rate and 200 MHz processing rate
+-- 1/400 kHz = 2500 ns
+clk <= not clk after 1250 ns;
+clk200 <= not clk200 after 2.5 ns;
 
 -- reset for 200 ns
-reset <= '1', '0' after 200 ns;
+reset <= '1', '0' after 10 us;
+reset200 <= '1', '0' after 10 us;
 
-rx_in_proc: process(reset, ce_out_0)
+rx_in_proc: process(reset, clk)
     file file_rxi:      text;
     file file_rxq:      text;
     variable line_rxi:  line;
@@ -113,11 +119,11 @@ rx_in_proc: process(reset, ce_out_0)
     variable rxq:       std_logic_vector(15 downto 0);
 begin
     if reset = '1' then
-        file_open(file_rxi, "rx_test_i.txt", read_mode);
-        file_open(file_rxq, "rx_test_q.txt", read_mode);
-        rx_i_in <= x"0000";
-        rx_q_in <= x"0000";
-    elsif ce_out_0 = '1' then
+            file_open(file_rxi, "rx_test_i.txt", read_mode);
+            file_open(file_rxq, "rx_test_q.txt", read_mode);
+            rx_i_in <= x"0000";
+            rx_q_in <= x"0000";
+    elsif clk'event and clk = '1' then
         if (not endfile(file_rxi) and not endfile(file_rxq)) then
             readline(file_rxi, line_rxi);
             readline(file_rxq, line_rxq);
@@ -129,21 +135,18 @@ begin
             rx_i_in <= rx_i_in;
             rx_q_in <= rx_q_in;
         end if;
-    else
-        rx_i_in <= rx_i_in;
-        rx_q_in <= rx_q_in;
     end if;
 end process;
 
 rx_v_in <= '1';
 
-results_file_proc: process(reset,clk)
+results_file_proc: process(reset,clk200)
    file rfile:         text;
    variable rline:     line;
 begin
    if reset = '1' then
        file_open(rfile, "sim_results.txt", write_mode);
-   elsif rising_edge(clk) then
+   elsif rising_edge(clk200) then
        write(rline,conv_integer(probe_xcorr1),right,10);
        write(rline,string'(", "));
        write(rline,conv_integer(probe_xcorr2),right,10);
@@ -166,7 +169,9 @@ end process;
 dut: ZynqBF_2t_ip_src_ZynqBF_2tx_fpga
 port map(
     clk => clk,
+    clk200 => clk200,
     reset => reset,
+    reset200 => reset200,
     clk_enable => '1',
     rx_i_in => rx_i_in,
     rx_q_in => rx_q_in,

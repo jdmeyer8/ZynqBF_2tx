@@ -155,11 +155,8 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
           clk200                          :   IN    std_logic;
           reset                           :   IN    std_logic;
           reset200                        :   IN    std_logic;
-          enb_1_128_0                     :   IN    std_logic;
           enb                             :   IN    std_logic;
           enb200                          :   IN    std_logic;
-          enb_1_128_1                     :   IN    std_logic;
-          enb_1_1_1                       :   IN    std_logic;
           rxi_in                          :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
           rxq_in                          :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
           rxv_in                          :   IN    std_logic;
@@ -298,18 +295,18 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
 
 BEGIN
   u_goldSequences : ZynqBF_2t_ip_src_goldSequences
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               gs_addr => gs_addr,  -- ufix12
               gs1 => goldSequences_out1,  -- sfix16_En15 [2]
               gs2 => goldSequences_out2  -- sfix16_En15 [2]
               );
 
   u_gs_selector : ZynqBF_2t_ip_src_gs_selector
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               pd1 => peakdetect_ch1_out3,
               pd2 => peakdetect_ch2_out3,
               en => Logical_Operator6_out1,
@@ -317,9 +314,9 @@ BEGIN
               );
 
   u_peakdetect_ch1 : ZynqBF_2t_ip_src_peakdetect_ch1
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               rst => Logical_Operator3_out1,
               din => ram_dout,  -- sfix16_En15 [2]
               vin => ram_valid,
@@ -332,9 +329,9 @@ BEGIN
               );
 
   u_ram_rd_counter : ZynqBF_2t_ip_src_ram_rd_counter
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               addr1 => peakdetect_ch1_out1,  -- ufix15
               addr2 => peakdetect_ch2_out1,  -- ufix15
               gs_sel => gs_sel,  -- boolean [2]
@@ -349,9 +346,9 @@ BEGIN
               );
 
   u_ram_counter : ZynqBF_2t_ip_src_ram_counter
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               rst => Logical_Operator3_out1,
               ram_we => fifo_rxv,
               ram_re => ram_re,
@@ -361,9 +358,9 @@ BEGIN
               );
 
   u_peakdetect_ch2 : ZynqBF_2t_ip_src_peakdetect_ch2
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               rst => Logical_Operator3_out1,
               din => ram_dout,  -- sfix16_En15 [2]
               vin => ram_valid,
@@ -376,9 +373,9 @@ BEGIN
               );
 
   u_state_machine : ZynqBF_2t_ip_src_state_machine
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               peak_found => peak_found_d2,
               est_done => est_done,
               cf_done => in_fifo_out4,
@@ -401,11 +398,8 @@ BEGIN
               clk200 => clk200,
               reset => reset,
               reset200 => reset200,
-              enb_1_128_0 => enb_1_128_0,
               enb => enb,
               enb200 => enb200,
-              enb_1_128_1 => enb_1_128_1,
-              enb_1_1_1 => enb_1_1_1,
               rxi_in => rx_i,  -- sfix16_En15
               rxq_in => rx_q,  -- sfix16_En15
               rxv_in => rx_v,
@@ -418,9 +412,9 @@ BEGIN
               );
 
   u_rx_bram : ZynqBF_2t_ip_src_rx_bram
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               din_i => fifo_rxi,  -- sfix16_En15
               din_q => fifo_rxq,  -- sfix16_En15
               we => fifo_rxv,
@@ -433,9 +427,9 @@ BEGIN
               );
 
   u_ch_est : ZynqBF_2t_ip_src_ch_est
-    PORT MAP( clk => clk,
-              reset => reset,
-              enb => enb,
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
               est_rst => ch_est_rst,
               rx => ram_dout,  -- sfix16_En15 [2]
               gs1 => goldSequences_out1,  -- sfix16_En15 [2]

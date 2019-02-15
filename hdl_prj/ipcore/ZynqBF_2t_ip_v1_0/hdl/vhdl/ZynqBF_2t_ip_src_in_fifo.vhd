@@ -22,6 +22,9 @@ USE IEEE.numeric_std.ALL;
 LIBRARY UNISIM;
 use UNISIM.vcomponents.all;
 
+LIBRARY UNIMACRO;
+use UNIMACRO.vcomponents.all;
+
 ENTITY ZynqBF_2t_ip_src_in_fifo IS
   PORT( clk                               :   IN    std_logic;
         clk200                            :   IN    std_logic;
@@ -46,7 +49,6 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_in_fifo IS
 
   -- Component Declarations
 
-
   -- Signals
   
   signal rst_fifo                         : std_logic;
@@ -59,15 +61,13 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_in_fifo IS
   signal empty_n                          : std_logic;
   
   signal pd_en_i                          : std_logic;  -- pd_en after clock-crossing
-  signal pd_en_meta_reg                   : std_logic(2 downto 0);
+  signal pd_en_meta_reg                   : std_logic_vector(2 downto 0);
   
   signal rden_dreg                        : std_logic_vector(1 downto 0); -- read enable delay register
   
-  
-
 BEGIN
 
-  rst_fifo <= reset200 or cf_en;
+  rst_fifo <= cf_en;
   
   u_rx_i_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
@@ -79,10 +79,10 @@ BEGIN
     full => open,
     rdclk => clk200,
     rden => rden,
-    do => rx_i_fifo_out,
+    do => rxi_out,
     empty => empty_rxi,
-    almost_empty => open,
-    almost_full => open,
+    almostempty => open,
+    almostfull => open,
     wrerr => open,
     rderr => open,
     wrcount => open,
@@ -92,17 +92,17 @@ BEGIN
   u_rx_q_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
   port map(
-    rst => reset200,
+    rst => rst_fifo,
     wrclk => clk,
     wren => wren,
     di => rxi_in,
     full => open,
     rdclk => clk200,
     rden => rden,
-    do => rx_i_fifo_out,
-    empty => empty_rxi,
-    almost_empty => open,
-    almost_full => open,
+    do => rxq_out,
+    empty => empty_rxq,
+    almostempty => open,
+    almostfull => open,
     wrerr => open,
     rderr => open,
     wrcount => open,
@@ -115,7 +115,7 @@ BEGIN
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pd_en_meta_reg <= "000";
+        pd_en_meta_reg <= "111";
       elsif enb = '1' then
         pd_en_meta_reg <= pd_en_meta_reg(1 downto 0) & pd_en;
       end if;
@@ -124,28 +124,39 @@ BEGIN
   
   pd_en_i <= pd_en_meta_reg(2);
   
-  wren <= pd_en_i & rxv_in;
+  wren <= pd_en_i and rxv_in;
   
   
   -- Read side signals
-  empty_i <= empty_rxi & empty_rxq;
+  empty_i <= empty_rxi and empty_rxq;
   empty_n <= not empty_i;
   
-  rden <= pd_en and empty_n;
   empty <= empty_i;
   
-  rd_en_delay_process : process(clk200)
+  rden <= pd_en and empty_n;
+  --rden_process: process(clk200)
+  --begin
+  --  if clk200'event and clk200 = '1' then
+  --    if reset200 = '1' then
+  --      rden <= '0';
+  --    elsif enb200 = '1' then
+  --      rden <= pd_en and empty_n;
+  --    end if;
+  --  end if;
+  --end process;
+  
+  rden_delay_process : process(clk200)
   begin
     if clk200'event and clk200 = '1' then
       if reset200 = '1' then
-        rd_en_dreg <= "00";
+        rden_dreg <= "00";
       elsif enb200 = '1' then
-        rd_en_dreg <= rd_en_dreg(0) & rd_en;
+        rden_dreg <= rden_dreg(0) & rden;
       end if;
     end if;
   end process;
   
-  rxv_out <= rd_en_dreg(1);
+  rxv_out <= rden_dreg(1);
   
 
 END rtl;

@@ -84,16 +84,16 @@ END ZynqBF_2t_ip_src_ZynqBF_2tx_fpga;
 ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
 
   -- Component Declarations
-  COMPONENT ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
-    PORT( clk                             :   IN    std_logic;
-          reset                           :   IN    std_logic;
-          clk_enable                      :   IN    std_logic;
-          enb                             :   OUT   std_logic;
-          enb_1_1_1                       :   OUT   std_logic;
-          enb_1_128_0                     :   OUT   std_logic;
-          enb_1_128_1                     :   OUT   std_logic
-          );
-  END COMPONENT;
+  --COMPONENT ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
+  --  PORT( clk                             :   IN    std_logic;
+  --        reset                           :   IN    std_logic;
+  --        clk_enable                      :   IN    std_logic;
+  --        enb                             :   OUT   std_logic;
+  --        enb_1_1_1                       :   OUT   std_logic;
+  --        enb_1_128_0                     :   OUT   std_logic;
+  --        enb_1_128_1                     :   OUT   std_logic
+  --        );
+  --END COMPONENT;
 
   COMPONENT ZynqBF_2t_ip_src_channel_estimator
     PORT( clk                             :   IN    std_logic;
@@ -102,6 +102,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
           reset200                        :   IN    std_logic;
           enb_1_128_0                     :   IN    std_logic;
           enb                             :   IN    std_logic;
+          enb200                          :   IN    std_logic;
           enb_1_128_1                     :   IN    std_logic;
           enb_1_1_1                       :   IN    std_logic;
           rx_i                            :   IN    std_logic_vector(15 DOWNTO 0);  -- sfix16_En15
@@ -122,8 +123,8 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
   END COMPONENT;
 
   -- Component Configuration Statements
-  FOR ALL : ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
-    USE ENTITY work.ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc(rtl);
+  -- FOR ALL : ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc
+  --   USE ENTITY work.ZynqBF_2t_ip_src_ZynqBF_2tx_fpga_tc(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_channel_estimator
     USE ENTITY work.ZynqBF_2t_ip_src_channel_estimator(rtl);
@@ -175,6 +176,7 @@ BEGIN
   --            enb_1_128_0 => enb_1_128_0,
   --            enb_1_128_1 => enb_1_128_1
   --            );
+  enb <= clk_enable;
 
   u_channel_estimator : ZynqBF_2t_ip_src_channel_estimator
     PORT MAP( clk => clk,
