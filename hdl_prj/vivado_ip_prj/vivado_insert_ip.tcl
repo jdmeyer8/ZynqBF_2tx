@@ -24,8 +24,8 @@ connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins util_ad9361_adc_fifo/d
 connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins bypass_rx/dut_valid_in]] [get_bd_pins $HDLCODERIPINST/dma_rx_valid_out] [get_bd_pins bypass_rx/dut_valid_in]
 connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins util_mw_clkconstr/clk_out]] [get_bd_pins $HDLCODERIPINST/IPCORE_CLK] [get_bd_pins util_mw_clkconstr/clk_out]
 connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins util_ad9361_divclk_reset/peripheral_aresetn]] [get_bd_pins $HDLCODERIPINST/IPCORE_RESETN] [get_bd_pins util_ad9361_divclk_reset/peripheral_aresetn]
-connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins sys_ps7/FCLK_CLK2]] [get_bd_pins $HDLCODERIPINST/ipcore_clk200] [get_bd_pins sys_ps7/FCLK_CLK2]
-connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins sys_ps7/FCLK_RESET2_N]] [get_bd_pins $HDLCODERIPINST/ipcore_reset200n] [get_bd_pins sys_ps7/FCLK_RESET2_N]
+connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins sys_ps7/FCLK_CLK0]] [get_bd_pins $HDLCODERIPINST/ipcore_clk200] [get_bd_pins sys_ps7/FCLK_CLK0]
+connect_bd_net -net [get_bd_nets -of_objects [get_bd_pins sys_ps7/FCLK_RESET0_N]] [get_bd_pins $HDLCODERIPINST/ipcore_reset200n] [get_bd_pins sys_ps7/FCLK_RESET0_N]
 add_files -norecurse {mw/projects/ad9361/board/fmcomms2/zc706/system_top.v}
 update_compile_order -fileset sources_1
 validate_bd_design
