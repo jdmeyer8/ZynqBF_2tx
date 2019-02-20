@@ -25,8 +25,8 @@ ENTITY ZynqBF_2t_ip_src_goldSeq1 IS
         reset                             :   IN    std_logic;
         enb                               :   IN    std_logic;
         addr                              :   IN    std_logic_vector(5 DOWNTO 0);  -- ufix6
-        gs1_i                             :   OUT   vector_of_std_logic_vector16(0 TO 63);  -- sfix16_En15 [64]
-        gs1_q                             :   OUT   vector_of_std_logic_vector16(0 TO 63)  -- sfix16_En15 [64]
+        gs_i                             :   OUT   vector_of_std_logic_vector16(0 TO 63);  -- sfix16_En15 [64]
+        gs_q                             :   OUT   vector_of_std_logic_vector16(0 TO 63)  -- sfix16_En15 [64]
         );
 END ZynqBF_2t_ip_src_goldSeq1;
 
@@ -34,7 +34,7 @@ END ZynqBF_2t_ip_src_goldSeq1;
 ARCHITECTURE rtl OF ZynqBF_2t_ip_src_goldSeq1 IS
 
   -- Constants
-  constant lut_gs1i_data_1 : vector_of_std_logic_vector16(0 to 63) := 
+  constant lut_gs_1 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111101110101",
    "0010001101010010",
    "1101110110010101",
@@ -102,7 +102,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_goldSeq1 IS
 
 
 
-constant lut_gs1i_data_2 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_2 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111110001001",
    "0001100101111000",
    "1101001001100001",
@@ -170,7 +170,7 @@ constant lut_gs1i_data_2 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_3 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_3 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111110111101",
    "0000110110101110",
    "1100101010111000",
@@ -238,7 +238,7 @@ constant lut_gs1i_data_3 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_4 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_4 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000000001010",
    "0000000011111001",
    "1100011001111100",
@@ -306,7 +306,7 @@ constant lut_gs1i_data_4 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_5 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_5 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000001100100",
    "1111010010010001",
    "1100010111010001",
@@ -374,7 +374,7 @@ constant lut_gs1i_data_5 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_6 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_6 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000010111000",
    "1110100110111001",
    "1100100010010110",
@@ -442,7 +442,7 @@ constant lut_gs1i_data_6 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_7 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_7 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000011110011",
    "1110000110010111",
    "1100111001110010",
@@ -510,7 +510,7 @@ constant lut_gs1i_data_7 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_8 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_8 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000100000100",
    "1101110100010000",
    "1101011011011110",
@@ -578,7 +578,7 @@ constant lut_gs1i_data_8 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_9 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_9 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000001010101",
    "1101110100101101",
    "1110000110111111",
@@ -646,7 +646,7 @@ constant lut_gs1i_data_9 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_10 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_10 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000000001111",
    "1110000011010000",
    "1110110010110010",
@@ -714,7 +714,7 @@ constant lut_gs1i_data_10 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_11 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_11 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111110111101",
    "1110100000001001",
    "1111100010010000",
@@ -782,7 +782,7 @@ constant lut_gs1i_data_11 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_12 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_12 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111101101100",
    "1111001000000000",
    "0000010000000001",
@@ -850,7 +850,7 @@ constant lut_gs1i_data_12 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_13 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_13 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111100101101",
    "1111110110010010",
    "0000111001000001",
@@ -918,7 +918,7 @@ constant lut_gs1i_data_13 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_14 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_14 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111100001101",
    "0000100101101110",
    "0001011010100001",
@@ -986,7 +986,7 @@ constant lut_gs1i_data_14 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_15 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_15 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111100010110",
    "0001010000111101",
    "0001110010010100",
@@ -1054,7 +1054,7 @@ constant lut_gs1i_data_15 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_16 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_16 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111101001100",
    "0001110011001100",
    "0001111110110111",
@@ -1122,7 +1122,7 @@ constant lut_gs1i_data_16 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_17 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_17 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111100100000",
    "0010000110011110",
    "0001111101001101",
@@ -1190,7 +1190,7 @@ constant lut_gs1i_data_17 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_18 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_18 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111110110000",
    "0010001111000011",
    "0001110100000101",
@@ -1258,7 +1258,7 @@ constant lut_gs1i_data_18 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_19 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_19 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000001101011",
    "0010000101101000",
    "0001011101111110",
@@ -1326,7 +1326,7 @@ constant lut_gs1i_data_19 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_20 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_20 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000100110100",
    "0001101101010000",
    "0000111110111101",
@@ -1394,7 +1394,7 @@ constant lut_gs1i_data_20 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_21 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_21 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000111100101",
    "0001001000001010",
    "0000011001100100",
@@ -1462,7 +1462,7 @@ constant lut_gs1i_data_21 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_22 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_22 : vector_of_std_logic_vector16(0 to 63) := 
    "0000001001010111",
    "0000011001101000",
    "1111110000110001",
@@ -1530,7 +1530,7 @@ constant lut_gs1i_data_22 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_23 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_23 : vector_of_std_logic_vector16(0 to 63) := 
    "0000001001101010",
    "1111100101100110",
    "1111000111101001",
@@ -1598,7 +1598,7 @@ constant lut_gs1i_data_23 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_24 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_24 : vector_of_std_logic_vector16(0 to 63) := 
    "0000001000000110",
    "1110110000010010",
    "1110100001001010",
@@ -1666,7 +1666,7 @@ constant lut_gs1i_data_24 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_25 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_25 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000010011110",
    "1101111111111111",
    "1101111101101110",
@@ -1734,7 +1734,7 @@ constant lut_gs1i_data_25 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_26 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_26 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111101101100",
    "1101010101110110",
    "1101100001111110",
@@ -1802,7 +1802,7 @@ constant lut_gs1i_data_26 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_27 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_27 : vector_of_std_logic_vector16(0 to 63) := 
    "1111111000011100",
    "1100110010011110",
    "1101010001101111",
@@ -1870,7 +1870,7 @@ constant lut_gs1i_data_27 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_28 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_28 : vector_of_std_logic_vector16(0 to 63) := 
    "1111110011100011",
    "1100011010110001",
    "1101001010111101",
@@ -1938,7 +1938,7 @@ constant lut_gs1i_data_28 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_29 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_29 : vector_of_std_logic_vector16(0 to 63) := 
    "1111101111111011",
    "1100010000101100",
    "1101001100110100",
@@ -2006,7 +2006,7 @@ constant lut_gs1i_data_29 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_30 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_30 : vector_of_std_logic_vector16(0 to 63) := 
    "1111101110100000",
    "1100010101010101",
    "1101010101110000",
@@ -2074,7 +2074,7 @@ constant lut_gs1i_data_30 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_31 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_31 : vector_of_std_logic_vector16(0 to 63) := 
    "1111110000000011",
    "1100101000110001",
    "1101100011100101",
@@ -2142,7 +2142,7 @@ constant lut_gs1i_data_31 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_32 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_32 : vector_of_std_logic_vector16(0 to 63) := 
    "1111110101000111",
    "1101001001111111",
    "1101110011111001",
@@ -2210,7 +2210,7 @@ constant lut_gs1i_data_32 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_33 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_33 : vector_of_std_logic_vector16(0 to 63) := 
    "0000000000000101",
    "1101111000111111",
    "1110000010000110",
@@ -2278,7 +2278,7 @@ constant lut_gs1i_data_33 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_34 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_34 : vector_of_std_logic_vector16(0 to 63) := 
    "0000001100001010",
    "1110101111110100",
    "1110010010101010",
@@ -2346,7 +2346,7 @@ constant lut_gs1i_data_34 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_35 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_35 : vector_of_std_logic_vector16(0 to 63) := 
    "0000011010110110",
    "1111100111101101",
    "1110011101011010",
@@ -2414,7 +2414,7 @@ constant lut_gs1i_data_35 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_36 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_36 : vector_of_std_logic_vector16(0 to 63) := 
    "0000101011011011",
    "0000011110010000",
    "1110100011011110",
@@ -2482,7 +2482,7 @@ constant lut_gs1i_data_36 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_37 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_37 : vector_of_std_logic_vector16(0 to 63) := 
    "0000111101000101",
    "0001001110110000",
    "1110100100011110",
@@ -2550,7 +2550,7 @@ constant lut_gs1i_data_37 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_38 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_38 : vector_of_std_logic_vector16(0 to 63) := 
    "0001001110111101",
    "0001110100110110",
    "1110100000100000",
@@ -2618,7 +2618,7 @@ constant lut_gs1i_data_38 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_39 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_39 : vector_of_std_logic_vector16(0 to 63) := 
    "0001100000001110",
    "0010001100111100",
    "1110011000001101",
@@ -2686,7 +2686,7 @@ constant lut_gs1i_data_39 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_40 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_40 : vector_of_std_logic_vector16(0 to 63) := 
    "0001110000000110",
    "0010010100101011",
    "1110001100100101",
@@ -2754,7 +2754,7 @@ constant lut_gs1i_data_40 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_41 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_41 : vector_of_std_logic_vector16(0 to 63) := 
    "0001111011110000",
    "0010001001001000",
    "1110000001001000",
@@ -2822,7 +2822,7 @@ constant lut_gs1i_data_41 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_42 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_42 : vector_of_std_logic_vector16(0 to 63) := 
    "0010000111010110",
    "0001110001111110",
    "1101110000101110",
@@ -2890,7 +2890,7 @@ constant lut_gs1i_data_42 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_43 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_43 : vector_of_std_logic_vector16(0 to 63) := 
    "0010010000100000",
    "0001001011100001",
    "1101100011100010",
@@ -2958,7 +2958,7 @@ constant lut_gs1i_data_43 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_44 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_44 : vector_of_std_logic_vector16(0 to 63) := 
    "0010010110111001",
    "0000011100011011",
    "1101011000111110",
@@ -3026,7 +3026,7 @@ constant lut_gs1i_data_44 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_45 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_45 : vector_of_std_logic_vector16(0 to 63) := 
    "0010011010001101",
    "1111101010010001",
    "1101010010100110",
@@ -3094,7 +3094,7 @@ constant lut_gs1i_data_45 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_46 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_46 : vector_of_std_logic_vector16(0 to 63) := 
    "0010011010010001",
    "1110111011000010",
    "1101010001110111",
@@ -3162,7 +3162,7 @@ constant lut_gs1i_data_46 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_47 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_47 : vector_of_std_logic_vector16(0 to 63) := 
    "0010010111000001",
    "1110010100011011",
    "1101010111111100",
@@ -3230,7 +3230,7 @@ constant lut_gs1i_data_47 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_48 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_48 : vector_of_std_logic_vector16(0 to 63) := 
    "0010010000101101",
    "1101111011001100",
    "1101100101101001",
@@ -3298,7 +3298,7 @@ constant lut_gs1i_data_48 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_49 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_49 : vector_of_std_logic_vector16(0 to 63) := 
    "0010001010000010",
    "1101110100100111",
    "1101111000111111",
@@ -3366,7 +3366,7 @@ constant lut_gs1i_data_49 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_50 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_50 : vector_of_std_logic_vector16(0 to 63) := 
    "0001111111010000",
    "1101111011001100",
    "1110010100001010",
@@ -3434,7 +3434,7 @@ constant lut_gs1i_data_50 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_51 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_51 : vector_of_std_logic_vector16(0 to 63) := 
    "0001110011100100",
    "1110010100011011",
    "1110111000100010",
@@ -3502,7 +3502,7 @@ constant lut_gs1i_data_51 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_52 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_52 : vector_of_std_logic_vector16(0 to 63) := 
    "0001101000100011",
    "1110111011000010",
    "1111100001101110",
@@ -3570,7 +3570,7 @@ constant lut_gs1i_data_52 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_53 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_53 : vector_of_std_logic_vector16(0 to 63) := 
    "0001011111111111",
    "1111101010010001",
    "0000001100110110",
@@ -3638,7 +3638,7 @@ constant lut_gs1i_data_53 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_54 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_54 : vector_of_std_logic_vector16(0 to 63) := 
    "0001011011100101",
    "0000011100011011",
    "0000110110101001",
@@ -3706,7 +3706,7 @@ constant lut_gs1i_data_54 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_55 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_55 : vector_of_std_logic_vector16(0 to 63) := 
    "0001011100101011",
    "0001001011100001",
    "0001011011111000",
@@ -3774,7 +3774,7 @@ constant lut_gs1i_data_55 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_56 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_56 : vector_of_std_logic_vector16(0 to 63) := 
    "0001100011111101",
    "0001110001111110",
    "0001111001110011",
@@ -3842,7 +3842,7 @@ constant lut_gs1i_data_56 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_57 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_57 : vector_of_std_logic_vector16(0 to 63) := 
    "0001110011011010",
    "0010001101011110",
    "0010010000101100",
@@ -3910,7 +3910,7 @@ constant lut_gs1i_data_57 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_58 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_58 : vector_of_std_logic_vector16(0 to 63) := 
    "0010000101000111",
    "0010011000011010",
    "0010011101001000",
@@ -3978,7 +3978,7 @@ constant lut_gs1i_data_58 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_59 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_59 : vector_of_std_logic_vector16(0 to 63) := 
    "0010011000110001",
    "0010001111000010",
    "0010011101000111",
@@ -4046,7 +4046,7 @@ constant lut_gs1i_data_59 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_60 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_60 : vector_of_std_logic_vector16(0 to 63) := 
    "0010101011011001",
    "0001110100100001",
    "0010010100111011",
@@ -4114,7 +4114,7 @@ constant lut_gs1i_data_60 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_61 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_61 : vector_of_std_logic_vector16(0 to 63) := 
    "0010111001100110",
    "0001001011101000",
    "0010000111101110",
@@ -4182,7 +4182,7 @@ constant lut_gs1i_data_61 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_62 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_62 : vector_of_std_logic_vector16(0 to 63) := 
    "0011000000000110",
    "0000011000011111",
    "0001111001010011",
@@ -4250,7 +4250,7 @@ constant lut_gs1i_data_62 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_63 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_63 : vector_of_std_logic_vector16(0 to 63) := 
    "0010111100001000",
    "1111100000000110",
    "0001101101011101",
@@ -4318,7 +4318,7 @@ constant lut_gs1i_data_63 : vector_of_std_logic_vector16(0 to 63) :=
 
 
 
-constant lut_gs1i_data_64 : vector_of_std_logic_vector16(0 to 63) := 
+constant lut_gs_64 : vector_of_std_logic_vector16(0 to 63) := 
    "0010101100000001",
    "1110100111101011",
    "0001100111010100",
@@ -4385,246 +4385,150 @@ constant lut_gs1i_data_64 : vector_of_std_logic_vector16(0 to 63) :=
    "0010010010111011");
 
   -- Signals
-  SIGNAL addr_unsigned                    : unsigned(5 DOWNTO 0);  -- ufix6
   SIGNAL addr_i                           : integer range 0 to 63;
-  SIGNAL Vector_Concatenate_out1          : vector_of_std_logic_vector16(0 TO 63);  -- sfix16_En15 [64]
-  SIGNAL Delay_out1                       : vector_of_std_logic_vector16(0 TO 63);  -- sfix16_En15 [64]
-  SIGNAL lut_gs1q_61_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_60_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_59_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_58_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_57_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_55_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_54_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_53_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_52_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_51_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_50_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_49_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_48_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_47_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_46_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_44_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_43_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_42_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_41_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_40_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_39_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_38_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_37_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_36_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_35_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_33_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_32_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_31_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_30_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_29_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_28_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_27_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_26_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_25_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_24_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_22_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_21_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_20_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_19_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_18_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_17_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_16_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_15_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_14_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_13_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_11_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_10_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_9_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_8_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_7_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_6_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_5_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_4_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_3_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_2_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_64_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_63_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_62_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_56_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_45_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_34_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_23_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_12_out1                 : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL lut_gs1q_1_out1                  : signed(15 DOWNTO 0);  -- sfix16_En15
-  SIGNAL Vector_Concatenate1_out1         : vector_of_signed16(0 TO 63);  -- sfix16_En15 [64]
-  SIGNAL Delay1_out1                      : vector_of_signed16(0 TO 63);  -- sfix16_En15 [64]
-  signal Delay2:                            vector_of_signed16(0 to 63);
-  signal Delay3:                            vector_of_signed16(0 to 63);
 
 BEGIN
   addr_i <= to_integer(unsigned(addr));
 
-  Vector_Concatenate_out1(0) <= lut_gs1i_data_64(addr_i);
-  Vector_Concatenate_out1(1) <= lut_gs1i_data_63(addr_i);
-  Vector_Concatenate_out1(2) <= lut_gs1i_data_62(addr_i);
-  Vector_Concatenate_out1(3) <= lut_gs1i_data_61(addr_i);
-  Vector_Concatenate_out1(4) <= lut_gs1i_data_60(addr_i);
-  Vector_Concatenate_out1(5) <= lut_gs1i_data_59(addr_i);
-  Vector_Concatenate_out1(6) <= lut_gs1i_data_58(addr_i);
-  Vector_Concatenate_out1(7) <= lut_gs1i_data_57(addr_i);
-  Vector_Concatenate_out1(8) <= lut_gs1i_data_56(addr_i);
-  Vector_Concatenate_out1(9) <= lut_gs1i_data_55(addr_i);
-  Vector_Concatenate_out1(10) <= lut_gs1i_data_54(addr_i);
-  Vector_Concatenate_out1(11) <= lut_gs1i_data_53(addr_i);
-  Vector_Concatenate_out1(12) <= lut_gs1i_data_52(addr_i);
-  Vector_Concatenate_out1(13) <= lut_gs1i_data_51(addr_i);
-  Vector_Concatenate_out1(14) <= lut_gs1i_data_50(addr_i);
-  Vector_Concatenate_out1(15) <= lut_gs1i_data_49(addr_i);
-  Vector_Concatenate_out1(16) <= lut_gs1i_data_48(addr_i);
-  Vector_Concatenate_out1(17) <= lut_gs1i_data_47(addr_i);
-  Vector_Concatenate_out1(18) <= lut_gs1i_data_46(addr_i);
-  Vector_Concatenate_out1(19) <= lut_gs1i_data_45(addr_i);
-  Vector_Concatenate_out1(20) <= lut_gs1i_data_44(addr_i);
-  Vector_Concatenate_out1(21) <= lut_gs1i_data_43(addr_i);
-  Vector_Concatenate_out1(22) <= lut_gs1i_data_42(addr_i);
-  Vector_Concatenate_out1(23) <= lut_gs1i_data_41(addr_i);
-  Vector_Concatenate_out1(24) <= lut_gs1i_data_40(addr_i);
-  Vector_Concatenate_out1(25) <= lut_gs1i_data_39(addr_i);
-  Vector_Concatenate_out1(26) <= lut_gs1i_data_38(addr_i);
-  Vector_Concatenate_out1(27) <= lut_gs1i_data_37(addr_i);
-  Vector_Concatenate_out1(28) <= lut_gs1i_data_36(addr_i);
-  Vector_Concatenate_out1(29) <= lut_gs1i_data_35(addr_i);
-  Vector_Concatenate_out1(30) <= lut_gs1i_data_34(addr_i);
-  Vector_Concatenate_out1(31) <= lut_gs1i_data_33(addr_i);
-  Vector_Concatenate_out1(32) <= lut_gs1i_data_32(addr_i);
-  Vector_Concatenate_out1(33) <= lut_gs1i_data_31(addr_i);
-  Vector_Concatenate_out1(34) <= lut_gs1i_data_30(addr_i);
-  Vector_Concatenate_out1(35) <= lut_gs1i_data_29(addr_i);
-  Vector_Concatenate_out1(36) <= lut_gs1i_data_28(addr_i);
-  Vector_Concatenate_out1(37) <= lut_gs1i_data_27(addr_i);
-  Vector_Concatenate_out1(38) <= lut_gs1i_data_26(addr_i);
-  Vector_Concatenate_out1(39) <= lut_gs1i_data_25(addr_i);
-  Vector_Concatenate_out1(40) <= lut_gs1i_data_24(addr_i);
-  Vector_Concatenate_out1(41) <= lut_gs1i_data_23(addr_i);
-  Vector_Concatenate_out1(42) <= lut_gs1i_data_22(addr_i);
-  Vector_Concatenate_out1(43) <= lut_gs1i_data_21(addr_i);
-  Vector_Concatenate_out1(44) <= lut_gs1i_data_20(addr_i);
-  Vector_Concatenate_out1(45) <= lut_gs1i_data_19(addr_i);
-  Vector_Concatenate_out1(46) <= lut_gs1i_data_18(addr_i);
-  Vector_Concatenate_out1(47) <= lut_gs1i_data_17(addr_i);
-  Vector_Concatenate_out1(48) <= lut_gs1i_data_16(addr_i);
-  Vector_Concatenate_out1(49) <= lut_gs1i_data_15(addr_i);
-  Vector_Concatenate_out1(50) <= lut_gs1i_data_14(addr_i);
-  Vector_Concatenate_out1(51) <= lut_gs1i_data_13(addr_i);
-  Vector_Concatenate_out1(52) <= lut_gs1i_data_12(addr_i);
-  Vector_Concatenate_out1(53) <= lut_gs1i_data_11(addr_i);
-  Vector_Concatenate_out1(54) <= lut_gs1i_data_10(addr_i);
-  Vector_Concatenate_out1(55) <= lut_gs1i_data_9(addr_i);
-  Vector_Concatenate_out1(56) <= lut_gs1i_data_8(addr_i);
-  Vector_Concatenate_out1(57) <= lut_gs1i_data_7(addr_i);
-  Vector_Concatenate_out1(58) <= lut_gs1i_data_6(addr_i);
-  Vector_Concatenate_out1(59) <= lut_gs1i_data_5(addr_i);
-  Vector_Concatenate_out1(60) <= lut_gs1i_data_4(addr_i);
-  Vector_Concatenate_out1(61) <= lut_gs1i_data_3(addr_i);
-  Vector_Concatenate_out1(62) <= lut_gs1i_data_2(addr_i);
-  Vector_Concatenate_out1(63) <= lut_gs1i_data_1(addr_i);
-
-  Delay_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay_out1 <= (OTHERS => to_signed(16#0000#, 16));
-        Delay2 <= (OTHERS => to_signed(16#0000#, 16));
-      ELSIF enb = '1' THEN
-        Delay_out1 <= Vector_Concatenate_out1;
-        Delay2 <= Delay_out1;
-      END IF;
-    END IF;
-  END PROCESS Delay_process;
-  
-  gs1_i <= Delay2;
-
-
-  Vector_Concatenate_out1(0) <= lut_gs1i_data_64(addr_i);
-  Vector_Concatenate_out1(1) <= lut_gs1i_data_63(addr_i);
-  Vector_Concatenate_out1(2) <= lut_gs1i_data_62(addr_i);
-  Vector_Concatenate_out1(3) <= lut_gs1i_data_61(addr_i);
-  Vector_Concatenate_out1(4) <= lut_gs1i_data_60(addr_i);
-  Vector_Concatenate_out1(5) <= lut_gs1i_data_59(addr_i);
-  Vector_Concatenate_out1(6) <= lut_gs1i_data_58(addr_i);
-  Vector_Concatenate_out1(7) <= lut_gs1i_data_57(addr_i);
-  Vector_Concatenate_out1(8) <= lut_gs1i_data_56(addr_i);
-  Vector_Concatenate_out1(9) <= lut_gs1i_data_55(addr_i);
-  Vector_Concatenate_out1(10) <= lut_gs1i_data_54(addr_i);
-  Vector_Concatenate_out1(11) <= lut_gs1i_data_53(addr_i);
-  Vector_Concatenate_out1(12) <= lut_gs1i_data_52(addr_i);
-  Vector_Concatenate_out1(13) <= lut_gs1i_data_51(addr_i);
-  Vector_Concatenate_out1(14) <= lut_gs1i_data_50(addr_i);
-  Vector_Concatenate_out1(15) <= lut_gs1i_data_49(addr_i);
-  Vector_Concatenate_out1(16) <= lut_gs1i_data_48(addr_i);
-  Vector_Concatenate_out1(17) <= lut_gs1i_data_47(addr_i);
-  Vector_Concatenate_out1(18) <= lut_gs1i_data_46(addr_i);
-  Vector_Concatenate_out1(19) <= lut_gs1i_data_45(addr_i);
-  Vector_Concatenate_out1(20) <= lut_gs1i_data_44(addr_i);
-  Vector_Concatenate_out1(21) <= lut_gs1i_data_43(addr_i);
-  Vector_Concatenate_out1(22) <= lut_gs1i_data_42(addr_i);
-  Vector_Concatenate_out1(23) <= lut_gs1i_data_41(addr_i);
-  Vector_Concatenate_out1(24) <= lut_gs1i_data_40(addr_i);
-  Vector_Concatenate_out1(25) <= lut_gs1i_data_39(addr_i);
-  Vector_Concatenate_out1(26) <= lut_gs1i_data_38(addr_i);
-  Vector_Concatenate_out1(27) <= lut_gs1i_data_37(addr_i);
-  Vector_Concatenate_out1(28) <= lut_gs1i_data_36(addr_i);
-  Vector_Concatenate_out1(29) <= lut_gs1i_data_35(addr_i);
-  Vector_Concatenate_out1(30) <= lut_gs1i_data_34(addr_i);
-  Vector_Concatenate_out1(31) <= lut_gs1i_data_33(addr_i);
-  Vector_Concatenate_out1(32) <= lut_gs1i_data_32(addr_i);
-  Vector_Concatenate_out1(33) <= lut_gs1i_data_31(addr_i);
-  Vector_Concatenate_out1(34) <= lut_gs1i_data_30(addr_i);
-  Vector_Concatenate_out1(35) <= lut_gs1i_data_29(addr_i);
-  Vector_Concatenate_out1(36) <= lut_gs1i_data_28(addr_i);
-  Vector_Concatenate_out1(37) <= lut_gs1i_data_27(addr_i);
-  Vector_Concatenate_out1(38) <= lut_gs1i_data_26(addr_i);
-  Vector_Concatenate_out1(39) <= lut_gs1i_data_25(addr_i);
-  Vector_Concatenate_out1(40) <= lut_gs1i_data_24(addr_i);
-  Vector_Concatenate_out1(41) <= lut_gs1i_data_23(addr_i);
-  Vector_Concatenate_out1(42) <= lut_gs1i_data_22(addr_i);
-  Vector_Concatenate_out1(43) <= lut_gs1i_data_21(addr_i);
-  Vector_Concatenate_out1(44) <= lut_gs1i_data_20(addr_i);
-  Vector_Concatenate_out1(45) <= lut_gs1i_data_19(addr_i);
-  Vector_Concatenate_out1(46) <= lut_gs1i_data_18(addr_i);
-  Vector_Concatenate_out1(47) <= lut_gs1i_data_17(addr_i);
-  Vector_Concatenate_out1(48) <= lut_gs1i_data_16(addr_i);
-  Vector_Concatenate_out1(49) <= lut_gs1i_data_15(addr_i);
-  Vector_Concatenate_out1(50) <= lut_gs1i_data_14(addr_i);
-  Vector_Concatenate_out1(51) <= lut_gs1i_data_13(addr_i);
-  Vector_Concatenate_out1(52) <= lut_gs1i_data_12(addr_i);
-  Vector_Concatenate_out1(53) <= lut_gs1i_data_11(addr_i);
-  Vector_Concatenate_out1(54) <= lut_gs1i_data_10(addr_i);
-  Vector_Concatenate_out1(55) <= lut_gs1i_data_9(addr_i);
-  Vector_Concatenate_out1(56) <= lut_gs1i_data_8(addr_i);
-  Vector_Concatenate_out1(57) <= lut_gs1i_data_7(addr_i);
-  Vector_Concatenate_out1(58) <= lut_gs1i_data_6(addr_i);
-  Vector_Concatenate_out1(59) <= lut_gs1i_data_5(addr_i);
-  Vector_Concatenate_out1(60) <= lut_gs1i_data_4(addr_i);
-  Vector_Concatenate_out1(61) <= lut_gs1i_data_3(addr_i);
-  Vector_Concatenate_out1(62) <= lut_gs1i_data_2(addr_i);
-  Vector_Concatenate_out1(63) <= lut_gs1i_data_1(addr_i);
-  
-
-  Delay1_process : PROCESS (clk)
-  BEGIN
-    IF clk'EVENT AND clk = '1' THEN
-      IF reset = '1' THEN
-        Delay1_out1 <= (OTHERS => to_signed(16#0000#, 16));
-        Delay3 <= (OTHERS => to_signed(16#0000#, 16));
-      ELSIF enb = '1' THEN
-        Delay1_out1 <= Vector_Concatenate1_out1;
-        Delay3 <= Delay1_out1;
-      END IF;
-    END IF;
-  END PROCESS Delay1_process;
-
-
-  outputgen: FOR k IN 0 TO 63 GENERATE
-    gs1_q(k) <= std_logic_vector(Delay3(k));
-  END GENERATE;
+  output_process : process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        gs_i <= (others => (others => '0'));
+      elsif enb = '1' then
+        -- gs_i output
+        gs_i(0) <= lut_gs_64(addr_i);
+        gs_i(1) <= lut_gs_63(addr_i);
+        gs_i(2) <= lut_gs_62(addr_i);
+        gs_i(3) <= lut_gs_61(addr_i);
+        gs_i(4) <= lut_gs_60(addr_i);
+        gs_i(5) <= lut_gs_59(addr_i);
+        gs_i(6) <= lut_gs_58(addr_i);
+        gs_i(7) <= lut_gs_57(addr_i);
+        gs_i(8) <= lut_gs_56(addr_i);
+        gs_i(9) <= lut_gs_55(addr_i);
+        gs_i(10) <= lut_gs_54(addr_i);
+        gs_i(11) <= lut_gs_53(addr_i);
+        gs_i(12) <= lut_gs_52(addr_i);
+        gs_i(13) <= lut_gs_51(addr_i);
+        gs_i(14) <= lut_gs_50(addr_i);
+        gs_i(15) <= lut_gs_49(addr_i);
+        gs_i(16) <= lut_gs_48(addr_i);
+        gs_i(17) <= lut_gs_47(addr_i);
+        gs_i(18) <= lut_gs_46(addr_i);
+        gs_i(19) <= lut_gs_45(addr_i);
+        gs_i(20) <= lut_gs_44(addr_i);
+        gs_i(21) <= lut_gs_43(addr_i);
+        gs_i(22) <= lut_gs_42(addr_i);
+        gs_i(23) <= lut_gs_41(addr_i);
+        gs_i(24) <= lut_gs_40(addr_i);
+        gs_i(25) <= lut_gs_39(addr_i);
+        gs_i(26) <= lut_gs_38(addr_i);
+        gs_i(27) <= lut_gs_37(addr_i);
+        gs_i(28) <= lut_gs_36(addr_i);
+        gs_i(29) <= lut_gs_35(addr_i);
+        gs_i(30) <= lut_gs_34(addr_i);
+        gs_i(31) <= lut_gs_33(addr_i);
+        gs_i(32) <= lut_gs_32(addr_i);
+        gs_i(33) <= lut_gs_31(addr_i);
+        gs_i(34) <= lut_gs_30(addr_i);
+        gs_i(35) <= lut_gs_29(addr_i);
+        gs_i(36) <= lut_gs_28(addr_i);
+        gs_i(37) <= lut_gs_27(addr_i);
+        gs_i(38) <= lut_gs_26(addr_i);
+        gs_i(39) <= lut_gs_25(addr_i);
+        gs_i(40) <= lut_gs_24(addr_i);
+        gs_i(41) <= lut_gs_23(addr_i);
+        gs_i(42) <= lut_gs_22(addr_i);
+        gs_i(43) <= lut_gs_21(addr_i);
+        gs_i(44) <= lut_gs_20(addr_i);
+        gs_i(45) <= lut_gs_19(addr_i);
+        gs_i(46) <= lut_gs_18(addr_i);
+        gs_i(47) <= lut_gs_17(addr_i);
+        gs_i(48) <= lut_gs_16(addr_i);
+        gs_i(49) <= lut_gs_15(addr_i);
+        gs_i(50) <= lut_gs_14(addr_i);
+        gs_i(51) <= lut_gs_13(addr_i);
+        gs_i(52) <= lut_gs_12(addr_i);
+        gs_i(53) <= lut_gs_11(addr_i);
+        gs_i(54) <= lut_gs_10(addr_i);
+        gs_i(55) <= lut_gs_9(addr_i);
+        gs_i(56) <= lut_gs_8(addr_i);
+        gs_i(57) <= lut_gs_7(addr_i);
+        gs_i(58) <= lut_gs_6(addr_i);
+        gs_i(59) <= lut_gs_5(addr_i);
+        gs_i(60) <= lut_gs_4(addr_i);
+        gs_i(61) <= lut_gs_3(addr_i);
+        gs_i(62) <= lut_gs_2(addr_i);
+        gs_i(63) <= lut_gs_1(addr_i);
+        -- gs_q output
+        gs_q(0) <= lut_gs_64(addr_i);
+        gs_q(1) <= lut_gs_63(addr_i);
+        gs_q(2) <= lut_gs_62(addr_i);
+        gs_q(3) <= lut_gs_61(addr_i);
+        gs_q(4) <= lut_gs_60(addr_i);
+        gs_q(5) <= lut_gs_59(addr_i);
+        gs_q(6) <= lut_gs_58(addr_i);
+        gs_q(7) <= lut_gs_57(addr_i);
+        gs_q(8) <= lut_gs_56(addr_i);
+        gs_q(9) <= lut_gs_55(addr_i);
+        gs_q(10) <= lut_gs_54(addr_i);
+        gs_q(11) <= lut_gs_53(addr_i);
+        gs_q(12) <= lut_gs_52(addr_i);
+        gs_q(13) <= lut_gs_51(addr_i);
+        gs_q(14) <= lut_gs_50(addr_i);
+        gs_q(15) <= lut_gs_49(addr_i);
+        gs_q(16) <= lut_gs_48(addr_i);
+        gs_q(17) <= lut_gs_47(addr_i);
+        gs_q(18) <= lut_gs_46(addr_i);
+        gs_q(19) <= lut_gs_45(addr_i);
+        gs_q(20) <= lut_gs_44(addr_i);
+        gs_q(21) <= lut_gs_43(addr_i);
+        gs_q(22) <= lut_gs_42(addr_i);
+        gs_q(23) <= lut_gs_41(addr_i);
+        gs_q(24) <= lut_gs_40(addr_i);
+        gs_q(25) <= lut_gs_39(addr_i);
+        gs_q(26) <= lut_gs_38(addr_i);
+        gs_q(27) <= lut_gs_37(addr_i);
+        gs_q(28) <= lut_gs_36(addr_i);
+        gs_q(29) <= lut_gs_35(addr_i);
+        gs_q(30) <= lut_gs_34(addr_i);
+        gs_q(31) <= lut_gs_33(addr_i);
+        gs_q(32) <= lut_gs_32(addr_i);
+        gs_q(33) <= lut_gs_31(addr_i);
+        gs_q(34) <= lut_gs_30(addr_i);
+        gs_q(35) <= lut_gs_29(addr_i);
+        gs_q(36) <= lut_gs_28(addr_i);
+        gs_q(37) <= lut_gs_27(addr_i);
+        gs_q(38) <= lut_gs_26(addr_i);
+        gs_q(39) <= lut_gs_25(addr_i);
+        gs_q(40) <= lut_gs_24(addr_i);
+        gs_q(41) <= lut_gs_23(addr_i);
+        gs_q(42) <= lut_gs_22(addr_i);
+        gs_q(43) <= lut_gs_21(addr_i);
+        gs_q(44) <= lut_gs_20(addr_i);
+        gs_q(45) <= lut_gs_19(addr_i);
+        gs_q(46) <= lut_gs_18(addr_i);
+        gs_q(47) <= lut_gs_17(addr_i);
+        gs_q(48) <= lut_gs_16(addr_i);
+        gs_q(49) <= lut_gs_15(addr_i);
+        gs_q(50) <= lut_gs_14(addr_i);
+        gs_q(51) <= lut_gs_13(addr_i);
+        gs_q(52) <= lut_gs_12(addr_i);
+        gs_q(53) <= lut_gs_11(addr_i);
+        gs_q(54) <= lut_gs_10(addr_i);
+        gs_q(55) <= lut_gs_9(addr_i);
+        gs_q(56) <= lut_gs_8(addr_i);
+        gs_q(57) <= lut_gs_7(addr_i);
+        gs_q(58) <= lut_gs_6(addr_i);
+        gs_q(59) <= lut_gs_5(addr_i);
+        gs_q(60) <= lut_gs_4(addr_i);
+        gs_q(61) <= lut_gs_3(addr_i);
+        gs_q(62) <= lut_gs_2(addr_i);
+        gs_q(63) <= lut_gs_1(addr_i);
+      end if;
+    end if;
+  end process;
 
 END rtl;
 

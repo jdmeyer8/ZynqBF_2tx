@@ -72,7 +72,10 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
           );
   END COMPONENT;
 
-  COMPONENT ZynqBF_2t_ip_src_peakdetect_ch1
+  COMPONENT ZynqBF_2t_ip_src_peakdetect
+    GENERIC(
+          CHANNEL                         : integer := 1
+          )
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
@@ -116,22 +119,6 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
           pd_en                           :   IN    std_logic;
           corr_en                         :   OUT   std_logic;
           pd_init                         :   OUT   std_logic
-          );
-  END COMPONENT;
-
-  COMPONENT ZynqBF_2t_ip_src_peakdetect_ch2
-    PORT( clk                             :   IN    std_logic;
-          reset                           :   IN    std_logic;
-          enb                             :   IN    std_logic;
-          rst                             :   IN    std_logic;
-          din                             :   IN    vector_of_std_logic_vector16(0 TO 1);  -- sfix16_En15 [2]
-          vin                             :   IN    std_logic;
-          en                              :   IN    std_logic;
-          addr                            :   IN    std_logic_vector(14 DOWNTO 0);  -- ufix15
-          index                           :   OUT   std_logic_vector(14 DOWNTO 0);  -- ufix15
-          step                            :   OUT   std_logic;
-          peak_found                      :   OUT   std_logic;
-          probe                           :   OUT   std_logic_vector(31 DOWNTO 0)  -- sfix32_En16
           );
   END COMPONENT;
 
@@ -235,17 +222,14 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   FOR ALL : ZynqBF_2t_ip_src_gs_selector
     USE ENTITY work.ZynqBF_2t_ip_src_gs_selector(rtl);
 
-  FOR ALL : ZynqBF_2t_ip_src_peakdetect_ch1
-    USE ENTITY work.ZynqBF_2t_ip_src_peakdetect_ch1(rtl);
+  FOR ALL : ZynqBF_2t_ip_src_peakdetect
+    USE ENTITY work.ZynqBF_2t_ip_src_peakdetect(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_ram_rd_counter
     USE ENTITY work.ZynqBF_2t_ip_src_ram_rd_counter(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_ram_counter
     USE ENTITY work.ZynqBF_2t_ip_src_ram_counter(rtl);
-
-  FOR ALL : ZynqBF_2t_ip_src_peakdetect_ch2
-    USE ENTITY work.ZynqBF_2t_ip_src_peakdetect_ch2(rtl);
 
   FOR ALL : ZynqBF_2t_ip_src_state_machine
     USE ENTITY work.ZynqBF_2t_ip_src_state_machine(rtl);
@@ -341,7 +325,10 @@ BEGIN
               gs_sel => gs_sel  -- boolean [2]
               );
 
-  u_peakdetect_ch1 : ZynqBF_2t_ip_src_peakdetect_ch1
+  u_peakdetect_ch1 : ZynqBF_2t_ip_src_peakdetect
+    GENERIC MAP(
+              CHANNEL => 1
+              )
     PORT MAP( clk => clk200,
               reset => reset200,
               enb => enb200,
@@ -354,6 +341,25 @@ BEGIN
               step => pd_step,
               peak_found => peakdetect_ch1_out3,
               probe => xcorr_ch1  -- sfix32_En16
+              );
+              
+  
+  u_peakdetect_ch2 : ZynqBF_2t_ip_src_peakdetect_ch2
+    GENERIC MAP(
+              CHANNEL => 2
+              )
+    PORT MAP( clk => clk200,
+              reset => reset200,
+              enb => enb200,
+              rst => Logical_Operator3_out1,
+              din => ram_dout,  -- sfix16_En15 [2]
+              vin => ram_valid,
+              en => xcorr_en,
+              addr => rx_bram_out3,  -- ufix15
+              index => peakdetect_ch2_out1,  -- ufix15
+              step => pd_step_1,
+              peak_found => peakdetect_ch2_out3,
+              probe => xcorr  -- sfix32_En16
               );
 
   u_ram_rd_counter : ZynqBF_2t_ip_src_ram_rd_counter
@@ -384,21 +390,6 @@ BEGIN
               pd_en => pd_en,
               corr_en => xcorr_en,
               pd_init => pd_init
-              );
-
-  u_peakdetect_ch2 : ZynqBF_2t_ip_src_peakdetect_ch2
-    PORT MAP( clk => clk200,
-              reset => reset200,
-              enb => enb200,
-              rst => Logical_Operator3_out1,
-              din => ram_dout,  -- sfix16_En15 [2]
-              vin => ram_valid,
-              en => xcorr_en,
-              addr => rx_bram_out3,  -- ufix15
-              index => peakdetect_ch2_out1,  -- ufix15
-              step => pd_step_1,
-              peak_found => peakdetect_ch2_out3,
-              probe => xcorr  -- sfix32_En16
               );
 
   u_state_machine : ZynqBF_2t_ip_src_state_machine
