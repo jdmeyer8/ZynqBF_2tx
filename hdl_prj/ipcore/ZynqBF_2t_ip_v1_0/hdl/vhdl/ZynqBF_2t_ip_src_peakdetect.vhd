@@ -37,16 +37,16 @@ ENTITY ZynqBF_2t_ip_src_peakdetect IS
         peak_found                        :   OUT   std_logic;
         probe                             :   OUT   std_logic_vector(31 DOWNTO 0)  -- sfix32_En16
         );
-END ZynqBF_2t_ip_src_peakdetect_ch1;
+END ZynqBF_2t_ip_src_peakdetect;
 
 
-ARCHITECTURE rtl OF ZynqBF_2t_ip_src_peakdetect_ch1 IS
+ARCHITECTURE rtl OF ZynqBF_2t_ip_src_peakdetect IS
 
   -- Component Declarations
   COMPONENT ZynqBF_2t_ip_src_correlator_wrapper
     GENERIC(
           CHANNEL                         : integer := 1
-          )
+          );
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;

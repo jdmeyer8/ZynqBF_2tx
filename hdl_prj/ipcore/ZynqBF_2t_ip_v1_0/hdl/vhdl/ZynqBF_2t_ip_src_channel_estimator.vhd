@@ -75,7 +75,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   COMPONENT ZynqBF_2t_ip_src_peakdetect
     GENERIC(
           CHANNEL                         : integer := 1
-          )
+          );
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
@@ -344,7 +344,7 @@ BEGIN
               );
               
   
-  u_peakdetect_ch2 : ZynqBF_2t_ip_src_peakdetect_ch2
+  u_peakdetect_ch2 : ZynqBF_2t_ip_src_peakdetect
     GENERIC MAP(
               CHANNEL => 2
               )

@@ -25,12 +25,12 @@ fprintf(fid1, '\nGS1 i LUTs\n\n');
 fprintf(fid2, '\nGS2 i LUTs\n\n');
 
 for i = 1:64
-    fprintf(fid1, ['constant lut_gs1i_data_' sprintf('%d', i) ' : vector_of_std_logic_vector16(0 to 63) := \n']);
-    fprintf(fid2, ['constant lut_gs2i_data_' sprintf('%d', i) ' : vector_of_std_logic_vector16(0 to 63) := \n']);
+    fprintf(fid1, ['constant lut_gs_' sprintf('%d', i) ' : vector_of_std_logic_vector16(0 to 63) := \n']);   
+    fprintf(fid2, ['constant lut_gs_' sprintf('%d', i) ' : vector_of_std_logic_vector16(0 to 63) := \n']);
     for j = i:64:4096
         if (j < 65)
-            fprintf(fid1, '   "%s",\n', bin(gs1(j)));
-            fprintf(fid2, '   "%s",\n', bin(gs2(j)));
+            fprintf(fid1, '  ("%s",\n', bin(gs1(j)));
+            fprintf(fid2, '  ("%s",\n', bin(gs2(j)));
         elseif (j > 4032)
             fprintf(fid1, '   "%s");\n', bin(gs1(j)));
             fprintf(fid2, '   "%s");\n', bin(gs2(j)));

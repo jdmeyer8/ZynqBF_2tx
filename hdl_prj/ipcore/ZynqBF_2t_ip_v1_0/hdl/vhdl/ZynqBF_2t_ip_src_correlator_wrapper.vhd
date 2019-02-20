@@ -90,7 +90,7 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_correlator_wrapper IS
           );
   END COMPONENT;
   
-  COMPONENT ZynqBF_2t_ip_src_goldSeq1
+  COMPONENT ZynqBF_2t_ip_src_goldSeq2
     PORT( clk                             :   IN    std_logic;
           reset                           :   IN    std_logic;
           enb                             :   IN    std_logic;
