@@ -191,10 +191,14 @@ BEGIN
               rx_i => std_logic_vector(rx_i),  -- sfix16_En15
               rx_q => std_logic_vector(rx_q),  -- sfix16_En15
               rx_v => Delay5_out1,
-              ch1_i => channel_estimator_out1,  -- sfix16_En15
-              ch1_q => channel_estimator_out2,  -- sfix16_En15
-              ch2_i => channel_estimator_out3,  -- sfix16_En15
-              ch2_q => channel_estimator_out4,  -- sfix16_En15
+              -- ch1_i => channel_estimator_out1,  -- sfix16_En15
+              -- ch1_q => channel_estimator_out2,  -- sfix16_En15
+              -- ch2_i => channel_estimator_out3,  -- sfix16_En15
+              -- ch2_q => channel_estimator_out4,  -- sfix16_En15
+              ch1_i => ch1_i,  -- sfix16_En15
+              ch1_q => ch1_q,  -- sfix16_En15
+              ch2_i => ch2_i,  -- sfix16_En15
+              ch2_q => ch2_q,  -- sfix16_En15
               probe_xcorr1 => channel_estimator_out5,  -- sfix32_En16
               probe_xcorr2 => channel_estimator_out6,  -- sfix32_En16
               probe_state => channel_estimator_out7,  -- uint8
@@ -303,69 +307,71 @@ BEGIN
   END PROCESS Delay2_process;
 
 
-  channel_estimator_out1_signed <= signed(channel_estimator_out1);
+  -- channel_estimator_out1_signed <= signed(channel_estimator_out1);
 
-  Delay8_process : PROCESS (clk)
-  BEGIN
-    IF clk200'EVENT AND clk200 = '1' THEN
-      IF reset200 = '1' THEN
-        Delay8_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb200 = '1' THEN
-        Delay8_out1 <= channel_estimator_out1_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay8_process;
-
-
-  ch1_i <= std_logic_vector(Delay8_out1);
-
-  channel_estimator_out2_signed <= signed(channel_estimator_out2);
-
-  Delay9_process : PROCESS (clk)
-  BEGIN
-    IF clk200'EVENT AND clk200 = '1' THEN
-      IF reset200 = '1' THEN
-        Delay9_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb200 = '1' THEN
-        Delay9_out1 <= channel_estimator_out2_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay9_process;
+  -- Delay8_process : PROCESS (clk)
+  -- ch_est_delay_process : PROCESS (clk)
+  -- BEGIN
+    -- IF clk200'EVENT AND clk200 = '1' THEN
+      -- IF reset200 = '1' THEN
+        -- -- Delay8_out1 <= to_signed(16#0000#, 16);
+        -- ch1_i <= x"0000";
+      -- ELSIF enb200 = '1' THEN
+        -- Delay8_out1 <= channel_estimator_out1_signed;
+      -- END IF;
+    -- END IF;
+  -- END PROCESS Delay8_process;
 
 
-  ch1_q <= std_logic_vector(Delay9_out1);
+  -- ch1_i <= std_logic_vector(Delay8_out1);
 
-  channel_estimator_out3_signed <= signed(channel_estimator_out3);
+  -- channel_estimator_out2_signed <= signed(channel_estimator_out2);
 
-  Delay10_process : PROCESS (clk)
-  BEGIN
-    IF clk200'EVENT AND clk200 = '1' THEN
-      IF reset200 = '1' THEN
-        Delay10_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb200 = '1' THEN
-        Delay10_out1 <= channel_estimator_out3_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay10_process;
-
-
-  ch2_i <= std_logic_vector(Delay10_out1);
-
-  channel_estimator_out4_signed <= signed(channel_estimator_out4);
-
-  Delay11_process : PROCESS (clk)
-  BEGIN
-    IF clk200'EVENT AND clk200 = '1' THEN
-      IF reset200 = '1' THEN
-        Delay11_out1 <= to_signed(16#0000#, 16);
-      ELSIF enb200 = '1' THEN
-        Delay11_out1 <= channel_estimator_out4_signed;
-      END IF;
-    END IF;
-  END PROCESS Delay11_process;
+  -- Delay9_process : PROCESS (clk)
+  -- BEGIN
+    -- IF clk200'EVENT AND clk200 = '1' THEN
+      -- IF reset200 = '1' THEN
+        -- Delay9_out1 <= to_signed(16#0000#, 16);
+      -- ELSIF enb200 = '1' THEN
+        -- Delay9_out1 <= channel_estimator_out2_signed;
+      -- END IF;
+    -- END IF;
+  -- END PROCESS Delay9_process;
 
 
-  ch2_q <= std_logic_vector(Delay11_out1);
+  -- ch1_q <= std_logic_vector(Delay9_out1);
+
+  -- channel_estimator_out3_signed <= signed(channel_estimator_out3);
+
+  -- Delay10_process : PROCESS (clk)
+  -- BEGIN
+    -- IF clk'EVENT AND clk = '1' THEN
+      -- IF reset200 = '1' THEN
+        -- Delay10_out1 <= to_signed(16#0000#, 16);
+      -- ELSIF enb200 = '1' THEN
+        -- Delay10_out1 <= channel_estimator_out3_signed;
+      -- END IF;
+    -- END IF;
+  -- END PROCESS Delay10_process;
+
+
+  -- ch2_i <= std_logic_vector(Delay10_out1);
+
+  -- channel_estimator_out4_signed <= signed(channel_estimator_out4);
+
+  -- Delay11_process : PROCESS (clk)
+  -- BEGIN
+    -- IF clk200'EVENT AND clk200 = '1' THEN
+      -- IF reset200 = '1' THEN
+        -- Delay11_out1 <= to_signed(16#0000#, 16);
+      -- ELSIF enb200 = '1' THEN
+        -- Delay11_out1 <= channel_estimator_out4_signed;
+      -- END IF;
+    -- END IF;
+  -- END PROCESS Delay11_process;
+
+
+  -- ch2_q <= std_logic_vector(Delay11_out1);
 
   ce_out_0 <= enb_1_128_1;
 

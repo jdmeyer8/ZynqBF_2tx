@@ -1,4 +1,11 @@
-load('RxInTest_20k_shifted.mat')
+if strcmp(computer, 'PCWIN64')
+    load('.\data\GenGoldSeq_4k.mat');
+else
+    load('./data/GenGoldSeq_4k.mat');
+end
+
+%% Arrange rx inputs
+rxi = [zeros(10,1); 0];
 
 %% File name
 file_i = '.\simulation\rx_test_i.txt';

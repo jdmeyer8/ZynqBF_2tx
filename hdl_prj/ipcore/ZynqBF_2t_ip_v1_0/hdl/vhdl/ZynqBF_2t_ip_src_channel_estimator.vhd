@@ -207,6 +207,26 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
           probe_ch1r                      :   OUT   std_logic_vector(31 DOWNTO 0)  -- sfix32_En14
           );
   END COMPONENT;
+  
+  COMPONENT ZynqBF_2t_ip_src_sync_csi
+    PORT( clk                             :   IN    std_logic;
+          clk200                          :   IN    std_logic;
+          reset                           :   IN    std_logic;
+          reset200                        :   IN    std_logic;
+          enb                             :   IN    std_logic;
+          enb200                          :   IN    std_logic;
+          ch1i_i                          :   IN    std_logic_vector(15 downto 0);
+          ch1q_i                          :   IN    std_logic_vector(15 downto 0);
+          ch2i_i                          :   IN    std_logic_vector(15 downto 0);
+          ch2q_i                          :   IN    std_logic_vector(15 downto 0);
+          ch1i_o                          :   OUT   std_logic_vector(15 downto 0);
+          ch1q_o                          :   OUT   std_logic_vector(15 downto 0);
+          ch2i_o                          :   OUT   std_logic_vector(15 downto 0);
+          ch2q_o                          :   OUT   std_logic_vector(15 downto 0);
+          est_done                        :   IN    std_logic
+          );
+  END COMPONENT;
+          
 
   -- Component Configuration Statements
   FOR ALL : ZynqBF_2t_ip_src_goldSequences
@@ -238,6 +258,9 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
 
   FOR ALL : ZynqBF_2t_ip_src_ch_est
     USE ENTITY work.ZynqBF_2t_ip_src_ch_est(rtl);
+    
+  FOR ALL : ZynqBF_2t_ip_src_sync_csi
+    USE ENTITY work.ZynqBF_2t_ip_src_sync_csi(rtl);
 
   -- Signals
   SIGNAL gs_addr                          : std_logic_vector(11 DOWNTO 0);  -- ufix12
@@ -292,6 +315,11 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_channel_estimator IS
   signal peak_found_d2:                     std_logic;
   signal peak_found_d3:                     std_logic;
   signal ch_est_rst:                        std_logic;
+  signal rx_bram_we:                        std_logic;
+  signal ch1i_200:                          std_logic_vector(15 downto 0);
+  signal ch1q_200:                          std_logic_vector(15 downto 0);
+  signal ch2i_200:                          std_logic_vector(15 downto 0);
+  signal ch2q_200:                          std_logic_vector(15 downto 0);
 
 BEGIN
   u_goldSequences : ZynqBF_2t_ip_src_goldSequences
@@ -350,7 +378,8 @@ BEGIN
               reset => reset200,
               enb => enb200,
               rst => Logical_Operator3_out1,
-              ram_we => fifo_rxv,
+              --ram_we => fifo_rxv,
+              ram_we => rx_bram_we,
               ram_re => ram_re,
               pd_en => pd_en,
               corr_en => xcorr_en,
@@ -417,7 +446,8 @@ BEGIN
               enb => enb200,
               din_i => fifo_rxi,  -- sfix16_En15
               din_q => fifo_rxq,  -- sfix16_En15
-              we => fifo_rxv,
+              -- we => fifo_rxv,
+              we => rx_bram_we,
               re => ram_re,
               rd_addr => rx_addr,  -- ufix15
               rst => est_done,
@@ -437,15 +467,33 @@ BEGIN
               gs_sel => gs_sel,  -- boolean [2]
               en => est_en,
               step_in => ram_valid,
-              ch1_i => ch1_i_tmp,  -- sfix16_En15
-              ch1_q => ch_est_out2,  -- sfix16_En15
-              ch2_i => ch_est_out3,  -- sfix16_En15
-              ch2_q => ch_est_out4,  -- sfix16_En15
+              ch1_i => ch1i_200,  -- sfix16_En15
+              ch1_q => ch1q_200,  -- sfix16_En15
+              ch2_i => ch2i_200,  -- sfix16_En15
+              ch2_q => ch2q_200,  -- sfix16_En15
               est_done => est_done,
               step_out => est_step,
               probe_ch1i => ch_est_out7,  -- sfix32_En16
               probe_ch1q => ch_est_out8,  -- sfix32_En16
               probe_ch1r => ch_est_out9  -- sfix32_En14
+              );
+              
+  u_sync_csi : ZynqBF_2t_ip_src_sync_csi
+    PORT MAP( clk => clk,
+              clk200 => clk200,
+              reset => reset,
+              reset200 => reset200,
+              enb => enb,
+              enb200 => enb200,
+              ch1i_i => ch1i_200,
+              ch1q_i => ch1q_200,
+              ch2i_i => ch2i_200,
+              ch2q_i => ch2q_200,
+              ch1i_o => ch1_i,
+              ch1q_o => ch1_q,
+              ch2i_o => ch2_i,
+              ch2q_o => ch2_q,
+              est_done => est_done
               );
               
    ch_est_rst <= not est_en;
@@ -464,6 +512,8 @@ BEGIN
       end if;
     end if;
   end process;
+  
+  rx_bram_we <= pd_en and fifo_rxv;
 
   clear_fifo <= cf_en OR est_en;
 
@@ -473,13 +523,10 @@ BEGIN
 
   Logical_Operator6_out1 <= peakdetect_ch2_out3 OR peakdetect_ch1_out3;
 
-  ch1_i <= ch1_i_tmp;
-
-  ch1_q <= ch_est_out2;
-
-  ch2_i <= ch_est_out3;
-
-  ch2_q <= ch_est_out4;
+  -- ch1_i <= ch1_i_tmp;
+  -- ch1_q <= ch_est_out2;
+  -- ch2_i <= ch_est_out3;
+  -- ch2_q <= ch_est_out4;
 
   probe_xcorr1 <= xcorr_ch1;
 

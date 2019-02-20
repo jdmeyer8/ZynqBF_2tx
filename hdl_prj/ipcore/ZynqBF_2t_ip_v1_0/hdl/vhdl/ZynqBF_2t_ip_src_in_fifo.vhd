@@ -70,7 +70,7 @@ BEGIN
   u_rx_i_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
   port map(
-    rst => reset200,
+    rst => reset,
     wrclk => clk,
     wren => wren,
     di => rxi_in,
@@ -90,7 +90,7 @@ BEGIN
   u_rx_q_fifo : FIFO_DUALCLOCK_MACRO
   generic map(data_width => 16)
   port map(
-    rst => reset200,
+    rst => reset,
     wrclk => clk,
     wren => wren,
     di => rxi_in,
