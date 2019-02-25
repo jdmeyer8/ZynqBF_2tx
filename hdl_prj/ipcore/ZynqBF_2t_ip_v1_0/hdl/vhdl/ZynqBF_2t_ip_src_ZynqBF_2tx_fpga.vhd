@@ -163,6 +163,12 @@ ARCHITECTURE rtl OF ZynqBF_2t_ip_src_ZynqBF_2tx_fpga IS
   SIGNAL channel_estimator_out4_signed    : signed(15 DOWNTO 0);  -- sfix16_En15
   SIGNAL Delay11_out1                     : signed(15 DOWNTO 0);  -- sfix16_En15
   
+  attribute mark_debug                    : string;
+  attribute keep                          : string;
+  attribute mark_debug of rx_i_in         : signal is "true";
+  attribute mark_debug of rx_q_in         : signal is "true";
+  attribute mark_debug of rx_v_in         : signal is "true";
+  
   -- Signals for enb clock-crossing meta filter
   signal enb_meta_reg                     : std_logic_vector(2 downto 0);
 
